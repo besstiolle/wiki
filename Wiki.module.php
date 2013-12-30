@@ -65,7 +65,7 @@ class Wiki extends Orm
 	}
 
 	function GetAdminSection() {
-		return 'extensions';
+		return 'content';
 	}
 
 	function VisibleToAdminUser() {
@@ -79,7 +79,7 @@ class Wiki extends Orm
 	}
 
 	function AllowSmartyCaching() {
-		return false;
+		return true;
 	}
 
 	function LazyLoadFrontend() {
