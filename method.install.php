@@ -12,7 +12,8 @@ foreach($entities as $anEntity) {
 list($currentUS, $currentTS) = explode(" ", microtime());
 $config = cmsms()->GetConfig();
 
-
+$this->SetPreference('prefix','wiki');
+$this->SetPreference('show_prefix_lang',TRUE);
 
 //Create first undeletable-page
 $page = new Page();
@@ -22,6 +23,7 @@ $page = $page->save();
 
 //Create first indeletable-lang
 $lang = new Lang();
+$lang->set('prefix','en_US');
 $lang->set('label','en_US');
 $lang->set('page_id',$page->get($page->getPk()->getName()));
 $lang = $lang->save();
@@ -29,7 +31,7 @@ $lang = $lang->save();
 // Create first version of text
 $version = new Version();
 $version->set('title',$page->get('title'));
-$version->set('text',file_get_contents($config['root_path'].'/modules/Wiki/README.md'));
+$version->set('text',htmlentities(file_get_contents($config['root_path'].'/modules/Wiki/default.txt')));
 $version->set('motor',Motors::$MARKDOWN);
 $version->set('dt_creation',$currentTS);
 $version->set('author_name','admin');
@@ -37,7 +39,6 @@ $version->set('author_id',0);
 $version->set('page_id',$page->get($page->getPk()->getName()));
 $version->set('lang_id',$lang->get($lang->getPk()->getName()));
 $version = $version->save();
-
 
 // put mention into the admin log
 $this->Audit( 0, 

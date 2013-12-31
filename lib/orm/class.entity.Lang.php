@@ -14,6 +14,12 @@ class Lang extends OrmEntity {
 			, OrmKEY::$PK	
 		));
 		
+		$this->add(new OrmField('prefix'		
+			, OrmCAST::$STRING
+			, 255
+			, TRUE	
+		));
+		
 		$this->add(new OrmField('label'		
 			, OrmCAST::$STRING
 			, 255	
