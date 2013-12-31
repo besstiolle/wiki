@@ -24,6 +24,7 @@ class Motors{
 				|| substr($match[2], 0, 8)== 'https://'){
 				$cssClass = 'external';
 				$title = "";
+				$url = $match[2];
 			}else {
 				//Internal link
 				$example = new OrmExample();
@@ -36,10 +37,11 @@ class Motors{
 					$cssClass = 'follow';
 					$title = "";
 				}
+				$url = "{$config['root_url']}/{$prefix}{$prefix_lang}/{$match[2]}";
 			}
 			//Replace plain text without regex anymore
 			$search[] = $match[0];
-			$replace[] = "<a class='{$cssClass}' title='{$title}' href='{$config['root_url']}/{$prefix}{$prefix_lang}/{$match[2]}'>{$match[3]}</a>";
+			$replace[] = "<a class='{$cssClass}' title='{$title}' href='{$url}'>{$match[3]}</a>";
 		}
 
 		$text = str_replace($search,$replace,$text);
@@ -47,7 +49,4 @@ class Motors{
 		return $text;
 	}
 }
-
-
-
 ?>

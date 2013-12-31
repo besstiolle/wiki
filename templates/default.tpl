@@ -7,7 +7,7 @@ a.follow{
 	color: #054882;
 }
 </style>
-
+<div class='wikiaction'>{edit}{delete}</div>
 <h3>{$version.title}</h3>
 <div class='wikimeta'>
 	Created by <b>{$version.author_name}</b>

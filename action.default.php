@@ -42,6 +42,10 @@ $prefix_lang = ($this->GetPreference('show_prefix_lang', true)?"/{$lang->get('pr
 		
 $vals['text'] = Motors::process($vals['text'], $prefix, $prefix_lang, $version->get('motor'));
 
+$edit = $this->CreateLink ($id, "edit", $returnid, '', array(), '', true, false, '', '', '/edit');
+$delete = $this->CreateLink ($id, "edit", $returnid, '', array(), 'Sure ?', true, false, '', '', '/delete');
+
+
 
 $smarty = cmsms()->GetSmarty();
 $smarty->assign('page', $page->getValues());
