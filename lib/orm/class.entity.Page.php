@@ -2,10 +2,9 @@
 /**
  * A very simple example of how you can define a "User" without any relation to another Object.
  */ 
-class Page extends OrmEntity
-{
-	public function __construct()
-	{
+class Page extends OrmEntity {
+
+	public function __construct() {
 		parent::__construct('Wiki','Page');
 		
 		$this->add(new OrmField('page_id'	
