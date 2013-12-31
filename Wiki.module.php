@@ -25,7 +25,7 @@ class Wiki extends Orm
 	}
 
 	function GetVersion() {
-		return '0.2.1';
+		return '1.0.0';
 	}
 
 	function GetDependencies() {
@@ -57,7 +57,7 @@ class Wiki extends Orm
 	}
 
 	function IsPluginModule() {
-		return false;
+		return true;
 	}
 
 	function HasAdmin() {
@@ -73,6 +73,8 @@ class Wiki extends Orm
 	}
 
 	function InitializeFrontend() {
+		$this->RegisterModulePlugin(true, false);
+		$this->RestrictUnknownParams();
 	}
 
 	function InitializeAdmin() {

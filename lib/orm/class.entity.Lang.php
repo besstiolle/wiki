@@ -26,8 +26,10 @@ class Lang extends OrmEntity {
 			, OrmKEY::$FK
 			, "Page.page_id"
 		));
-				
-
+		
+		$this->garnishAutoincrement();	
+		
+		$this->garnishDefaultOrderBy(new OrmOrderBy(array('lang_id'=>OrmOrderBy::$ASC)));
 	}	
 }
 ?>

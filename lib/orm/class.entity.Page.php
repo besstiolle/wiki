@@ -25,6 +25,9 @@ class Page extends OrmEntity {
 			, 255	
 		));
 			
+		$this->garnishAutoincrement();
+		
+		$this->garnishDefaultOrderBy(new OrmOrderBy(array('title'=>OrmOrderBy::$ASC)));
 	}	
 }
 ?>

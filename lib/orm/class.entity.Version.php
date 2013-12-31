@@ -54,7 +54,7 @@ class Version extends OrmEntity {
 		));
 		
 		// Not required link to the author (integer or string or both)
-		$this->add(new OrmField('author_string'
+		$this->add(new OrmField('author_name'
 			, OrmCAST::$STRING
 			, 255	
 			, TRUE
@@ -65,6 +65,9 @@ class Version extends OrmEntity {
 			, TRUE
 		));
 		
+		$this->garnishAutoincrement();
+		
+		$this->garnishDefaultOrderBy(new OrmOrderBy(array('version_id'=>OrmOrderBy::$DESC)));
 	}	
 }
 ?>

@@ -3,7 +3,7 @@
 
 class Motors{
 
-	public $MARKDOWN = 1;
+	public static $MARKDOWN = 1;
 
 }
 
