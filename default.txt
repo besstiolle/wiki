@@ -5,12 +5,12 @@ Welcome on your first Wiki page. From here you will be able to create et edit a 
 Some tips : 
 
 *   The default language is "MarkDown". If it's the first time for you to write in "Markdown" mode, take a few moment [to read this](http://daringfireball.net/projects/markdown/syntax)
-*   If you can't see the button Edition, it's maybe because you are not logged or maybe the page is protected. See the admin panel to lean more.
-*   Like in most of WIKI, you don't have to create a page before linking it. Every links pointing to a [no-existing page will be coloured in RED](a_new_page) -[ALPHA](a_new_page)-[BRAVO](a_new_page)[CHARLIE](a_new_page). On the other side, a link pointing on an another wiki page will be [coloured in BLUE](home) [DELTA](home)
+*   If you can't see the button Edition, it's maybe because you are not logged or maybe the page is protected. See the admin panel to learn more.
+*   Like most of wiki, you don't have to create a page before linking it. Every links pointing to a [no-existing page will be coloured in RED](a_new_page). On the other side, a link pointing on an another wiki page will be [coloured in BLUE](home)
 *   HTML tags like <b>bold</b> or <a href='#'>links</a> are not processed by the motor "MarkDown"
-*   Smarty tags and CmsMadeSimple tags like {"hello"|capitalize} or {News} are not processed by the motor "MarkDown"
+*   Smarty tags and CmsMadeSimple tags like {"hello"|capitalize} or {News} are not processed by the motor "MarkDown" unless the administrator setted it in the admin panel of the module.
 
-[ECHO](home) In fact, the "MarkDown" language is a **editorial language** and not a **programmatic language** (like Smarty is)
+In fact, the "MarkDown" language is a **editorial language** and not a **programmatic language** (like Smarty is)
  
 And finally, here some advice by "Duky", the loyal Duck.
 

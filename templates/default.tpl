@@ -4,6 +4,7 @@ a.new{
 }
 
 a.follow{
+	color: #054882;
 }
 </style>
 

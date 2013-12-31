@@ -31,11 +31,22 @@ $order = new OrmOrderBy(array('version_id'=>OrmOrderBy::$DESC));
 //$limit = new OrmLimit(0,1);
 $versions = OrmCore::findByExample(new Version(),$example, $order, $limit);
 $version = $versions[0];
+$vals = $version->getValues();
+
+//Get the text
+//$config = cmsms()->GetConfig();
+//$vals['text'] = htmlentities(file_get_contents($config['root_path'].'/modules/Wiki/default.txt'));
+$prefix = $this->GetPreference('prefix');
+$prefix_lang = ($this->GetPreference('show_prefix_lang', true)?"/{$lang->get('prefix')}":"");
+
+		
+$vals['text'] = Motors::process($vals['text'], $prefix, $prefix_lang, $version->get('motor'));
+
 
 $smarty = cmsms()->GetSmarty();
 $smarty->assign('page', $page->getValues());
 $smarty->assign('lang', $lang->getValues());
-$smarty->assign('version', $version->getValues());
+$smarty->assign('version', $vals);
 echo $this->ProcessTemplate('default.tpl');
 
 ?>
