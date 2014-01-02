@@ -2,6 +2,8 @@
 
 if (!function_exists("cmsms")) exit;
 
+include_once(dirname(__FILE__).'/lib/class.Motors.php');
+
 //Create all the tables automatically 
 $entities = MyAutoload::getAllInstances($this->GetName());
 foreach($entities as $anEntity) {
