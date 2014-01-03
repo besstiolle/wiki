@@ -75,6 +75,16 @@ class Wiki extends Orm
 	function InitializeFrontend() {
 		$this->RegisterModulePlugin(true, false);
 		$this->RestrictUnknownParams();
+		
+		$this->SetParameterType('title',CLEAN_STRING);
+		$this->SetParameterType('lang',CLEAN_STRING);
+		
+		//save
+		$this->SetParameterType('text',CLEAN_STRING);
+		$this->SetParameterType('save',CLEAN_STRING);
+		$this->SetParameterType('page_id',CLEAN_INT);
+		$this->SetParameterType('lang_id',CLEAN_INT);
+		$this->SetParameterType('errors',CLEAN_NONE);
 	}
 
 	function InitializeAdmin() {
@@ -107,6 +117,21 @@ class Wiki extends Orm
 	function DisplayErrorPage($msg) {
 		echo "<h3>".$msg."</h3>";
 	}  
+	
+	public function CreateStaticRoutes() {
+	
+		$returnid = cmsms()->GetContentOperations()->GetDefaultContent();
+
+		$route = new CmsRoute('/[wW]iki$/', $this->GetName(), array('action'=>'default','returnid'=>$returnid));
+		cms_route_manager::add_static($route);
+		$route = new CmsRoute('/[wW]iki\/(?P<lang>[a-zA-Z0-9\-\_]*?)\/(?P<title>[a-zA-Z0-9\-\_]+)$/', $this->GetName(), array('action'=>'default','returnid'=>$returnid));
+		cms_route_manager::add_static($route);
+		$route = new CmsRoute('/[wW]iki\/(?P<lang>[a-zA-Z0-9\-\_]*?)\/(?P<title>[a-zA-Z0-9\-\_]+)\/edit$/', $this->GetName(), array('action'=>'edit','returnid'=>$returnid));
+		cms_route_manager::add_static($route);
+		$route = new CmsRoute('/[wW]iki\/(?P<lang>[a-zA-Z0-9\-\_]*?)\/(?P<title>[a-zA-Z0-9\-\_]+)\/delete$/', $this->GetName(), array('action'=>'delete','returnid'=>$returnid));
+		cms_route_manager::add_static($route);
+		
+  }
 	
 	/**
 	 * a inner function for factorize some recurrent code

@@ -1,8 +1,8 @@
 <?php
 
 //Default values
-$titleParam = 'home';
-$langParam = 'en_US';
+$titleParam = null;
+$langParam = null;
 $smarty = cmsms()->GetSmarty();
 
 /*******************************************/
@@ -52,12 +52,35 @@ if($lang != null){
 	return;
 }
 
+
+
 if($page == null || $version == null){
 	//Creation
 	include_once('inc.createPage.php');
 } else {
-	//Display
-	include_once('inc.viewPage.php');
+	//Edition
+	include_once('inc.editPage.php');
 }
+
+/*
+//Get the text
+$prefix = $this->GetPreference('prefix');
+$prefix_lang = ($this->GetPreference('show_prefix_lang', true)?"/{$lang->get('prefix')}":"");
+
+		
+$vals['text'] = Motors::process($vals['text'], $prefix, $prefix_lang, $version->get('motor'));
+
+$cancel = $this->CreateLink ($id, "default", $returnid, '', array('version_id'=>$version->get($version->getPk()->getName())), 'Sure ?', true, false, '', '', '');
+$delete = $this->CreateLink ($id, "delete", $returnid, '', array('version_id'=>$version->get($version->getPk()->getName())), 'Sure ?', true, false, '', '', '/delete');
+
+
+
+$smarty = cmsms()->GetSmarty();
+$smarty->assign('page', $page->getValues());
+$smarty->assign('lang', $lang->getValues());
+$smarty->assign('edit', $edit);
+$smarty->assign('delete', $delete);
+$smarty->assign('version', $vals);
+echo $this->ProcessTemplate('default.tpl');*/
 
 ?>
