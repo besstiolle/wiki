@@ -42,6 +42,9 @@ $version->set('page_id',$page->get($page->getPk()->getName()));
 $version->set('lang_id',$lang->get($lang->getPk()->getName()));
 $version = $version->save();
 
+// Add some routes
+$this->CreateStaticRoutes();
+
 // put mention into the admin log
 $this->Audit( 0, 
 	      $this->Lang('friendlyname'), 
