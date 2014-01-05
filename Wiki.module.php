@@ -76,15 +76,16 @@ class Wiki extends Orm
 		$this->RegisterModulePlugin(true, false);
 		$this->RestrictUnknownParams();
 		
-		$this->SetParameterType('title',CLEAN_STRING);
-		$this->SetParameterType('lang',CLEAN_STRING);
+		$this->SetParameterType('wtitle',CLEAN_STRING);
+		$this->SetParameterType('wlang',CLEAN_STRING);
 		
 		//save
-		$this->SetParameterType('text',CLEAN_STRING);
+		$this->SetParameterType('wtext',CLEAN_STRING);
 		$this->SetParameterType('save',CLEAN_STRING);
 		$this->SetParameterType('page_id',CLEAN_INT);
 		$this->SetParameterType('lang_id',CLEAN_INT);
-		$this->SetParameterType('errors',CLEAN_NONE);
+		$this->SetParameterType('werrors',CLEAN_NONE);
+		
 	}
 
 	function InitializeAdmin() {
@@ -122,13 +123,28 @@ class Wiki extends Orm
 	
 		$returnid = cmsms()->GetContentOperations()->GetDefaultContent();
 
+		//WIth nothing
 		$route = new CmsRoute('/[wW]iki$/', $this->GetName(), array('action'=>'default','returnid'=>$returnid));
 		cms_route_manager::add_static($route);
-		$route = new CmsRoute('/[wW]iki\/(?P<lang>[a-zA-Z0-9\-\_]*?)\/(?P<title>[a-zA-Z0-9\-\_]+)$/', $this->GetName(), array('action'=>'default','returnid'=>$returnid));
+		
+		//Without Lang
+		$route = new CmsRoute('/[wW]iki\/(?P<wtitle>[a-zA-Z0-9\-\_]+)$/', $this->GetName(), array('action'=>'default','returnid'=>$returnid));
 		cms_route_manager::add_static($route);
-		$route = new CmsRoute('/[wW]iki\/(?P<lang>[a-zA-Z0-9\-\_]*?)\/(?P<title>[a-zA-Z0-9\-\_]+)\/edit$/', $this->GetName(), array('action'=>'edit','returnid'=>$returnid));
+		$route = new CmsRoute('/[wW]iki\/(?P<wtitle>[a-zA-Z0-9\-\_]+)\/edit$/', $this->GetName(), array('action'=>'edit','returnid'=>$returnid));
 		cms_route_manager::add_static($route);
-		$route = new CmsRoute('/[wW]iki\/(?P<lang>[a-zA-Z0-9\-\_]*?)\/(?P<title>[a-zA-Z0-9\-\_]+)\/delete$/', $this->GetName(), array('action'=>'delete','returnid'=>$returnid));
+		$route = new CmsRoute('/[wW]iki\/(?P<wtitle>[a-zA-Z0-9\-\_]+)\/delete$/', $this->GetName(), array('action'=>'delete','returnid'=>$returnid));
+		cms_route_manager::add_static($route);
+		$route = new CmsRoute('/[wW]iki\/(?P<wtitle>[a-zA-Z0-9\-\_]+)\/preview$/', $this->GetName(), array('action'=>'preview','returnid'=>$returnid));
+		cms_route_manager::add_static($route);
+		
+		//With Lang
+		$route = new CmsRoute('/[wW]iki\/(?P<wlang>[a-zA-Z0-9\-\_]*?)\/(?P<wtitle>[a-zA-Z0-9\-\_]+)$/', $this->GetName(), array('action'=>'default','returnid'=>$returnid));
+		cms_route_manager::add_static($route);
+		$route = new CmsRoute('/[wW]iki\/(?P<wlang>[a-zA-Z0-9\-\_]*?)\/(?P<wtitle>[a-zA-Z0-9\-\_]+)\/edit$/', $this->GetName(), array('action'=>'edit','returnid'=>$returnid));
+		cms_route_manager::add_static($route);
+		$route = new CmsRoute('/[wW]iki\/(?P<wlang>[a-zA-Z0-9\-\_]*?)\/(?P<wtitle>[a-zA-Z0-9\-\_]+)\/delete$/', $this->GetName(), array('action'=>'delete','returnid'=>$returnid));
+		cms_route_manager::add_static($route);
+		$route = new CmsRoute('/[wW]iki\/(?P<wlang>[a-zA-Z0-9\-\_]*?)\/(?P<wtitle>[a-zA-Z0-9\-\_]+)\/preview$/', $this->GetName(), array('action'=>'preview','returnid'=>$returnid));
 		cms_route_manager::add_static($route);
 		
   }

@@ -16,14 +16,14 @@ if(!empty($params['page_id'])){
 if(!empty($params['lang_id'])){
 	$langParam = $params['lang_id'];
 }
-if(!empty($params['title'])){
-	$titleParam = $params['title'];
+if(!empty($params['wtitle'])){
+	$titleParam = $params['wtitle'];
 }
-if(!empty($params['text'])){
-	$textParam = $params['text'];
+if(!empty($params['wtext'])){
+	$textParam = $params['wtext'];
 }
 if($langParam == null){
-die("redirect");
+die("redirect langParam == null");
 	$this->RedirectForFrontEnd($id, $returnid, 'default');
 }
 
@@ -41,10 +41,10 @@ if($textParam == null){
 	$errors[] = 'text_mandatory';
 }
 if(count($errors) !== 0){
-	$params['errors'] = $errors;
+	$params['werrors'] = $errors;
 	if($lang != null) {
-		$params['lang'] = $lang->get('label');
-	}die("redirect");
+		$params['wlang'] = $lang->get('label');
+	}die("redirect lang == null");
 	$this->RedirectForFrontEnd($id, $returnid, 'edit', $params);
 }
 

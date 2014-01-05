@@ -10,6 +10,10 @@ class RouteMaker{
 		return RouteMaker::getRoute($langPrefix, $title, 'edit');
 	}
 	
+	public static function getPreviewRoute($langPrefix = null, $title){
+		return RouteMaker::getRoute($langPrefix, $title, 'preview');
+	}
+	
 	public static function getViewRoute($langPrefix = null, $title){
 		return RouteMaker::getRoute($langPrefix, $title);
 	}
