@@ -14,11 +14,15 @@ class RouteMaker{
 		return RouteMaker::getRoute($langPrefix, $title, 'preview');
 	}
 	
+	public static function getRawRoute($langPrefix = null, $title, $version_id){
+		return RouteMaker::getRoute($langPrefix, $title, 'raw', $version_id);
+	}
+	
 	public static function getViewRoute($langPrefix = null, $title){
 		return RouteMaker::getRoute($langPrefix, $title);
 	}
 	
-	protected static function getRoute($langPrefix = null, $title, $action = null){
+	protected static function getRoute($langPrefix = null, $title, $action = null, $version_id = null){
 				$modops = cmsms()->GetModuleOperations(); 
 		$wiki = $modops->get_module_instance('Wiki');
 		
@@ -32,7 +36,12 @@ class RouteMaker{
 		$action = ($action==null?'':'/'.$action);
 		
 		// "wiki/en_US/myPage/action"
-		return $prefix.$prefix_lang.'/'.$title.$action;
+		$url = $prefix.$prefix_lang.'/'.$title.$action;
+		
+		// /version_id 
+		$url .= ($version_id==null?'':'/'.$version_id);
+		
+		return $url;
 	}
 
 }

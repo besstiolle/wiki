@@ -10,10 +10,10 @@ $smarty = cmsms()->GetSmarty();
 $motorsParams = Motors::$MARKDOWN;
 
 if(!empty($params['wtext'])){
-	$textParam = $params['wtext'];
+	$textParam = urldecode($params['wtext']);
 }
 if(!empty($params['wtitle'])){
-	$titleParam = $params['wtitle'];
+	$titleParam = urldecode($params['wtitle']);
 }
 if(!empty($params['lang_id'])){
 	$langParam = $params['lang_id'];
@@ -22,6 +22,8 @@ if($langParam == null){
 die("redirect langParam == null");
 //TODO
 }
+
+
 
 //Get Lang
 $lang = OrmCore::findById(new Lang(),$langParam);

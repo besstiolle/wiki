@@ -3,8 +3,8 @@
 //<![CDATA[
   $(document).ready(function () {
 	  $("input.preview").click(function () { 
-			query = "{/literal}{$actionid}{literal}wtitle=" + $("#{/literal}{$actionid}{literal}wtitle").val() + "&" 
-				+ "{/literal}{$actionid}{literal}wtext=" + $("#{/literal}{$actionid}{literal}wtext").val() + "&" 
+			query = "{/literal}{$actionid}{literal}wtitle=" + escape($("#{/literal}{$actionid}{literal}wtitle").val()) + "&" 
+				+ "{/literal}{$actionid}{literal}wtext=" + escape($("#{/literal}{$actionid}{literal}wtext").val()) + "&" 
 				+ "{/literal}{$actionid}{literal}lang_id=" + $("#{/literal}{$actionid}{literal}lang_id").val();
 			
 			url = '{/literal}{$preview}{literal}&showtemplate=false';

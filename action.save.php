@@ -57,10 +57,15 @@ if($pageParam != null){
 	$page->set('prefix', '');
 	$page->set('title', $titleParam);
 	$page = $page->save();
-	
 }
+
 //Always create new Version
 $version = new Version();
+
+//Update old version in "last version"
+$query = "UPDATE {$version->getDbname()} SET status={$version::$STATUS_OLD} WHERE status={$version::$STATUS_CURRENT} AND lang_id={$lang->get($lang->getPk()->getName())} AND page_id={$page->get($page->getPk()->getName())}";
+OrmDb::execute($query);
+
 
 list($currentUS, $currentTS) = explode(" ", microtime());
 $version->set('motor',Motors::$MARKDOWN);
@@ -69,6 +74,7 @@ $version->set('author_name','admin');
 $version->set('author_id',0);
 $version->set('page_id',$page->get($page->getPk()->getName()));
 $version->set('lang_id',$lang->get($lang->getPk()->getName()));
+$version->set('status',$version::$STATUS_CURRENT);
 $version->set('title',$titleParam);
 $version->set('text',$textParam);
 

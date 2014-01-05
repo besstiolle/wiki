@@ -40,6 +40,7 @@ $version->set('author_name','admin');
 $version->set('author_id',0);
 $version->set('page_id',$page->get($page->getPk()->getName()));
 $version->set('lang_id',$lang->get($lang->getPk()->getName()));
+$version->set('status',$version::$STATUS_CURRENT);
 $version = $version->save();
 
 // Add some routes

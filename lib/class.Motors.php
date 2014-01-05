@@ -43,6 +43,7 @@ class Motors{
 				//Internal link
 				$example = new OrmExample();
 				$example->addCriteria('title', OrmTypeCriteria::$EQ, array($match[2]));
+				$example->addCriteria('status', OrmTypeCriteria::$EQ, array(Version::$STATUS_CURRENT));
 				$versions = OrmCore::findByExample(new Version(),$example);
 				if(count($versions) == 0){
 					$cssClass = 'new';
@@ -57,6 +58,9 @@ class Motors{
 			$search[] = $match[0];
 			$replace[] = "<a class='wikilinks {$cssClass}' title='{$title}' href='{$url}'>{$match[3]}</a>";
 		}
+		
+		//Fix <code></code> and <pre></pre> replacement
+		
 
 		$text = str_replace($search,$replace,$text);
 		

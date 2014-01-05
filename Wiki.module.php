@@ -84,6 +84,7 @@ class Wiki extends Orm
 		$this->SetParameterType('save',CLEAN_STRING);
 		$this->SetParameterType('page_id',CLEAN_INT);
 		$this->SetParameterType('lang_id',CLEAN_INT);
+		$this->SetParameterType('version_id',CLEAN_INT); // raw action
 		$this->SetParameterType('werrors',CLEAN_NONE);
 		
 	}
@@ -126,7 +127,7 @@ class Wiki extends Orm
 		//WIth nothing
 		$route = new CmsRoute('/[wW]iki$/', $this->GetName(), array('action'=>'default','returnid'=>$returnid));
 		cms_route_manager::add_static($route);
-		
+				
 		//Without Lang
 		$route = new CmsRoute('/[wW]iki\/(?P<wtitle>[a-zA-Z0-9\-\_]+)$/', $this->GetName(), array('action'=>'default','returnid'=>$returnid));
 		cms_route_manager::add_static($route);
@@ -135,6 +136,8 @@ class Wiki extends Orm
 		$route = new CmsRoute('/[wW]iki\/(?P<wtitle>[a-zA-Z0-9\-\_]+)\/delete$/', $this->GetName(), array('action'=>'delete','returnid'=>$returnid));
 		cms_route_manager::add_static($route);
 		$route = new CmsRoute('/[wW]iki\/(?P<wtitle>[a-zA-Z0-9\-\_]+)\/preview$/', $this->GetName(), array('action'=>'preview','returnid'=>$returnid));
+		cms_route_manager::add_static($route);
+		$route = new CmsRoute('/[wW]iki\/(?P<wtitle>[a-zA-Z0-9\-\_]+)\/raw\/(?P<version_id>[0-9]+)$/', $this->GetName(), array('action'=>'raw','returnid'=>$returnid));
 		cms_route_manager::add_static($route);
 		
 		//With Lang
@@ -145,6 +148,8 @@ class Wiki extends Orm
 		$route = new CmsRoute('/[wW]iki\/(?P<wlang>[a-zA-Z0-9\-\_]*?)\/(?P<wtitle>[a-zA-Z0-9\-\_]+)\/delete$/', $this->GetName(), array('action'=>'delete','returnid'=>$returnid));
 		cms_route_manager::add_static($route);
 		$route = new CmsRoute('/[wW]iki\/(?P<wlang>[a-zA-Z0-9\-\_]*?)\/(?P<wtitle>[a-zA-Z0-9\-\_]+)\/preview$/', $this->GetName(), array('action'=>'preview','returnid'=>$returnid));
+		cms_route_manager::add_static($route);
+		$route = new CmsRoute('/[wW]iki\/(?P<wlang>[a-zA-Z0-9\-\_]*?)\/(?P<wtitle>[a-zA-Z0-9\-\_]+)\/raw\/(?P<version_id>[0-9]+)$/', $this->GetName(), array('action'=>'raw','returnid'=>$returnid));
 		cms_route_manager::add_static($route);
 		
   }
