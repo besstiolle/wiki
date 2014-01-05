@@ -7,7 +7,7 @@
 				+ "{/literal}{$actionid}{literal}wtext=" + escape($("#{/literal}{$actionid}{literal}wtext").val()) + "&" 
 				+ "{/literal}{$actionid}{literal}lang_id=" + $("#{/literal}{$actionid}{literal}lang_id").val();
 			
-			url = '{/literal}{$preview}{literal}&showtemplate=false';
+			url = '{/literal}{$preview|unescape:"htmlall"}{literal}&showtemplate=false';
 		
 			$.post( url, query).done(function( data ) {
 				$("#preview_result").html(data);

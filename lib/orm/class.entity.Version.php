@@ -4,6 +4,10 @@
  */ 
 class Version extends OrmEntity {
 
+	public static $STATUS_OLD = 0;
+	public static $STATUS_CURRENT = 1;
+	public static $STATUS_DELETED = -1;
+
 	public function __construct() {
 		parent::__construct('Wiki','Version');
 		
@@ -65,7 +69,15 @@ class Version extends OrmEntity {
 			, TRUE
 		));
 		
+		
+		$this->add(new OrmField('status'
+			, OrmCAST::$INTEGER
+		));
+		
 		$this->garnishAutoincrement();
+		
+		$this->garnishDefaultValue('status',0);
+		$this->addIndexes('status');
 		
 		$this->garnishDefaultOrderBy(new OrmOrderBy(array('version_id'=>OrmOrderBy::$DESC)));
 	}	

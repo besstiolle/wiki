@@ -5,7 +5,7 @@
 	  $("input.raw").click(function () { 
 			query = "";
 			
-			url = '{/literal}{$raw}{literal}&showtemplate=false';
+			url = '{/literal}{$raw|unescape:"htmlall"}{literal}&showtemplate=false';
 		
 			$.post( url, query).done(function( data ) {
 				$("#raw_result").html(data);
