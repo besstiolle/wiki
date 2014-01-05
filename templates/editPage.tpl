@@ -27,10 +27,6 @@
 				$.fancybox.open( {href : '#preview_result', title : 'Preview', autoSize : false});
 			});
 		});
-		$( "a" ).click(function( event ) {
-			event.preventDefault();
-			alert('');
-		});
 	});
 // ]]>
 </script>
