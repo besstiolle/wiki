@@ -10,6 +10,9 @@ class Motors{
 		$config = cmsms()->GetConfig();
 		include_once($config['root_path'].'/modules/Wiki/lib/Michelf/Markdown.inc.php');
 		
+		//Transform {root_url}
+		$text = str_replace('{root_url}',$config['root_url'],$text);
+		
 		// Process the text : 
 		$text = Michelf\Markdown::defaultTransform($text);
 
