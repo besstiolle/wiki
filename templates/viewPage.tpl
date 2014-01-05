@@ -24,11 +24,12 @@
 			location.href = "{/literal}{$edit}{literal}";
 		});
 		
-		$(fieldPost).hide();
 		$(fieldPost).click(function () { 
 			location.href = "{/literal}{$delete}{literal}";
 		});
-			
+		
+		
+		$(fieldPost).hide();	
 		//All but fieldPre
 		$(document).bind('click', function (e) {
 		    window.clearTimeout(timeoutID);

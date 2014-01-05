@@ -1,6 +1,13 @@
 {literal}
 <script type="text/javascript">
 //<![CDATA[
+
+  var timeoutID;
+  var label;
+  var cnt = 2;
+  var fieldPre = '.cancelPre';
+  var fieldPost = '.cancelPost';
+  
   $(document).ready(function () {
 	  $("input.preview").click(function () { 
 			query = "{/literal}{$actionid}{literal}wtitle=" + escape($("#{/literal}{$actionid}{literal}wtitle").val()) + "&" 
@@ -17,7 +24,49 @@
 				$.fancybox.open( {href : '#preview_result', title : 'Preview', autoSize : false});
 			});
 		});
+		
+		$(fieldPost).click(function () { 
+			location.href = "{/literal}{$cancel}{literal}";
+		});
+		
+		$(fieldPost).hide();	
+		//All but fieldPre
+		$(document).bind('click', function (e) {
+		    window.clearTimeout(timeoutID);
+			$(fieldPre).show();
+			$(fieldPost).hide();
+			$(fieldPost).attr('disabled','disabled');
+			if(label==null){
+			    label = $(fieldPost).val();
+			}
+			$(fieldPost).val(label);
+		    cnt=2;
+		});
+
+		$(fieldPre).bind('click', function(e) {
+			e.stopPropagation();
+			$(fieldPre).hide();
+			$(fieldPost).show().attr('disabled','disabled');
+			count(fieldPost);
+			
+		});
 	});
+	
+	
+	function count(fieldId) {
+	  if(label==null){
+		label = $(fieldId).val();
+	  }
+	  if(cnt <= 0){
+		  $(fieldId).val(label);
+		  $(fieldId).removeAttr('disabled');
+	  } else {
+		  $(fieldId).val(label + " " + (cnt) + "s");
+		  cnt--;
+		  timeoutID = window.setTimeout(function() {count(fieldId);}, 1000);
+	  }
+	}
+
 // ]]>
 </script>
 {/literal}
@@ -34,8 +83,9 @@
 		<h2>Create a the new Page <b>{$version.title}</b></h2>
 	{/if}
 	<div class='wikiaction'>
-		<a class='small button' href='{$cancel}'>Cancel</a>
-		<input class='small button' type='submit' value='Save' name='{$actionid}save' />
+		<input class='small button cancelPre' type='button' value='Cancel'>
+		<input class='small button cancelPost alert' type='button' value='Cancel (Are You Sure?)'>
+		<input class='small button save' type='submit' value='Save' name='{$actionid}save' />
 		<input class='small button preview' type='button' value='Preview'>
 	</div>
 
@@ -43,8 +93,9 @@
 	<textarea name='{$actionid}wtext' id='{$actionid}wtext' rows='10' cols='20' class='wikiarea'>{$version.text}</textarea>
 
 	<div class='wikiaction'>
-		<a class='small button' href='{$cancel}'>Cancel</a>
-		<input class='small button' type='submit' value='Save' name='{$actionid}save' />
+		<input class='small button cancelPre' type='button' value='Cancel'>
+		<input class='small button cancelPost alert' type='button' value='Cancel (Are You Sure?)'>
+		<input class='small button save' type='submit' value='Save' name='{$actionid}save' />
 		<input class='small button preview' type='button' value='Preview'>
 	</div>
 </form>
