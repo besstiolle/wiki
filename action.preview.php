@@ -1,32 +1,64 @@
 <?php
 
-//die(print_r($_POST));
-die(print_r($params));
+//Default values
+$titleParam = null;
+$textParam = null;
+$langParam = null;
+//$pageParam = null;
+$smarty = cmsms()->GetSmarty();
 
+$motorsParams = Motors::$MARKDOWN;
 
-$text = $params['wtext'];
-$prefix = $params['wprefix'];
-$prefix_lang = $params['wprefix_lang'];
-$motors = $params['wmotors'];
+if(!empty($params['wtext'])){
+	$textParam = $params['wtext'];
+}
+if(!empty($params['wtitle'])){
+	$titleParam = $params['wtitle'];
+}
+if(!empty($params['lang_id'])){
+	$langParam = $params['lang_id'];
+}
+if($langParam == null){
+die("redirect langParam == null");
+//TODO
+}
 
+//Get Lang
+$lang = OrmCore::findById(new Lang(),$langParam);
+$errors = array();
+
+if($lang == null){
+	$errors[] = 'lang_mandatory';;
+}
+if($titleParam == null){
+	$errors[] = 'title_mandatory';
+}
+if($textParam == null){
+	$errors[] = 'text_mandatory';
+}
+if(count($errors) !== 0){
+	$params['werrors'] = $errors;
+	if($lang != null) {
+		$params['wlang'] = $lang->get('label');
+	}die("redirect lang == null");
+	//TODO
+}
 
 $prefix = $this->GetPreference('prefix');
 $prefix_lang = ($this->GetPreference('show_prefix_lang', true)?"/{$lang->get('prefix')}":"");
-		
-$vals['text'] = Motors::process($vals['text'], $prefix, $prefix_lang, $version->get('motor'));
 
+$vals['title'] = $titleParam;
+$vals['text'] = Motors::process($textParam, $prefix, $prefix_lang, $motorsParams);
 
-$edit = $this->CreateLink ($id, "edit", $returnid, '', array('title'=>$titleParam, 'lang'=>$langParam), '', true, false, '', '', RouteMaker::getEditRoute($prefix_lang, $titleParam));
-$delete = $this->CreateLink ($id, "delete", $returnid, '', array('title'=>$titleParam, 'lang'=>$langParam), 'Sure ?', true, false, '', '', RouteMaker::getDeleteRoute($prefix_lang, $titleParam));
 
 
 $smarty->assign('version', $vals);
 //$smarty->assign('page', $page->getValues());
 //$smarty->assign('lang', $lang->getValues());
 
-$smarty->assign('edit', $edit);
-$smarty->assign('delete', $delete);
+//$smarty->assign('edit', $edit);
+//$smarty->assign('delete', $delete);
 
-echo $this->ProcessTemplate('viewPage.tpl');
+echo $this->ProcessTemplate('previewPage.tpl');
 
 ?>

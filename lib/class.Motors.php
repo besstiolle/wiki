@@ -41,7 +41,7 @@ class Motors{
 			}
 			//Replace plain text without regex anymore
 			$search[] = $match[0];
-			$replace[] = "<a class='{$cssClass}' title='{$title}' href='{$url}'>{$match[3]}</a>";
+			$replace[] = "<a class='wikilinks {$cssClass}' title='{$title}' href='{$url}'>{$match[3]}</a>";
 		}
 
 		$text = str_replace($search,$replace,$text);
