@@ -8,10 +8,21 @@ class Motors{
 	public static function process($text, $prefix, $prefix_lang, $motor = 1){
 		//Prepare configuration
 		$config = cmsms()->GetConfig();
-		include_once($config['root_path'].'/modules/Wiki/lib/Michelf/Markdown.inc.php');
+		include_once($config['root_path'].'/modules/Wiki/lib/Michelf/MarkdownExtra.inc.php');
 		
-		//Transform {root_url}
-		$text = str_replace('{root_url}',$config['root_url'],$text);
+		//die($text);
+		
+		//Transform {root_url}, "!" symbol
+		$search = array('{root_url}', '&#33;');
+		$replace = array($config['root_url'], '!');
+		$text = str_replace($search, $replace, $text);
+		
+		//Transform blockquote
+		$search = array('`\n ?&gt; &gt; &gt; &gt; &gt; &gt; `','`\n ?&gt; &gt; &gt; &gt; &gt; `','`\n ?&gt; &gt; &gt; &gt; `','`\n ?&gt; &gt; &gt; `','`\n ?&gt; &gt; `','`\n ?&gt; `');
+		$replace = array('> > > > > >', '> > > > > ','> > > > ','> > > ','> > ','> ');
+		$text = preg_replace($search, $replace, $text);
+		$search = array('`^ ?&gt; &gt; &gt; &gt; &gt; &gt; `','`\n ?&gt; &gt; &gt; &gt; &gt; `','`^ ?&gt; &gt; &gt; &gt; `','`^ ?&gt; &gt; &gt; `','`^ ?&gt; &gt; `','`^ ?&gt; `');
+		$text = preg_replace($search, $replace, $text);
 		
 		// Process the text : 
 		$text = Michelf\Markdown::defaultTransform($text);

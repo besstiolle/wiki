@@ -1,18 +1,8 @@
 {literal}
-<!-- Add jQuery library -->
-<script type="text/javascript" src="{/literal}{root_url}{literal}/modules/Wiki/scripts/jquery/jquery-1.10.1.min.js"></script>
-
-<!-- Add mousewheel plugin (this is optional) -->
-<script type="text/javascript" src="{/literal}{root_url}{literal}/modules/Wiki/scripts/jquery/jquery.mousewheel-3.0.6.pack.js"></script>
-
-<!-- Add fancyBox main JS and CSS files -->
-<script type="text/javascript" src="{/literal}{root_url}{literal}/modules/Wiki/scripts/fancybox/jquery.fancybox.js?v=2.1.5"></script>
-<link rel="stylesheet" type="text/css" href="{/literal}{root_url}{literal}/modules/Wiki/scripts/fancybox/jquery.fancybox.css?v=2.1.5" media="screen" />
-	
 <script type="text/javascript">
 //<![CDATA[
   $(document).ready(function () {
-	  $("input[name='preview']").click(function () { 
+	  $("input.preview").click(function () { 
 			query = "{/literal}{$actionid}{literal}wtitle=" + $("#{/literal}{$actionid}{literal}wtitle").val() + "&" 
 				+ "{/literal}{$actionid}{literal}wtext=" + $("#{/literal}{$actionid}{literal}wtext").val() + "&" 
 				+ "{/literal}{$actionid}{literal}lang_id=" + $("#{/literal}{$actionid}{literal}lang_id").val();
@@ -44,17 +34,17 @@
 		<h2>Create a the new Page <b>{$version.title}</b></h2>
 	{/if}
 	<div class='wikiaction'>
-		<a href='{$cancel}'>Cancel</a>
-		<input type='submit' value='Save' class='sub' name='{$actionid}save' />
-		<input type='button' value='Preview' class='sub' name='preview' />
+		<a class='small button' href='{$cancel}'>Cancel</a>
+		<input class='small button' type='submit' value='Save' name='{$actionid}save' />
+		<input class='small button preview' type='button' value='Preview'>
 	</div>
 
 	<label for='{$actionid}wtitle' >Title : </label><input type='text' value='{$version.title}' name='{$actionid}wtitle' id='{$actionid}wtitle'/>
-	<textarea name='{$actionid}wtext' id='{$actionid}wtext' rows='10' cols='20'>{$version.text}</textarea>
+	<textarea name='{$actionid}wtext' id='{$actionid}wtext' rows='10' cols='20' class='wikiarea'>{$version.text}</textarea>
 
 	<div class='wikiaction'>
-		<a href='{$cancel}'>Cancel</a>
-		<input type='submit' value='Save' class='sub' name='{$actionid}save' />
-		<input type='button' value='Preview' class='sub' name='preview' id='preview' />
+		<a class='small button' href='{$cancel}'>Cancel</a>
+		<input class='small button' type='submit' value='Save' name='{$actionid}save' />
+		<input class='small button preview' type='button' value='Preview'>
 	</div>
 </form>
