@@ -38,6 +38,7 @@
     </div>
 
     <script src='{root_url}/uploads/foundation/js/foundation.min.js'></script>
+    <script src="{root_url}/uploads/foundation/js/foundation/foundation.abide.js"></script>
 
 
     <!-- Add mousewheel plugin (this is optional) -->
@@ -50,7 +51,7 @@
     <!-- <script type='text/javascript' src='{root_url}/modules/Wiki/scripts/wiki.js'></script> -->
 
     <script>
-      $(document).foundation();
+      $(document).foundation();       
     </script>
 
   </body>
