@@ -23,29 +23,33 @@ if(!empty($params['wtext'])){
 	$textParam = $params['wtext'];
 }
 if($langParam == null){
-die("redirect langParam == null");
-	$this->RedirectForFrontEnd($id, $returnid, 'default');
+	$params['werrors'] = 'lang_id_mandatory|';
+	$this->RedirectForFrontEnd($id, $returnid, 'default', $params);
 }
 
 //Get Lang
 $lang = OrmCore::findById(new Lang(),$langParam);
-$errors = array();
+$errors = '';
 
 if($lang == null){
-	$errors[] = 'lang_mandatory';;
+	$errors .= 'lang_mandatory|';
 }
 if($titleParam == null){
-	$errors[] = 'title_mandatory';
+	$errors .= 'title_mandatory|';
 }
 if($textParam == null){
-	$errors[] = 'text_mandatory';
+	$errors .= 'text_mandatory|';
 }
-if(count($errors) !== 0){
+if(!empty($errors)){
 	$params['werrors'] = $errors;
 	if($lang != null) {
 		$params['wlang'] = $lang->get('label');
-	}die("redirect lang == null");
-	$this->RedirectForFrontEnd($id, $returnid, 'edit', $params);
+		$this->RedirectForFrontEnd($id, $returnid, 'edit', $params);
+	} else {
+		$params['werrors'] .= 'lang_unknown|';
+		$this->RedirectForFrontEnd($id, $returnid, 'default', $params);
+	}
+	
 }
 
 //get Page
@@ -58,6 +62,18 @@ if($pageParam != null){
 	$page->set('title', $titleParam);
 	$page = $page->save();
 }
+
+//Avoir edit title of version "en_US/home"
+if($page->get('title') == 'home' && $titleParam != 'home' && $lang->get('label') == 'en_US'){
+	if($lang != null) {
+		$params['wlang'] = $lang->get('label');
+	}
+	//Reset title
+	$params['wtitle'] = $page->get('title');
+	$params['werrors'] = 'default_page_with_new_title|';
+	$this->RedirectForFrontEnd($id, $returnid, 'edit', $params);
+}
+
 
 //Always create new Version
 $version = new Version();
