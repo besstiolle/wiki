@@ -78,16 +78,20 @@
 	<input class='small button edit' type='button' value='Edit'>
 	<input class='small button deletePre' type='button' value='Delete'>
 	<input class='small button deletePost alert' type='button' value='Delete (Are You Sure?)'>
-	
 </div>
 
 {*<h3>{$version.title|capitalize}</h3>*}
 
 <div class='wikimeta'>
-	Created by <b>{$version.author_name}</b>
-	the <b>{$version.dt_creation|cms_date_format|utf8_encode}</b>. 
-	<b>v{$version.version_id}</b>
+	<input type='button' class="small button" data-dropdown="drop" value='R.{$version.version_id} &raquo;' />
+	<ul id="drop" class="small content f-dropdown" data-dropdown-content> 
+		<li><a href="#">R.{$version.version_id} By <b>{$version.author_name}</b> the <b>{$version.dt_creation|cms_date_format|utf8_encode}</b></a></li>
+		{foreach $oldvals as $oldval}
+			<li><a href="#">R.{$oldval.version_id} By <b>{$oldval.author_name}</b> the <b>{$oldval.dt_creation|cms_date_format|utf8_encode}</b></a></li>
+		{/foreach}
+	</ul>
 </div>
+
 <div class='wikiContent'>{$version.text}</div>
 
 <div class='wikiaction'>
