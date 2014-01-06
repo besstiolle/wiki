@@ -10,7 +10,12 @@ $form = $this->CreateFormStart($id, 'save', $returnid, 'post');
 $cancel = $this->CreateLink ($id, "default", $returnid, '', array(), '', true, false, '', '', RouteMaker::getViewRoute($langParam, $titleParam));
 $preview = $this->CreateLink ($id, "preview", $returnid, '', array(), '', true, false, '', '', RouteMaker::getPreviewRoute($langParam, $titleParam));
 
-$smarty->assign('version', $version->getValues());
+//Case : get in edition after an error : keep the previous text.
+if(!empty($params['wtext'])){
+	$vals['text'] = $params['wtext'];
+}
+
+$smarty->assign('version', $vals);
 //$smarty->assign('page', $page->getValues());
 //$smarty->assign('lang', $lang->getValues());
 
