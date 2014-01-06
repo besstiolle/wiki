@@ -71,6 +71,14 @@
 </script>
 {/literal}
 
+{if !empty($errors)}
+{foreach $errors as $error}{if !empty($error)}
+<div data-alert class="alert-box warning radius">
+  {$mod->Lang($error)}
+  <a href="#" class="close">&times;</a>
+</div>{/if}{/foreach}
+{/if}
+
 <div class='fancybox' id='raw_result'></div>
 
 {*<h3>{$version.title|capitalize}</h3>*}

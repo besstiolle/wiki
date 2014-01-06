@@ -46,4 +46,11 @@ if($lang != null){
 }
 
 
+if(!empty($params['werrors'])){
+	$errors = explode('|',$params['werrors']);
+	$smarty->assign('errors', $errors);
+}
+
+$smarty->assign('mod', $this);
+
 ?>

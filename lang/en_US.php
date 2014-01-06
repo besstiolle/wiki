@@ -10,4 +10,17 @@ $lang['changelog'] = 'see changelog : <a href="https://github.com/besstiolle/wik
 $lang['help'] = '<h3>What Does This Do?</h3>
 <p>more informations on : <a href="https://github.com/besstiolle/wiki-ms" target="_blank">https://github.com/besstiolle/wiki-ms</a></p>
 ';
+
+$lang['lang_id_mandatory'] = 'the lang_id parameter is missing';
+$lang['lang_mandatory'] = 'The lang is missing or unknown';
+$lang['title_mandatory'] = 'The title is mandatory';
+$lang['text_mandatory'] = 'The text is mandatory';
+$lang['default_page_with_new_title'] = 'You can\'t change the title of the default page';
+$lang['xxx'] = 'xxx';
+$lang['xxx'] = 'xxx';
+$lang['xxx'] = 'xxx';
+$lang['xxx'] = 'xxx';
+$lang['xxx'] = 'xxx';
+$lang['xxx'] = 'xxx';
+
 ?>
