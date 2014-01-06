@@ -10,10 +10,10 @@ $smarty = cmsms()->GetSmarty();
 $motorsParams = Motors::$MARKDOWN;
 
 if(!empty($params['wtext'])){
-	$textParam = urldecode($params['wtext']);
+	$textParam = js_urldecode($params['wtext']);
 }
 if(!empty($params['wtitle'])){
-	$titleParam = urldecode($params['wtitle']);
+	$titleParam = js_urldecode($params['wtitle']);
 }
 if(!empty($params['lang_id'])){
 	$langParam = $params['lang_id'];
@@ -22,7 +22,6 @@ if($langParam == null){
 die("redirect langParam == null");
 //TODO
 }
-
 
 //$textParam =htmlentities(file_get_contents($config['root_path'].'/modules/Wiki/default.txt'));
 
@@ -63,5 +62,13 @@ $smarty->assign('version', $vals);
 //$smarty->assign('delete', $delete);
 
 echo $this->ProcessTemplate('previewPage.tpl');
+
+/**
+ * @param string $str unicode and ulrencoded string
+ * @return string decoded string
+ */
+function js_urldecode($str) {
+    return preg_replace("/%u([0-9a-f]{3,4})/i","&#x\\1;",urldecode($str));
+}
 
 ?>
