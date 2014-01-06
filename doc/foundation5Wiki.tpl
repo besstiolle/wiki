@@ -1,6 +1,9 @@
 {process_pagedata}{content assign='content'}<!doctype html>
 <html class='no-js' lang='en'>
   <head>
+
+    {if isset($canonical)}<link rel="canonical" href="{$canonical}" />{elseif isset($content_obj)}<link rel="canonical" href="{$content_obj->GetURL()}" />{/if}
+
     <meta charset='utf-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
     <title>{sitename}  {title}</title>
