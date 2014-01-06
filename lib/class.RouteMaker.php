@@ -18,27 +18,33 @@ class RouteMaker{
 		return RouteMaker::getRoute($langPrefix, $title, 'raw', $version_id);
 	}
 	
+	public static function getViewOldRoute($langPrefix = null, $title, $version_id){
+		return RouteMaker::getRoute($langPrefix, $title, 'view', $version_id);
+	}
+	
 	public static function getViewRoute($langPrefix = null, $title){
 		return RouteMaker::getRoute($langPrefix, $title);
 	}
 	
 	protected static function getRoute($langPrefix = null, $title, $action = null, $version_id = null){
-				$modops = cmsms()->GetModuleOperations(); 
+		$modops = cmsms()->GetModuleOperations(); 
 		$wiki = $modops->get_module_instance('Wiki');
 		
+		$url = '';
+		
 		// "wiki"
-		$prefix = $wiki->GetPreference('prefix');
+		$url .= $wiki->GetPreference('prefix');
 		
-		// "/en_US
-		$prefix_lang = ($wiki->GetPreference('show_prefix_lang', true)?'/'.$langPrefix:"");
+		// "/en_US"
+		$url .= ($wiki->GetPreference('show_prefix_lang', true)?'/'.$langPrefix:"");
 		
-		// /action
-		$action = ($action==null?'':'/'.$action);
+		// "/title"
+		$url .= '/'.$title;
 		
-		// "wiki/en_US/myPage/action"
-		$url = $prefix.$prefix_lang.'/'.$title.$action;
+		// "/action"
+		$url .= ($action==null?'':'/'.$action);
 		
-		// /version_id 
+		// "/version_id"
 		$url .= ($version_id==null?'':'/'.$version_id);
 		
 		return $url;

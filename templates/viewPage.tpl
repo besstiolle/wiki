@@ -83,11 +83,11 @@
 {*<h3>{$version.title|capitalize}</h3>*}
 
 <div class='wikimeta'>
-	<input type='button' class="small button" data-dropdown="drop" value='R.{$version.version_id} &raquo;' />
-	<ul id="drop" class="small content f-dropdown" data-dropdown-content> 
-		<li><a href="#">R.{$version.version_id} By <b>{$version.author_name}</b> the <b>{$version.dt_creation|cms_date_format|utf8_encode}</b></a></li>
+	<input type='button' class="tiny button" data-dropdown="drop" value='R.{$version.version_id} &raquo;' />
+	<ul id="drop" class="small f-dropdown" data-dropdown-content> 
+		{*<li><a href="#">R.{$version.version_id} By <b>{$version.author_name}</b> the <b>{$version.dt_creation|cms_date_format|utf8_encode}</b></a></li>*}
 		{foreach $oldvals as $oldval}
-			<li><a href="#">R.{$oldval.version_id} By <b>{$oldval.author_name}</b> the <b>{$oldval.dt_creation|cms_date_format|utf8_encode}</b></a></li>
+			<li><a href="{$oldval.viewUrl}">{if $oldval.version_id==$version.version_id}&raquo; {/if}R.{$oldval.version_id} By <b>{$oldval.author_name}</b> the <b>{$oldval.dt_creation|cms_date_format|utf8_encode}</b></a></li>
 		{/foreach}
 	</ul>
 </div>

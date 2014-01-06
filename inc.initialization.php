@@ -22,7 +22,12 @@ if($lang != null){
 	$example = new OrmExample();
 	$example->addCriteria('title', OrmTypeCriteria::$EQ, array($titleParam));
 	$example->addCriteria('lang_id', OrmTypeCriteria::$EQ, array($lang->get($lang->getPk()->getName())));
-	$example->addCriteria('status', OrmTypeCriteria::$EQ, array(Version::$STATUS_CURRENT));
+	
+	if($version_id != null){ // Case wiki/en_US/home/view/2
+		$example->addCriteria('version_id', OrmTypeCriteria::$EQ, array($version_id));
+	} else {
+		$example->addCriteria('status', OrmTypeCriteria::$EQ, array(Version::$STATUS_CURRENT));
+	}
 
 	$versions = OrmCore::findByExample(new Version(),$example, null, new OrmLimit(0,1));
 	if(count($versions) == 0){
@@ -36,7 +41,7 @@ if($lang != null){
 	}
 		
 } else { //Error cases
-	echo "The lang {$langParam} is not an unknown lang.";
+	echo "The lang {$langParam} is not an known lang.";
 	return;
 }
 

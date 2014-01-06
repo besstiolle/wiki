@@ -127,9 +127,13 @@ class Wiki extends Orm
 		//WIth nothing
 		$route = new CmsRoute('/[wW]iki$/', $this->GetName(), array('action'=>'default','returnid'=>$returnid));
 		cms_route_manager::add_static($route);
-				
+			/*	
 		//Without Lang
 		$route = new CmsRoute('/[wW]iki\/(?P<wtitle>[a-zA-Z0-9\-\_\:]+)$/', $this->GetName(), array('action'=>'default','returnid'=>$returnid));
+		cms_route_manager::add_static($route);
+		$route = new CmsRoute('/[wW]iki\/(?P<wtitle>[a-zA-Z0-9\-\_\:]+)\/view$/', $this->GetName(), array('action'=>'default','returnid'=>$returnid));
+		cms_route_manager::add_static($route);
+		$route = new CmsRoute('/[wW]iki\/(?P<wtitle>[a-zA-Z0-9\-\_\:]+)\/view\/(?P<version_id>[0-9]+)$/', $this->GetName(), array('action'=>'default','returnid'=>$returnid));
 		cms_route_manager::add_static($route);
 		$route = new CmsRoute('/[wW]iki\/(?P<wtitle>[a-zA-Z0-9\-\_\:]+)\/edit$/', $this->GetName(), array('action'=>'edit','returnid'=>$returnid));
 		cms_route_manager::add_static($route);
@@ -139,9 +143,13 @@ class Wiki extends Orm
 		cms_route_manager::add_static($route);
 		$route = new CmsRoute('/[wW]iki\/(?P<wtitle>[a-zA-Z0-9\-\_\:]+)\/raw\/(?P<version_id>[0-9]+)$/', $this->GetName(), array('action'=>'raw','returnid'=>$returnid));
 		cms_route_manager::add_static($route);
-		
+		*/
 		//With Lang
 		$route = new CmsRoute('/[wW]iki\/(?P<wlang>[a-zA-Z0-9\-\_]*?)\/(?P<wtitle>[a-zA-Z0-9\-\_\:]+)$/', $this->GetName(), array('action'=>'default','returnid'=>$returnid));
+		cms_route_manager::add_static($route);
+		$route = new CmsRoute('/[wW]iki\/(?P<wlang>[a-zA-Z0-9\-\_]*?)\/(?P<wtitle>[a-zA-Z0-9\-\_\:]+)\/view$/', $this->GetName(), array('action'=>'default','returnid'=>$returnid));
+		cms_route_manager::add_static($route);
+		$route = new CmsRoute('/[wW]iki\/(?P<wlang>[a-zA-Z0-9\-\_]*?)\/(?P<wtitle>[a-zA-Z0-9\-\_\:]+)\/view\/(?P<version_id>[0-9]+)$/', $this->GetName(), array('action'=>'default','returnid'=>$returnid));
 		cms_route_manager::add_static($route);
 		$route = new CmsRoute('/[wW]iki\/(?P<wlang>[a-zA-Z0-9\-\_]*?)\/(?P<wtitle>[a-zA-Z0-9\-\_\:]+)\/edit$/', $this->GetName(), array('action'=>'edit','returnid'=>$returnid));
 		cms_route_manager::add_static($route);

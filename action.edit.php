@@ -3,6 +3,7 @@
 //Default values
 $titleParam = null;
 $langParam = null;
+$version_id = null;
 $smarty = cmsms()->GetSmarty();
 
 /*******************************************/
