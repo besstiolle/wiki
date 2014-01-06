@@ -1,8 +1,8 @@
 {process_pagedata}{content assign='content'}<!doctype html>
-<html class=no-js lang=en>
+<html class='no-js' lang='en'>
   <head>
-    <meta charset=utf-8 />
-    <meta name=viewport content=width=device-width, initial-scale=1.0 />
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
     <title>{sitename}  {title}</title>
 
 
@@ -12,43 +12,43 @@
     {cms_selflink dir=prev rellink=1}
     {cms_selflink dir=next rellink=1}
 
-    <link rel=stylesheet href={root_url}uploadsfoundationcssfoundation.css />
+    <link rel='stylesheet' href='{root_url}/uploads/foundation/css/foundation.css' />
     
-    <link rel=stylesheet type=textcss href={root_url}modulesWikiscriptsfancyboxjquery.fancybox.cssv=2.1.5 media=screen />
-    <script src={root_url}uploadsfoundationjsmodernizr.js</script>
-    <script src={root_url}uploadsfoundationjsjquery.js</script>
+    <link rel='stylesheet' type='text/css' href='{root_url}/modules/Wiki/scripts/fancybox/jquery.fancybox.css?v=2.1.5' media='screen' />
+    <script src='{root_url}/uploads/foundation/js/modernizr.js'></script>
+    <script src='{root_url}/uploads/foundation/js/jquery.js'></script>
 
-  <head>
+  </head>
   <body>
     
-    <div class=row>
-      <div class=large-12 columns>
-        <h1>{if isset($title)}{$titlecapitalize}{else}{title}{/if}</h1>
+    <div class='row'>
+      <div class='large-12 columns'>
+        <h1>{if isset($title)}{$title|capitalize}{else}{title}{/if}</h1>
       </div>
     </div>
     
-    <div class=row>
-      <div class=large-12 columns>
-      	<div class=panel>{$content}
+    <div class='row'>
+      <div class='large-12 columns'>
+      	<div class='panel'>{$content}
       	</div>
       </div>
     </div>
 
-    <script src={root_url}uploadsfoundationjsfoundation.min.js</script>
+    <script src='{root_url}/uploads/foundation/js/foundation.min.js'></script>
 
 
-    !-- Add mousewheel plugin (this is optional) --
-    <script type=textjavascript src={root_url}modulesWikiscriptsjqueryjquery.mousewheel-3.0.6.pack.js></script>
+    <!-- Add mousewheel plugin (this is optional) -->
+    <script type='text/javascript' src='{root_url}/modules/Wiki/scripts/jquery/jquery.mousewheel-3.0.6.pack.js'></script>
 
-    !-- Add fancyBox main JS and CSS files --
-    <script type=textjavascript src={root_url}modulesWikiscriptsfancyboxjquery.fancybox.jsv=2.1.5></script>
+    <!-- Add fancyBox main JS and CSS files -->
+    <script type='text/javascript' src='{root_url}/modules/Wiki/scripts/fancybox/jquery.fancybox.js?v=2.1.5'></script>
 
-    !-- Add wiki Javascript code --
-    <script type=textjavascript src={root_url}modulesWikiscriptswiki.js></script>
+    <!-- Add wiki Javascript code -->
+    <!-- <script type='text/javascript' src='{root_url}/modules/Wiki/scripts/wiki.js'></script> -->
 
     <script>
       $(document).foundation();
     </script>
 
-  <body>
+  </body>
 </html>
