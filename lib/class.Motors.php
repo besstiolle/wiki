@@ -58,11 +58,21 @@ class Motors{
 			$search[] = $match[0];
 			$replace[] = "<a class='wikilinks {$cssClass}' title='{$title}' href='{$url}'>{$match[3]}</a>";
 		}
+		$text = str_replace($search,$replace,$text);
 		
 		//Fix <code></code> and <pre></pre> replacement
-		
-
+		$patternS = '`<code>([^<]*)</code>`si';
+		preg_match_all( $patternS, $text, $matches, PREG_SET_ORDER);
+		//print_r($matches);
+		$search = array();
+		$replace = array();
+		foreach($matches as $match) {
+			$search[] = $match[0];
+			$replace[] = html_entity_decode($match[0]);
+		}
 		$text = str_replace($search,$replace,$text);
+		//die();
+
 		
 		return $text;
 	}

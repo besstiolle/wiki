@@ -24,6 +24,7 @@ die("redirect langParam == null");
 }
 
 
+//$textParam =htmlentities(file_get_contents($config['root_path'].'/modules/Wiki/default.txt'));
 
 //Get Lang
 $lang = OrmCore::findById(new Lang(),$langParam);
