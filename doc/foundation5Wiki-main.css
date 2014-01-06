@@ -1,0 +1,11 @@
+a.new{
+    color: #93000C;
+}
+
+a.follow{
+    color: #054882;
+}
+textarea.wikiarea{
+    height: 500px;
+    resize: vertical;
+}
