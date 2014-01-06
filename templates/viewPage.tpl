@@ -73,30 +73,23 @@
 
 <div class='fancybox' id='raw_result'></div>
 
-<div class='wikiaction'>
-	<input class='small button raw' type='button' value='Show Raw Code'>
-	<input class='small button edit' type='button' value='Edit'>
-	<input class='small button deletePre' type='button' value='Delete'>
-	<input class='small button deletePost alert' type='button' value='Delete (Are You Sure?)'>
-</div>
-
 {*<h3>{$version.title|capitalize}</h3>*}
 
-<div class='wikimeta'>
-	<input type='button' class="tiny button" data-dropdown="drop" value='R.{$version.version_id} &raquo;' />
-	<ul id="drop" class="small f-dropdown" data-dropdown-content> 
-		{*<li><a href="#">R.{$version.version_id} By <b>{$version.author_name}</b> the <b>{$version.dt_creation|cms_date_format|utf8_encode}</b></a></li>*}
-		{foreach $oldvals as $oldval}
-			<li><a href="{$oldval.viewUrl}">{if $oldval.version_id==$version.version_id}&raquo; {/if}R.{$oldval.version_id} By <b>{$oldval.author_name}</b> the <b>{$oldval.dt_creation|cms_date_format|utf8_encode}</b></a></li>
-		{/foreach}
-	</ul>
-</div>
+{capture assign='btns'}
+<ul class="button-group radius">
+	<li><input class='tiny button raw' type='button' value='Show Raw Code'></li>
+	<li><input class='tiny button edit' type='button' value='Edit'></li>
+	<li><input class='tiny button deletePre' type='button' value='Delete'></li>
+	<li><input class='tiny button deletePost alert' type='button' value='Delete (Are You Sure?)'></li>
+	<li><input type='button' class="tiny button" data-dropdown="drop" value='R.{$version.version_id} &raquo;' />
+		<ul id="drop" class="small f-dropdown" data-dropdown-content> 
+			{foreach $oldvals as $oldval}
+				<li><a href="{$oldval.viewUrl}">{if $oldval.version_id==$version.version_id}&raquo; {/if}R.{$oldval.version_id} By <b>{$oldval.author_name}</b> the <b>{$oldval.dt_creation|cms_date_format|utf8_encode}</b></a></li>
+			{/foreach}
+		</ul></li>
+</ul>
+{/capture}
 
+{$btns}
 <div class='wikiContent'>{$version.text}</div>
-
-<div class='wikiaction'>
-	<input class='small button raw' type='button' value='Show Raw Code'>
-	<input class='small button edit' type='button' value='Edit'>
-	<input class='small button deletePre' type='button' value='Delete'>
-	<input class='small button deletePost alert' type='button' value='Delete (Are You Sure?)'>
-</div>
+{$btns}

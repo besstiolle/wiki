@@ -82,20 +82,19 @@
 	{else}
 		<h2>Create a the new Page <b>{$version.title}</b></h2>
 	{/if}
-	<div class='wikiaction'>
-		<input class='small button cancelPre' type='button' value='Cancel'>
-		<input class='small button cancelPost alert' type='button' value='Cancel (Are You Sure?)'>
-		<input class='small button save' type='submit' value='Save' name='{$actionid}save' />
-		<input class='small button preview' type='button' value='Preview'>
-	</div>
-
+	
+	{capture assign='btns'}
+	<ul class="button-group radius">
+		<li><input class='tiny button preview' type='button' value='Preview'></li>
+		<li><input class='tiny button cancelPre' type='button' value='Cancel'></li>
+		<li><input class='tiny button cancelPost alert' type='button' value='Cancel (Are You Sure?)'></li>
+		<li><input class='tiny button save' type='submit' value='Save' name='{$actionid}save' /></li>
+	</ul>
+	{/capture}
+	
+	{$btns}
 	<label for='{$actionid}wtitle' >Title : </label><input type='text' value='{$version.title}' name='{$actionid}wtitle' id='{$actionid}wtitle'/>
 	<textarea name='{$actionid}wtext' id='{$actionid}wtext' rows='10' cols='20' class='wikiarea'>{$version.text}</textarea>
-
-	<div class='wikiaction'>
-		<input class='small button cancelPre' type='button' value='Cancel'>
-		<input class='small button cancelPost alert' type='button' value='Cancel (Are You Sure?)'>
-		<input class='small button save' type='submit' value='Save' name='{$actionid}save' />
-		<input class='small button preview' type='button' value='Preview'>
-	</div>
+	{$btns}
+	
 </form>
