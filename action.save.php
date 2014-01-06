@@ -39,6 +39,7 @@ if($titleParam == null){
 }
 if($textParam == null){
 	$errors .= 'text_mandatory|';
+	unset($params['wtext']); //avoid blank text in edition
 }
 if(!empty($errors)){
 	$params['werrors'] = $errors;
@@ -46,7 +47,6 @@ if(!empty($errors)){
 		$params['wlang'] = $lang->get('label');
 		$this->RedirectForFrontEnd($id, $returnid, 'edit', $params);
 	} else {
-		$params['werrors'] .= 'lang_unknown|';
 		$this->RedirectForFrontEnd($id, $returnid, 'default', $params);
 	}
 	
