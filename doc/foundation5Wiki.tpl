@@ -11,9 +11,9 @@
 
     {metadata}
     {cms_stylesheet}
-    {cms_selflink dir=start rellink=1}
-    {cms_selflink dir=prev rellink=1}
-    {cms_selflink dir=next rellink=1}
+    {cms_selflink dir="start" rellink=1}
+    {cms_selflink dir="prev" rellink=1}
+    {cms_selflink dir="next" rellink=1}
 
     <link rel='stylesheet' href='{root_url}/uploads/foundation/css/foundation.css' />
     
