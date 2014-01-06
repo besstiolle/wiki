@@ -36,6 +36,8 @@ if($lang == null){
 }
 if($titleParam == null){
 	$errors .= 'title_mandatory|';
+} else if(!preg_match ('`^[\p{L}0-9\-:_]*$`u', $titleParam)) {
+	$errors .= 'title_format|';
 }
 if($textParam == null){
 	$errors .= 'text_mandatory|';

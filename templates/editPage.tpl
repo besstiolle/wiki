@@ -101,8 +101,14 @@
 	{/capture}
 	
 	{$btns}
-	<label for='{$actionid}wtitle' >Title : </label><input type='text' value='{$version.title}' name='{$actionid}wtitle' id='{$actionid}wtitle'/>
-	<textarea name='{$actionid}wtext' id='{$actionid}wtext' rows='10' cols='20' class='wikiarea'>{$version.text}</textarea>
+	<div class="name-field">
+		<label for='{$actionid}wtitle' >Title : </label><input type='text' value='{$version.title}' name='{$actionid}wtitle' id='{$actionid}wtitle' required pattern="[a-zA-Z0-9\-_:]+"/>
+		<small class="error">Title is required and must be a string with symbols "-_:".</small>
+	</div>
+	<div class="name-field">
+		<textarea name='{$actionid}wtext' id='{$actionid}wtext' rows='10' cols='20' class='wikiarea' required>{$version.text}</textarea>
+		<small class="error">Text is required.</small>
+	</div>
 	{$btns}
 	
 </form>
