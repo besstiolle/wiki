@@ -17,8 +17,8 @@ if(!empty($params['lang_id'])){
 	$langParam = $params['lang_id'];
 }
 if(!empty($params['wtitle'])){
-	$params['wtitle'] = $this->js_urldecode($params['wtitle']);
-	$params['wtitle'] = preg_replace('`[^\p{L}0-9\-:_]*`u','', html_entity_decode($params['wtitle']));
+	$params['wtitle'] = $this->clean_title($this->js_urldecode($params['wtitle']));
+	//$params['wtitle'] = preg_replace('`[^\p{L}0-9\-:_]*`u','', html_entity_decode($params['wtitle']));
 	$titleParam = $params['wtitle'];
 }
 if(!empty($params['wtext'])){

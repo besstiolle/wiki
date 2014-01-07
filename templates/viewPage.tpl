@@ -87,7 +87,7 @@
 <ul class="button-group radius">
 	<li><input class='tiny button raw' type='button' value='Show Raw Code'></li>
 	<li><input class='tiny button edit' type='button' value='Edit'{if $version.status!=1} disabled='disabled' title='you can not edit an old version'{/if}></li>
-	<li><input class='tiny button deletePre' type='button' value='Delete'{if $version.status!=1} disabled='disabled' title='you can not delete an old version'{/if}></li>
+	<li><input class='tiny button deletePre' type='button' value='Delete'{if $version.status!=1} disabled='disabled' title='you can not delete an old version'{elseif $isDefaultPage} disabled='disabled' title='you can not delete the default page'{/if}></li>
 	<li><input class='tiny button deletePost alert' type='button' value='Delete (Are You Sure?)'></li>
 	<li><input type='button' class="tiny button" data-dropdown="drop" value='R.{$version.version_id} &raquo;' />
 		<ul id="drop" class="small f-dropdown" data-dropdown-content> 

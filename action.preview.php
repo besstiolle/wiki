@@ -1,11 +1,10 @@
 <?php
 
-//Default values
-$titleParam = null;
-$textParam = null;
-$langParam = null;
-//$pageParam = null;
-$smarty = cmsms()->GetSmarty();
+
+//Common initialization
+include_once('inc.initialization.php');
+
+/*******************************************/
 
 $motorsParams = Motors::$MARKDOWN;
 
@@ -13,21 +12,19 @@ if(!empty($params['wtext'])){
 	$textParam = $this->js_urldecode($params['wtext']);
 }
 if(!empty($params['wtitle'])){
-	$titleParam = $this->js_urldecode($params['wtitle']);
+	$titleParam = $this->clean_title($this->js_urldecode($params['wtitle']));
 }
 if(!empty($params['lang_id'])){
 	$langParam = $params['lang_id'];
 }
 if($langParam == null){
-die("redirect langParam == null");
-//TODO
+	echo $this->Lang("lang_id_mandatory");
 }
 
 //$textParam =htmlentities(file_get_contents($config['root_path'].'/modules/Wiki/default.txt'));
 
 //Get Lang
 $lang = OrmCore::findById(new Lang(),$langParam);
-$errors = array();
 
 if($lang == null){
 	$errors[] = 'lang_mandatory';;

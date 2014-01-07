@@ -16,10 +16,13 @@ $lang['lang_mandatory'] = 'The lang is missing or unknown';
 $lang['title_mandatory'] = 'The title is mandatory';
 $lang['text_mandatory'] = 'The text is mandatory';
 $lang['default_page_with_new_title'] = 'You can\'t change the title of the default page';
+$lang['default_version_undeletable'] = 'You can\'t delete the default page';
 $lang['title_format'] = 'Title is required and must be an alphanumerique string (symbols "-_:" are accepted too).';
-$lang['xxx'] = 'xxx';
-$lang['xxx'] = 'xxx';
-$lang['xxx'] = 'xxx';
+$lang['version_unknow'] = 'The current page is not know. Maybe it\'s already deleted ?';
+
+
+$lang['save_success'] = 'Page saved with success.';
+$lang['delete_success'] = 'Page deleted with success.';
 $lang['xxx'] = 'xxx';
 $lang['xxx'] = 'xxx';
 
