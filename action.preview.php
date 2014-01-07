@@ -10,10 +10,10 @@ $smarty = cmsms()->GetSmarty();
 $motorsParams = Motors::$MARKDOWN;
 
 if(!empty($params['wtext'])){
-	$textParam = js_urldecode($params['wtext']);
+	$textParam = $this->js_urldecode($params['wtext']);
 }
 if(!empty($params['wtitle'])){
-	$titleParam = js_urldecode($params['wtitle']);
+	$titleParam = $this->js_urldecode($params['wtitle']);
 }
 if(!empty($params['lang_id'])){
 	$langParam = $params['lang_id'];
@@ -42,8 +42,9 @@ if(count($errors) !== 0){
 	$params['werrors'] = $errors;
 	if($lang != null) {
 		$params['wlang'] = $lang->get('label');
-	}die("redirect lang == null");
-	//TODO
+	}
+	echo $this->Lang("lang_mandatory");
+	return;
 }
 
 $prefix = $this->GetPreference('prefix');
@@ -63,12 +64,5 @@ $smarty->assign('version', $vals);
 
 echo $this->ProcessTemplate('previewPage.tpl');
 
-/**
- * @param string $str unicode and ulrencoded string
- * @return string decoded string
- */
-function js_urldecode($str) {
-    return preg_replace("/%u([0-9a-f]{3,4})/i","&#x\\1;",urldecode($str));
-}
 
 ?>

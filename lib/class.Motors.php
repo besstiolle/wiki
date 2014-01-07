@@ -9,9 +9,7 @@ class Motors{
 		//Prepare configuration
 		$config = cmsms()->GetConfig();
 		include_once($config['root_path'].'/modules/Wiki/lib/Michelf/MarkdownExtra.inc.php');
-		
-		//die($text);
-		
+				
 		//Transform {root_url}, "!" symbol
 		$search = array('{root_url}', '&#33;');
 		$replace = array($config['root_url'], '!');
@@ -71,8 +69,6 @@ class Motors{
 			$replace[] = html_entity_decode($match[0]);
 		}
 		$text = str_replace($search,$replace,$text);
-		//die();
-
 		
 		return $text;
 	}

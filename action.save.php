@@ -17,9 +17,12 @@ if(!empty($params['lang_id'])){
 	$langParam = $params['lang_id'];
 }
 if(!empty($params['wtitle'])){
+	$params['wtitle'] = $this->js_urldecode($params['wtitle']);
+	$params['wtitle'] = preg_replace('`[^\p{L}0-9\-:_]*`u','', html_entity_decode($params['wtitle']));
 	$titleParam = $params['wtitle'];
 }
 if(!empty($params['wtext'])){
+	$params['wtext'] = $this->js_urldecode($params['wtext']);
 	$textParam = $params['wtext'];
 }
 if($langParam == null){
@@ -36,9 +39,10 @@ if($lang == null){
 }
 if($titleParam == null){
 	$errors .= 'title_mandatory|';
-} else if(!preg_match ('`^[\p{L}0-9\-:_]*$`u', $titleParam)) {
-	$errors .= 'title_format|';
-}
+} 
+
+//$titleParam = preg_replace('`[^\p{L}0-9\-:_]*`u','', html_entity_decode($titleParam));
+
 if($textParam == null){
 	$errors .= 'text_mandatory|';
 	unset($params['wtext']); //avoid blank text in edition
