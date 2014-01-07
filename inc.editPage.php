@@ -12,7 +12,7 @@ $preview = $this->CreateLink ($id, "preview", $returnid, '', array(), '', true, 
 
 //Case : get in edition after an error : keep the previous text.
 if(!empty($params['wtext'])){
-	$vals['text'] = $params['wtext'];
+	$vals['text'] = html_entity_decode($params['wtext']);
 }
 
 $smarty->assign('version', $vals);
