@@ -29,7 +29,7 @@ class Wiki extends Orm
 	}
 
 	function GetDependencies() {
-		return array('Orm'=>'0.2.1');
+		return array('Orm'=>'0.3.0-SNAPSHOT');
 	}
 
 	function GetHelp() {
@@ -160,13 +160,42 @@ class Wiki extends Orm
 		$route = new CmsRoute('/[wW]iki\/(?P<wlang>[a-zA-Z0-9\-\_]*?)\/(?P<wtitle>[a-zA-Z0-9\-\_\:]+)\/raw\/(?P<version_id>[0-9]+)$/', $this->GetName(), array('action'=>'raw','returnid'=>$returnid));
 		cms_route_manager::add_static($route);
 		
-  }
+   }
 	
 	/**
 	 * a inner function for factorize some recurrent code
 	 **/
 	function securize($str){
 		return htmlentities($str, ENT_QUOTES, 'UTF-8');
+	}
+	/**
+	* @param string $str unicode and ulrencoded string
+	* @return string decoded string
+	*/
+	function js_urldecode($str) {
+	    return preg_replace("/%u([0-9a-f]{3,4})/i","&#x\\1;",urldecode($str));
+	}
+
+	/**
+	 * 1 - Replace accent
+	 * 2 - Replace everything except a-zA-Z0-9  and -:_  by a underscore
+	 * 3 - Replace groupe of underscore by a single underscore
+	 *
+	 */
+	function clean_title($str, $charset='UTF-8'){
+		$str = htmlentities($str, ENT_NOQUOTES, $charset);
+		
+		$str = preg_replace('#&([A-za-z])(?:acute|cedil|circ|grave|orn|ring|slash|th|tilde|uml);#', '\1', $str);
+		$str = preg_replace('#&([A-za-z]{2})(?:lig);#', '\1', $str); // pour les ligatures e.g. '&oelig;'
+		
+		//$str = str_replace(array('&#45;','&#58;','&#95;'), array('-',':','_') , $str); // restaure -:_
+		$str = preg_replace('#&[^;]+;#', '_', $str); // supprime les autres caractères html
+		$str = preg_replace('#[^a-zA-Z0-9\-_:]#', '_', $str); // supprime les autres caractères interdits
+		$str = preg_replace('#(_)+#', '_', $str); // reduit les couples d'underscore
+    
+		$str = html_entity_decode($str, ENT_NOQUOTES, $charset);
+		
+		return $str;
 	}
 } 
 ?>
