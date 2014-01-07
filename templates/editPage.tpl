@@ -4,7 +4,7 @@
 
   var timeoutID;
   var label;
-  var cnt = 2;
+  var cnt = 1;
   var fieldPre = '.cancelPre';
   var fieldPost = '.cancelPost';
   
@@ -40,7 +40,7 @@
 			    label = $(fieldPost).val();
 			}
 			$(fieldPost).val(label);
-		    cnt=2;
+		    cnt=1;
 		});
 
 		$(fieldPre).bind('click', function(e) {
