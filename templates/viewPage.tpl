@@ -81,7 +81,6 @@
 
 <div class='fancybox' id='raw_result'></div>
 
-{*<h3>{$version.title|capitalize}</h3>*}
 
 {capture assign='btns'}
 <ul class="button-group radius">
