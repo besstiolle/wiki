@@ -1,1 +1,1 @@
-<pre style="width:100%">{$version.text}</pre>
+<textarea class='wikiarea wikiarea420'>{$version.text}</textarea>
