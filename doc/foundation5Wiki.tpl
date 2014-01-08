@@ -26,7 +26,7 @@
     
     <div class='row'>
       <div class='large-12 columns'>
-        <h1>{if isset($title)}{$title|capitalize}{else}{title}{/if}</h1>
+        <h1>{if isset($title)}{$title|capitalize}{else}{title}{/if}{if isset($action)} / {$action}{/if}</h1>
       </div>
     </div>
     

@@ -85,12 +85,6 @@
 	{if !empty($version.page_id)}<input type='hidden' name='{$actionid}page_id' id='{$actionid}page_id' value='{$version.page_id}'/>{/if}
 	{if !empty($version.lang_id)}<input type='hidden' name='{$actionid}lang_id' id='{$actionid}lang_id' value='{$version.lang_id}'/>{/if}
 
-	{if !empty($version.page_id)}
-		<h2>Edit the Page <b>{$version.title}</b></h2>
-	{else}
-		<h2>Create a the new Page <b>{$version.title}</b></h2>
-	{/if}
-	
 	{capture assign='btns'}
 	<ul class="button-group radius">
 		<li><input class='tiny button preview' type='button' value='Preview'></li>

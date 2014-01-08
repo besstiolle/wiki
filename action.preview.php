@@ -53,11 +53,8 @@ $vals['text'] = Motors::process($textParam, $prefix, $prefix_lang, $motorsParams
 
 
 $smarty->assign('version', $vals);
-//$smarty->assign('page', $page->getValues());
-//$smarty->assign('lang', $lang->getValues());
-
-//$smarty->assign('edit', $edit);
-//$smarty->assign('delete', $delete);
+$smarty->assign('title', $titleParam);
+$smarty->assign('action', 'Preview');
 
 echo $this->ProcessTemplate('previewPage.tpl');
 

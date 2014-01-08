@@ -11,8 +11,8 @@ $cancel = $this->CreateLink ($id, "default", $returnid, '', array(), '', true, f
 $preview = $this->CreateLink ($id, "preview", $returnid, '', array(), '', true, false, '', '', RouteMaker::getPreviewRoute($langParam, $titleParam));
 
 $smarty->assign('version', $version->getValues());
-//$smarty->assign('page', $page->getValues());
-//$smarty->assign('lang', $lang->getValues());
+$smarty->assign('title', $titleParam);
+$smarty->assign('action', 'Create');
 
 $smarty->assign('cancel', $cancel);
 $smarty->assign('preview', $preview);

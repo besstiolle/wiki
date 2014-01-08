@@ -33,9 +33,7 @@ $smarty->assign('oldvals', $oldvals);
 
 
 $smarty->assign('version', $vals);
-$smarty->assign('title', $vals['title']);
-//$smarty->assign('page', $page->getValues());
-//$smarty->assign('lang', $lang->getValues());
+$smarty->assign('title', $titleParam);
 
 $smarty->assign('edit', $edit);
 $smarty->assign('delete', $delete);

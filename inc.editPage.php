@@ -16,8 +16,8 @@ if(!empty($params['wtext'])){
 }
 
 $smarty->assign('version', $vals);
-//$smarty->assign('page', $page->getValues());
-//$smarty->assign('lang', $lang->getValues());
+$smarty->assign('title', $titleParam);
+$smarty->assign('action', .'Edit');
 
 $smarty->assign('cancel', $cancel);
 $smarty->assign('preview', $preview);
