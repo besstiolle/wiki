@@ -52,6 +52,14 @@ if(!empty($params['werrors'])){
 	$smarty->assign('errors', $errors);
 }
 
+//Avoid edit title of default page/default lang
+$isDefaultPage = false;
+if($page != null && $page->get('title') == 'home' 
+	&& $lang != null && $lang->get('label') == 'en_US'){
+	$isDefaultPage = true;
+}
+$smarty->assign('isDefaultPage', $isDefaultPage);
+
 if($page == null || $version == null){
 	//Creation
 	include_once('inc.createPage.php');

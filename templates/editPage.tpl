@@ -96,7 +96,7 @@
 	
 	{$btns}
 	<div class="name-field">
-		<label for='{$actionid}wtitle' >Title : </label><input type='text' value='{$version.title}' name='{$actionid}wtitle' id='{$actionid}wtitle' required/>
+		<label for='{$actionid}wtitle' >Title : </label><input type='text' value='{$version.title}' name='{$actionid}wtitle' id='{$actionid}wtitle' required {if $isDefaultPage}disabled='disabled' title="You can't edit the title of the default page"{/if}/>
 		<small class="error">Title is required.</small>
 	</div>
 	<div class="name-field">
