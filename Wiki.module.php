@@ -155,7 +155,7 @@ class Wiki extends Orm
 		cms_route_manager::add_static($route);
 		$route = new CmsRoute('/[wW]iki\/(?P<wlang>[a-zA-Z0-9\-\_]*?)\/(?P<wtitle>[a-zA-Z0-9\-\_\:]+)\/delete$/', $this->GetName(), array('action'=>'delete','returnid'=>$returnid));
 		cms_route_manager::add_static($route);
-		$route = new CmsRoute('/[wW]iki\/(?P<wlang>[a-zA-Z0-9\-\_]*?)\/(?P<wtitle>[a-zA-Z0-9\-\_\:]+)\/preview$/', $this->GetName(), array('action'=>'preview','returnid'=>$returnid));
+		$route = new CmsRoute('/[wW]iki\/(?P<wlang>[a-zA-Z0-9\-\_]*?)\/([a-zA-Z0-9\-\_\:]+)\/preview$/', $this->GetName(), array('action'=>'preview','returnid'=>$returnid));
 		cms_route_manager::add_static($route);
 		$route = new CmsRoute('/[wW]iki\/(?P<wlang>[a-zA-Z0-9\-\_]*?)\/(?P<wtitle>[a-zA-Z0-9\-\_\:]+)\/raw\/(?P<version_id>[0-9]+)$/', $this->GetName(), array('action'=>'raw','returnid'=>$returnid));
 		cms_route_manager::add_static($route);
