@@ -1,11 +1,11 @@
 <?php
 
 
-class Motors{
+class Engines{
 
 	public static $MARKDOWN = 1;
 
-	public static function process($text, $prefix, $prefix_lang, $motor = 1){
+	public static function process($text, $prefix, $prefix_lang, $engine = 1){
 		//Prepare configuration
 		$config = cmsms()->GetConfig();
 		include_once($config['root_path'].'/modules/Wiki/lib/Michelf/MarkdownExtra.inc.php');

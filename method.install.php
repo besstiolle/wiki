@@ -2,7 +2,7 @@
 
 if (!function_exists("cmsms")) exit;
 
-include_once(dirname(__FILE__).'/lib/class.Motors.php');
+include_once(dirname(__FILE__).'/lib/class.Engines.php');
 
 //Create all the tables automatically 
 $entities = MyAutoload::getAllInstances($this->GetName());
@@ -34,7 +34,7 @@ $lang = $lang->save();
 $version = new Version();
 $version->set('title',$page->get('title'));
 $version->set('text',htmlentities(file_get_contents($config['root_path'].'/modules/Wiki/default.txt')));
-$version->set('motor',Motors::$MARKDOWN);
+$version->set('engine',Engines::$MARKDOWN);
 $version->set('dt_creation',$currentTS);
 $version->set('author_name','admin');
 $version->set('author_id',0);

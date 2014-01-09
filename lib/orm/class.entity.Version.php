@@ -29,8 +29,8 @@ class Version extends OrmEntity {
 			, OrmCAST::$BUFFER 
 		));
 		
-		// the inner motor
-		$this->add(new OrmField('motor'
+		// the inner engine
+		$this->add(new OrmField('engine'
 			, OrmCAST::$INTEGER	
 		));
 		

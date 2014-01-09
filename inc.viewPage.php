@@ -5,7 +5,7 @@ $prefix_lang = ($this->GetPreference('show_prefix_lang', true)?"/{$lang->get('pr
 
 $vals['raw'] = $vals['text'];	
 //$vals['text'] = htmlentities(file_get_contents($config['root_path'].'/modules/Wiki/default.txt'));	
-$vals['text'] = Motors::process($vals['text'], $prefix, $prefix_lang, $version->get('motor'));
+$vals['text'] = Engines::process($vals['text'], $prefix, $prefix_lang, $version->get('engine'));
 
 
 $edit = $this->CreateLink ($id, "edit", $returnid, '', array('wtitle'=>$titleParam, 'wlang'=>$langParam), '', true, false, '', '', RouteMaker::getEditRoute($prefix_lang, $titleParam));

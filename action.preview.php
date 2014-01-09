@@ -6,7 +6,7 @@ include_once('inc.initialization.php');
 
 /*******************************************/
 
-$motorsParams = Motors::$MARKDOWN;
+$enginesParams = Engines::$MARKDOWN;
 
 if(!empty($params['wtext'])){
 	$textParam = $this->js_urldecode($params['wtext']);
@@ -48,7 +48,7 @@ $prefix = $this->GetPreference('prefix');
 $prefix_lang = ($this->GetPreference('show_prefix_lang', true)?"/{$lang->get('prefix')}":"");
 
 $vals['title'] = $titleParam;
-$vals['text'] = Motors::process($textParam, $prefix, $prefix_lang, $motorsParams);
+$vals['text'] = Engines::process($textParam, $prefix, $prefix_lang, $enginesParams);
 
 
 

@@ -1,11 +1,7 @@
 <?php
 
-//Default values
-$titleParam = null;
-$textParam = null;
-$langParam = null;
-$pageParam = null;
-$smarty = cmsms()->GetSmarty();
+//Common initialization
+include_once('inc.initialization.php');
 
 /*******************************************/
 
@@ -26,35 +22,40 @@ if(!empty($params['wtext'])){
 	$textParam = $params['wtext'];
 }
 if($langParam == null){
-	$params['werrors'] = 'lang_id_mandatory|';
-	$this->RedirectForFrontEnd($id, $returnid, 'default', $params);
+	$errors[] = 'lang_id_mandatory';
+	$url = RouteMaker::getViewRoute('en_US', 'home');
+	$smarty->assign('errors',$errors);
+	$smarty->assign('url',$url);
+	echo $this->ProcessTemplate('message.tpl');
+	return;
 }
 
 //Get Lang
 $lang = OrmCore::findById(new Lang(),$langParam);
-$errors = '';
 
 if($lang == null){
-	$errors .= 'lang_mandatory|';
+	$errors[] = 'lang_mandatory';
 }
 if($titleParam == null){
-	$errors .= 'title_mandatory|';
+	$errors[] = 'title_mandatory';
 } 
 
 //$titleParam = preg_replace('`[^\p{L}0-9\-:_]*`u','', html_entity_decode($titleParam));
 
 if($textParam == null){
-	$errors .= 'text_mandatory|';
-	unset($params['wtext']); //avoid blank text in edition
+	$errors[] = 'text_mandatory';
 }
-if(!empty($errors)){
-	$params['werrors'] = $errors;
+if(!empty($errors)) {
 	if($lang != null) {
-		$params['wlang'] = $lang->get('label');
-		$this->RedirectForFrontEnd($id, $returnid, 'edit', $params);
+		$url = RouteMaker::getEditRoute('en_US', 'home');
 	} else {
-		$this->RedirectForFrontEnd($id, $returnid, 'default', $params);
+		$url = RouteMaker::getViewRoute('en_US', 'home');
 	}
+	
+	$smarty->assign('errors',$errors);
+	$smarty->assign('url',$url);
+	echo $this->ProcessTemplate('message.tpl');
+	return;
 	
 }
 
@@ -69,15 +70,14 @@ if($pageParam != null){
 	$page = $page->save();
 }
 
-//Avoir edit title of version "en_US/home"
+//Avoid edit title of version "en_US/home"
 if($page->get('title') == 'home' && $titleParam != 'home' && $lang->get('label') == 'en_US'){
-	if($lang != null) {
-		$params['wlang'] = $lang->get('label');
-	}
-	//Reset title
-	$params['wtitle'] = $page->get('title');
-	$params['werrors'] = 'default_page_with_new_title|';
-	$this->RedirectForFrontEnd($id, $returnid, 'edit', $params);
+	$errors[] = 'default_page_with_new_title';
+	$url = RouteMaker::getEditRoute('en_US', 'home');
+	$smarty->assign('errors',$errors);
+	$smarty->assign('url',$url);
+	echo $this->ProcessTemplate('message.tpl');
+	return;
 }
 
 
@@ -90,7 +90,7 @@ OrmDb::execute($query);
 
 
 list($currentUS, $currentTS) = explode(" ", microtime());
-$version->set('motor',Motors::$MARKDOWN);
+$version->set('engine',Engines::$MARKDOWN);
 $version->set('dt_creation',$currentTS);
 $version->set('author_name','admin');
 $version->set('author_id',0);
@@ -103,7 +103,9 @@ $version->set('text',$textParam);
 $version = $version->save();
 
 
-$this->RedirectForFrontEnd($id, $returnid, 'default', $params);
+$url = $this->CreateLink ($id, "default", $returnid, '', array(), '', true, false, '', '', RouteMaker::getViewRoute($lang->get('label'), $titleParam));
+header("Location: {$url}");
+return;
 
 
 ?>
