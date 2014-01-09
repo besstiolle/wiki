@@ -121,43 +121,47 @@ class Wiki extends Orm
 	}  
 	
 	public function CreateStaticRoutes() {
+		$this->_inner_createStaticRoutes('[wW]iki', '(?P<wlang>[a-zA-Z0-9\-\_]*?)');
+	}
+	
+	public function _inner_createStaticRoutes($prefix, $lang) {
 	
 		$returnid = cmsms()->GetContentOperations()->GetDefaultContent();
+		$pipe = '\/';
+		$title = '(?P<wtitle>[a-zA-Z0-9\-\_\:]+)';
+		$version = '(?P<version_id>[0-9]+)';
 
 		//WIth nothing
-		$route = new CmsRoute('/[wW]iki$/', $this->GetName(), array('action'=>'default','returnid'=>$returnid));
+		$route = new CmsRoute("/{$prefix}$/", $this->GetName(), array('action'=>'default','returnid'=>$returnid));
 		cms_route_manager::add_static($route);
-			/*	
-		//Without Lang
-		$route = new CmsRoute('/[wW]iki\/(?P<wtitle>[a-zA-Z0-9\-\_\:]+)$/', $this->GetName(), array('action'=>'default','returnid'=>$returnid));
-		cms_route_manager::add_static($route);
-		$route = new CmsRoute('/[wW]iki\/(?P<wtitle>[a-zA-Z0-9\-\_\:]+)\/view$/', $this->GetName(), array('action'=>'default','returnid'=>$returnid));
-		cms_route_manager::add_static($route);
-		$route = new CmsRoute('/[wW]iki\/(?P<wtitle>[a-zA-Z0-9\-\_\:]+)\/view\/(?P<version_id>[0-9]+)$/', $this->GetName(), array('action'=>'default','returnid'=>$returnid));
-		cms_route_manager::add_static($route);
-		$route = new CmsRoute('/[wW]iki\/(?P<wtitle>[a-zA-Z0-9\-\_\:]+)\/edit$/', $this->GetName(), array('action'=>'edit','returnid'=>$returnid));
-		cms_route_manager::add_static($route);
-		$route = new CmsRoute('/[wW]iki\/(?P<wtitle>[a-zA-Z0-9\-\_\:]+)\/delete$/', $this->GetName(), array('action'=>'delete','returnid'=>$returnid));
-		cms_route_manager::add_static($route);
-		$route = new CmsRoute('/[wW]iki\/(?P<wtitle>[a-zA-Z0-9\-\_\:]+)\/preview$/', $this->GetName(), array('action'=>'preview','returnid'=>$returnid));
-		cms_route_manager::add_static($route);
-		$route = new CmsRoute('/[wW]iki\/(?P<wtitle>[a-zA-Z0-9\-\_\:]+)\/raw\/(?P<version_id>[0-9]+)$/', $this->GetName(), array('action'=>'raw','returnid'=>$returnid));
-		cms_route_manager::add_static($route);
-		*/
+				
 		//With Lang
-		$route = new CmsRoute('/[wW]iki\/(?P<wlang>[a-zA-Z0-9\-\_]*?)\/(?P<wtitle>[a-zA-Z0-9\-\_\:]+)$/', $this->GetName(), array('action'=>'default','returnid'=>$returnid));
+		$route = new CmsRoute("/{$prefix}{$pipe}{$lang}{$pipe}{$title}$/", 
+				$this->GetName(), array('action'=>'default','returnid'=>$returnid));
 		cms_route_manager::add_static($route);
-		$route = new CmsRoute('/[wW]iki\/(?P<wlang>[a-zA-Z0-9\-\_]*?)\/(?P<wtitle>[a-zA-Z0-9\-\_\:]+)\/view$/', $this->GetName(), array('action'=>'default','returnid'=>$returnid));
+		
+		$route = new CmsRoute("/{$prefix}{$pipe}{$lang}{$pipe}{$title}{$pipe}view$/", 
+				$this->GetName(), array('action'=>'default','returnid'=>$returnid));
 		cms_route_manager::add_static($route);
-		$route = new CmsRoute('/[wW]iki\/(?P<wlang>[a-zA-Z0-9\-\_]*?)\/(?P<wtitle>[a-zA-Z0-9\-\_\:]+)\/view\/(?P<version_id>[0-9]+)$/', $this->GetName(), array('action'=>'default','returnid'=>$returnid));
+		
+		$route = new CmsRoute("/{$prefix}{$pipe}{$lang}{$pipe}{$title}{$pipe}view{$pipe}{$version}$/", 
+				$this->GetName(), array('action'=>'default','returnid'=>$returnid));
 		cms_route_manager::add_static($route);
-		$route = new CmsRoute('/[wW]iki\/(?P<wlang>[a-zA-Z0-9\-\_]*?)\/(?P<wtitle>[a-zA-Z0-9\-\_\:]+)\/edit$/', $this->GetName(), array('action'=>'edit','returnid'=>$returnid));
+		
+		$route = new CmsRoute("/{$prefix}{$pipe}{$lang}{$pipe}{$title}{$pipe}edit$/", 
+				$this->GetName(), array('action'=>'edit','returnid'=>$returnid));
 		cms_route_manager::add_static($route);
-		$route = new CmsRoute('/[wW]iki\/(?P<wlang>[a-zA-Z0-9\-\_]*?)\/(?P<wtitle>[a-zA-Z0-9\-\_\:]+)\/delete$/', $this->GetName(), array('action'=>'delete','returnid'=>$returnid));
+		
+		$route = new CmsRoute("/{$prefix}{$pipe}{$lang}{$pipe}{$title}{$pipe}delete$/", 
+				$this->GetName(), array('action'=>'delete','returnid'=>$returnid));
 		cms_route_manager::add_static($route);
-		$route = new CmsRoute('/[wW]iki\/(?P<wlang>[a-zA-Z0-9\-\_]*?)\/([a-zA-Z0-9\-\_\:]+)\/preview$/', $this->GetName(), array('action'=>'preview','returnid'=>$returnid));
+		
+		$route = new CmsRoute("/{$prefix}{$pipe}{$lang}{$pipe}([a-zA-Z0-9\-\_\:]+){$pipe}preview$/", 
+				$this->GetName(), array('action'=>'preview','returnid'=>$returnid));
 		cms_route_manager::add_static($route);
-		$route = new CmsRoute('/[wW]iki\/(?P<wlang>[a-zA-Z0-9\-\_]*?)\/(?P<wtitle>[a-zA-Z0-9\-\_\:]+)\/raw\/(?P<version_id>[0-9]+)$/', $this->GetName(), array('action'=>'raw','returnid'=>$returnid));
+		
+		$route = new CmsRoute("/{$prefix}{$pipe}{$lang}{$pipe}{$title}{$pipe}raw{$pipe}{$version}$/", 
+				$this->GetName(), array('action'=>'raw','returnid'=>$returnid));
 		cms_route_manager::add_static($route);
 		
    }
