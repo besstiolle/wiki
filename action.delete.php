@@ -44,7 +44,7 @@ if($lang != null){
 		
 } else { //Error cases
 	$errors[] = 'lang_mandatory';
-	$url = $this->CreateLink ($id, "default", $returnid, '', array('errors'=>$errors), '', true, false, '', '', RouteMaker::getViewRoute($langParam, $titleParam));
+	$url = $this->CreateLink ($id, "default", $returnid, '', array(), '', true, false, '', '', RouteMaker::getViewRoute($langParam, $titleParam));
 	$smarty->assign('errors',$errors);
 	$smarty->assign('url',$url);
 	echo $this->ProcessTemplate('message.tpl');
