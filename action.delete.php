@@ -52,16 +52,16 @@ if($lang != null){
 }
 if($version == null){ //Go back to home
 	$errors[] = 'version_unknow';
-	$url = $this->CreateLink ($id, "default", $returnid, '', array(), '', true, false, '', '', RouteMaker::getViewRoute($langParam, 'home'));
+	$url = $this->CreateLink ($id, "default", $returnid, '', array(), '', true, false, '', '', RouteMaker::getViewRoute($langParam, $this->_getDefaultTitle()));
 	$smarty->assign('errors',$errors);
 	$smarty->assign('url',$url);
 	echo $this->ProcessTemplate('message.tpl');
 	return;
 }
 
-if($page->get('title') == 'home' && $lang->get('label') == 'en_US'){ //Don't allow that.
+if($page->get('title') == $this->_getDefaultTitle() && $lang->get('label') == $this->_getDefaultLang()){ //Don't allow that.
 	$errors[] = 'default_version_undeletable';
-	$url = $this->CreateLink ($id, "default", $returnid, '', array(), '', true, false, '', '', RouteMaker::getViewRoute($langParam, 'home'));
+	$url = $this->CreateLink ($id, "default", $returnid, '', array(), '', true, false, '', '', RouteMaker::getViewRoute($langParam, $this->_getDefaultTitle()));
 	$smarty->assign('errors',$errors);
 	$smarty->assign('url',$url);
 	echo $this->ProcessTemplate('message.tpl');

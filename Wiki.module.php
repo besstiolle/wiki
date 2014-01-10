@@ -201,5 +201,13 @@ class Wiki extends Orm
 		
 		return $str;
 	}
+		
+	function _getDefaultLang(){
+		return 'en_US';
+	}
+	
+	function _getDefaultTitle(){
+		return 'home';
+	}
 } 
 ?>

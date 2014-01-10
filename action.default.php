@@ -6,8 +6,8 @@ include_once('inc.initialization.php');
 /*******************************************/
 
 //Default values in view class
-$titleParam = 'home';
-$langParam = 'en_US';
+$titleParam = $this->_getDefaultTitle();
+$langParam = $this->_getDefaultLang();
 
 /*******************************************/
 
@@ -35,7 +35,7 @@ if(count($langs) == 0){
 
 if($lang == null){
 	$errors[] = 'lang_mandatory';
-	$url = $this->CreateLink ($id, "default", $returnid, '', array(), '', true, false, '', '', RouteMaker::getViewRoute('en_US', 'home'));
+	$url = $this->CreateLink ($id, "default", $returnid, '', array(), '', true, false, '', '', RouteMaker::getViewRoute($this->_getDefaultLang(), $this->_getDefaultTitle()));
 	$smarty->assign('errors',$errors);
 	$smarty->assign('url',$url);
 	echo $this->ProcessTemplate('message.tpl');
@@ -71,8 +71,8 @@ if(!empty($params['werrors'])){
 
 //Avoid delete default page/default lang
 $isDefaultPage = false;
-if($page != null && $page->get('title') == 'home' 
-	&& $lang != null && $lang->get('label') == 'en_US'){
+if($page != null && $page->get('title') == $this->_getDefaultTitle() 
+	&& $lang != null && $lang->get('label') == $this->_getDefaultLang()){
 	$isDefaultPage = true;
 }
 $smarty->assign('isDefaultPage', $isDefaultPage);

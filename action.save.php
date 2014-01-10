@@ -23,7 +23,7 @@ if(!empty($params['wtext'])){
 }
 if($langParam == null){
 	$errors[] = 'lang_id_mandatory';
-	$url = RouteMaker::getViewRoute('en_US', 'home');
+	$url = RouteMaker::getViewRoute($this->_getDefaultLang(), $this->_getDefaultTitle());
 	$smarty->assign('errors',$errors);
 	$smarty->assign('url',$url);
 	echo $this->ProcessTemplate('message.tpl');
@@ -47,9 +47,9 @@ if($textParam == null){
 }
 if(!empty($errors)) {
 	if($lang != null) {
-		$url = RouteMaker::getEditRoute('en_US', 'home');
+		$url = RouteMaker::getEditRoute($this->_getDefaultLang(), $this->_getDefaultTitle());
 	} else {
-		$url = RouteMaker::getViewRoute('en_US', 'home');
+		$url = RouteMaker::getViewRoute($this->_getDefaultLang(), $this->_getDefaultTitle());
 	}
 	
 	$smarty->assign('errors',$errors);
@@ -71,9 +71,9 @@ if($pageParam != null){
 }
 
 //Avoid edit title of version "en_US/home"
-if($page->get('title') == 'home' && $titleParam != 'home' && $lang->get('label') == 'en_US'){
+if($page->get('title') == $this->_getDefaultTitle() && $titleParam != $this->_getDefaultTitle() && $lang->get('label') == $this->_getDefaultLang()){
 	$errors[] = 'default_page_with_new_title';
-	$url = RouteMaker::getEditRoute('en_US', 'home');
+	$url = RouteMaker::getEditRoute($this->_getDefaultLang(), $this->_getDefaultTitle());
 	$smarty->assign('errors',$errors);
 	$smarty->assign('url',$url);
 	echo $this->ProcessTemplate('message.tpl');
