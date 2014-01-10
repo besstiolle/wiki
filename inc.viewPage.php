@@ -22,7 +22,7 @@ $oldversions = OrmCore::findByExample(new Version(),$example, null, new OrmLimit
 $oldvals = array();
 foreach($oldversions as $oldversion){
 	$oldval = $oldversion->getValues();
-	if($oldval['version_id'] == $vals['version_id']){
+	if($oldversion->get('status') == Version::$STATUS_CURRENT){
 		$oldval['viewUrl'] = RouteMaker::getViewRoute($prefix_lang, $titleParam);
 	} else {
 		$oldval['viewUrl'] = RouteMaker::getViewOldRoute($prefix_lang, $titleParam, $oldval['version_id']);
