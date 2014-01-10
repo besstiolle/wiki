@@ -89,6 +89,8 @@ if($page == null || $version == null){
 	//Creation
 	include_once('inc.createPage.php');
 } else {
+	//Breadcrumbs
+	include_once('inc.breadcrumbs.php');
 	//Display
 	include_once('inc.viewPage.php');
 }
