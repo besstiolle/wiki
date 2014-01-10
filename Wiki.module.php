@@ -196,6 +196,7 @@ class Wiki extends Orm
 		$str = preg_replace('#&[^;]+;#', '_', $str); // supprime les autres caractères html
 		$str = preg_replace('#[^a-zA-Z0-9\-_:]#', '_', $str); // supprime les autres caractères interdits
 		$str = preg_replace('#(_)+#', '_', $str); // reduit les couples d'underscore
+		$str = preg_replace('#(:)+#', ':', $str); // reduit les couples de ::::
     
 		$str = html_entity_decode($str, ENT_NOQUOTES, $charset);
 		
