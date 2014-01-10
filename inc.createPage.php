@@ -2,7 +2,7 @@
 
 $version = new Version();
 $version->set('title', $titleParam);
-$version->set('text', "## {$titleParam}\r\nWrite here some text");
+$version->set('text', "## Your title <h2> for the new page {$titleParam}\r\nWrite here some text");
 $version->set('lang_id', $lang->get($lang->getPk()->getName()));
 
 
