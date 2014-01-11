@@ -3,7 +3,60 @@
 	 <li {if $bread@last}class='current'{/if}><a href="{$bread.url}" {if !empty($bread.class)}class='{$bread.class}'{/if} {if !empty($bread.title)}title='{$bread.title}'{/if}>{$bread.name}</a></li>
 {/foreach}</ul>
 {/if}
-<div class='panel'>
+
+<div class="off-canvas-wrap">
+<div class="inner-wrap">
+
+<nav class="tab-bar">
+
+	<section class="left-small">
+		<a class="left-off-canvas-toggle menu-icon" ><span></span></a>
+	</section> 
+
+	<section class="middle tab-bar-section"> 
+		
+
+	<ul class="button-group in-off-bar">
+		<li><input class='tiny button in-off-bar raw' type='button' value='Show Raw Code'></li>
+		<li><input class='tiny button in-off-bar edit' type='button' value='Edit'{if $version.status!=1} disabled='disabled' title='you can not edit an old version'{/if}></li>
+		<li><input class='tiny button in-off-bar deletePre' type='button' value='Delete'{if $version.status!=1} disabled='disabled' title='you can not delete an old version'{elseif $isDefaultPage} disabled='disabled' title='you can not delete the default page'{/if}></li>
+		<li><input class='tiny button in-off-bar deletePost alert' type='button' value='Delete (Are You Sure?)'></li>
+		<li><input type='button' class="tiny button in-off-bar" data-dropdown="drop" value='R.{$version.version_id} &raquo;' />
+			<ul id="drop" class="small f-dropdown" data-dropdown-content> 
+				{foreach $oldvals as $oldval}
+					<li><a href="{$oldval.viewUrl}">{if $oldval.version_id==$version.version_id}&raquo; {/if}R.{$oldval.version_id} By <b>{$oldval.author_name}</b> the <b>{$oldval.dt_creation|cms_date_format|utf8_encode}</b></a></li>
+				{/foreach}
+			</ul></li>
+	</ul>
+			
+	</section>
+	
+	<section class="right-small">
+		<a class="right-off-canvas-toggle menu-icon" ><span></span></a>
+	</section>
+</nav>
+<aside class="left-off-canvas-menu">
+	<ul class="off-canvas-list">
+		<li><label>Menu</label></li>
+		<li><a href="#">The Psychohistorians</a></li>
+		<li><a href="#">The Psychohistorians</a></li>
+	</ul>
+</aside>
+<aside class="right-off-canvas-menu">
+	<ul class="off-canvas-list">
+		<li><label>Lang</label></li>
+			<li><a href="#">en_US</a></li>
+		<li><label>Revisions</label></li>
+		{foreach $oldvals as $oldval}
+			<li><a href="{$oldval.viewUrl}">{if $oldval.version_id==$version.version_id}&raquo; {/if}The <b>{$oldval.dt_creation|cms_date_format|utf8_encode}</b> by <b>{$oldval.author_name}</b> </a></li>
+		{/foreach}
+	</ul>
+</aside> 
+
+
+<section class="main-section">
+
+<div class='panel no-margin'>
 	{literal}
 	<script type="text/javascript">
 	//<![CDATA[
@@ -86,24 +139,11 @@
 	{/if}
 
 	<div class='fancybox' id='raw_result'></div>
-
-
-	{capture assign='btns'}
-	<ul class="button-group radius">
-		<li><input class='tiny button raw' type='button' value='Show Raw Code'></li>
-		<li><input class='tiny button edit' type='button' value='Edit'{if $version.status!=1} disabled='disabled' title='you can not edit an old version'{/if}></li>
-		<li><input class='tiny button deletePre' type='button' value='Delete'{if $version.status!=1} disabled='disabled' title='you can not delete an old version'{elseif $isDefaultPage} disabled='disabled' title='you can not delete the default page'{/if}></li>
-		<li><input class='tiny button deletePost alert' type='button' value='Delete (Are You Sure?)'></li>
-		<li><input type='button' class="tiny button" data-dropdown="drop" value='R.{$version.version_id} &raquo;' />
-			<ul id="drop" class="small f-dropdown" data-dropdown-content> 
-				{foreach $oldvals as $oldval}
-					<li><a href="{$oldval.viewUrl}">{if $oldval.version_id==$version.version_id}&raquo; {/if}R.{$oldval.version_id} By <b>{$oldval.author_name}</b> the <b>{$oldval.dt_creation|cms_date_format|utf8_encode}</b></a></li>
-				{/foreach}
-			</ul></li>
-	</ul>
-	{/capture}
-
-	{$btns}
 	<div class='wikiContent'>{$version.text}</div>
-	{$btns}
+
 </div>
+
+
+
+
+ </section> <a class="exit-off-canvas"></a> </div> </div>

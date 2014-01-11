@@ -26,20 +26,18 @@
     
     <div class='row'>
       <div class='large-12 columns'>
-        <h1>{if isset($title)}{$title|capitalize}{else}{title}{/if}{if isset($action)} / {$action}{/if}</h1>
+        <h1>{if isset($title)}{$title|capitalize}{else}{title}{/if}</h1>
       </div>
     </div>
     
     <div class='row'>
       <div class='large-12 columns'>
-      	<div class='panel'>{$content}
-      	</div>
+      	{$content}
       </div>
     </div>
 
     <script src='{root_url}/uploads/foundation/js/foundation.min.js'></script>
     <script src="{root_url}/uploads/foundation/js/foundation/foundation.abide.js"></script>
-
 
     <!-- Add mousewheel plugin (this is optional) -->
     <script type='text/javascript' src='{root_url}/modules/Wiki/scripts/jquery/jquery.mousewheel-3.0.6.pack.js'></script>
