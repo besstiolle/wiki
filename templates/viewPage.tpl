@@ -21,12 +21,6 @@
 		<li><input class='tiny button in-off-bar edit' type='button' value='Edit'{if $version.status!=1} disabled='disabled' title='you can not edit an old version'{/if}></li>
 		<li><input class='tiny button in-off-bar deletePre' type='button' value='Delete'{if $version.status!=1} disabled='disabled' title='you can not delete an old version'{elseif $isDefaultPage} disabled='disabled' title='you can not delete the default page'{/if}></li>
 		<li><input class='tiny button in-off-bar deletePost alert' type='button' value='Delete (Are You Sure?)'></li>
-		<li><input type='button' class="tiny button in-off-bar" data-dropdown="drop" value='R.{$version.version_id} &raquo;' />
-			<ul id="drop" class="small f-dropdown" data-dropdown-content> 
-				{foreach $oldvals as $oldval}
-					<li><a href="{$oldval.viewUrl}">{if $oldval.version_id==$version.version_id}&raquo; {/if}R.{$oldval.version_id} By <b>{$oldval.author_name}</b> the <b>{$oldval.dt_creation|cms_date_format|utf8_encode}</b></a></li>
-				{/foreach}
-			</ul></li>
 	</ul>
 			
 	</section>
@@ -38,18 +32,26 @@
 <aside class="left-off-canvas-menu">
 	<ul class="off-canvas-list">
 		<li><label>Menu</label></li>
-		<li><a href="#">The Psychohistorians</a></li>
-		<li><a href="#">The Psychohistorians</a></li>
+		<li><a href="#">Home</a></li>
+		<li><a href="#">A Page</a></li>
+		<li><a href="#">Another page</a></li>
+		<li><a href="#" class='new'>A no-existing page</a></li>
+		<li><a href="#">Ho ! another one with a very long entry</a></li>
+		<li><label>Options</label></li>
+		<li><a href="#">Some options</a></li>
+		<li><a href="#">Other options</a></li>
 	</ul>
 </aside>
 <aside class="right-off-canvas-menu">
 	<ul class="off-canvas-list">
 		<li><label>Lang</label></li>
 			<li><a href="#">en_US</a></li>
+			<li><a href="#" class='new'>de_DE</a></li>
+			<li><a href="#">fr_FR</a></li>
 		<li><label>Revisions</label></li>
 		{foreach $oldvals as $oldval}
 			<li><a href="{$oldval.viewUrl}">{if $oldval.version_id==$version.version_id}&raquo; {/if}The <b>{$oldval.dt_creation|cms_date_format|utf8_encode}</b> by <b>{$oldval.author_name}</b> </a></li>
-		{/foreach}
+		{/foreach} 
 	</ul>
 </aside> 
 
@@ -57,6 +59,24 @@
 <section class="main-section">
 
 <div class='panel no-margin'>
+
+	<dl class="sub-nav">
+		<dt>Sub page:</dt>
+		<dd{* class="active"*}><a href="#">First</a></dd>
+		<dd><a href="#">Second</a></dd>
+		<dd><a href="#">Third</a></dd>
+		<dd><a href="#">Suspended</a></dd>
+		<dd><a href="#">Active</a></dd>
+		<dd><a href="#">Pending</a></dd>
+		<dd><a href="#">Suspended</a></dd>
+		<dd><a href="#">Active</a></dd>
+		<dd><a href="#">Pending</a></dd>
+		<dd><a href="#">Suspended</a></dd>
+		<dd><a href="#">Active</a></dd>
+		<dd><a href="#">Pending</a></dd>
+		<dd><a href="#">Suspended</a></dd>
+	</dl>
+
 	{literal}
 	<script type="text/javascript">
 	//<![CDATA[
