@@ -29,9 +29,23 @@ $example->addCriteria('status', OrmTypeCriteria::$EQ, array(Version::$STATUS_CUR
 
 $versions = OrmCore::findByExample(new Version(),$example, null, new OrmLimit(0,1));
 if(empty($versions)){
-	$version = null;
-	$vals = null;
-	$page = null;
+
+	//Ok, we try to find a link to a page with another lang
+	$example = new OrmExample();
+	$example->addCriteria('title', OrmTypeCriteria::$EQ, array($titleParam));
+	$example->addCriteria('lang_id', OrmTypeCriteria::$NEQ, array($lang->get($lang->getPk()->getName())));
+	$example->addCriteria('status', OrmTypeCriteria::$EQ, array(Version::$STATUS_CURRENT));
+
+	$versions = OrmCore::findByExample(new Version(),$example, null, new OrmLimit(0,1));
+	if(empty($versions)){
+		$version = null;
+		$vals = null;
+		$page = null;
+	} else {
+		$version = $versions[0];
+		$vals = $version->getValues();
+		$page = OrmCore::findById(new Page(),$version->get('page_id'));
+	}
 } else {
 	$version = $versions[0];
 	$vals = $version->getValues();
