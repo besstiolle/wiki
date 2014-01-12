@@ -61,7 +61,7 @@
 
 <section class="main-section">
 
-<div class='panel no-margin'>
+<div class='panel no-margin h500'>
 	{if !empty($sub_entries)}
 	<dl class="sub-nav">
 		<dt>Sub page:</dt>

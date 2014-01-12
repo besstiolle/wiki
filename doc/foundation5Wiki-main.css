@@ -12,6 +12,9 @@ textarea.wikiarea{
 div.panel.no-margin{
     margin: 0;
 }
+div.panel.h500{
+    min-height:500px;
+}
 ul.in-off-bar{
     margin-top: 4px;
 }
