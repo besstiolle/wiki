@@ -61,9 +61,13 @@ if($page != null && $page->get('title') == $this->_getDefaultTitle()
 $smarty->assign('isDefaultPage', $isDefaultPage);
 
 if($page == null || $version == null){
+	//Menu
+	include_once('inc.menu.php');
 	//Creation
 	include_once('inc.createPage.php');
 } else {
+	//Menu
+	include_once('inc.menu.php');
 	//Edition
 	include_once('inc.editPage.php');
 }

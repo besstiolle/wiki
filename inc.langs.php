@@ -13,7 +13,9 @@ foreach($all_langs_by_code as $a_lang_code => $a_lang){
 
 	$prettyUrl = RouteMaker::getEditRoute($a_lang['code'], $titleParam);
 
-	$other_langs[$a_lang_code] = array('label' => $a_lang['label'], 'viewUrl' => $this->CreateLink ($id, "default", $returnid, '', array(), '', true, false, '', '', $prettyUrl), 'class' => 'new');
+	$other_langs[$a_lang_code] = array('label' => $a_lang['label'], 
+				'viewUrl' => $this->CreateLink ($id, "default", $returnid, '', array(), '', true, false, '', '', $prettyUrl), 
+				'class' => 'new');
 }
 
 foreach($version_by_langs as $version_by_lang){

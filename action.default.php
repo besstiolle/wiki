@@ -70,9 +70,13 @@ if($version_id != null && $version == null){
 
 
 if($page == null || $version == null){
+	//Menu
+	include_once('inc.menu.php');
 	//Creation
 	include_once('inc.createPage.php');
 } else {
+	//Menu
+	include_once('inc.menu.php');
 	//Include langs
 	include_once('inc.langs.php');
 	//Include last 10 versions

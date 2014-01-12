@@ -32,11 +32,10 @@
 <aside class="left-off-canvas-menu">
 	<ul class="off-canvas-list">
 		<li><label>Menu</label></li>
-		<li><a href="#">Home</a></li>
-		<li><a href="#">A Page</a></li>
-		<li><a href="#">Another page</a></li>
-		<li><a href="#" class='new'>A no-existing page</a></li>
-		<li><a href="#">Ho ! another one with a very long entry</a></li>
+	
+		{foreach $wiki_menu as $elt}
+			<li><a href="{$elt.viewUrl}" {if !empty($elt.class)}class='{$elt.class}'{/if}>{$elt.label|capitalize}</a></li>
+		{/foreach}
 		<li><label>Options</label></li>
 		<li><a href="#">Some options</a></li>
 		<li><a href="#">Other options</a></li>
@@ -45,13 +44,17 @@
 <aside class="right-off-canvas-menu">
 	<ul class="off-canvas-list">
 		<li><label>Lang</label></li>
-		{foreach $other_langs as $other_lang}
-			<li><a href="{$other_lang.viewUrl}" {if isset($other_lang.class)}class='{$other_lang.class}'{/if}>{$other_lang.label}</a></li>
+		
+		{foreach $other_langs as $elt}
+			<li><a href="{$elt.viewUrl}" {if !empty($elt.class)}class='{$elt.class}'{/if}>{$elt.label|capitalize}</a></li>
 		{/foreach}
+		
 		<li><label>Revisions</label></li>
-		{foreach $oldRevisions as $revision}
-			<li class='small'><a href="{$revision.viewUrl}">{if $revision.version_id==$version.version_id}&raquo; {/if}The <b>{$revision.dt_creation|cms_date_format|utf8_encode}</b> by <b>{$revision.author_name}</b> </a></li>
+		
+		{foreach $oldRevisions as $elt}
+			<li class='small'><a href="{$elt.viewUrl}">{if $elt.version_id==$version.version_id}&raquo; {/if}The <b>{$elt.dt_creation|cms_date_format|utf8_encode}</b> by <b>{$elt.author_name}</b> </a></li>
 		{/foreach} 
+		
 	</ul>
 </aside> 
 
