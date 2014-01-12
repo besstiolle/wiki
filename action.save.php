@@ -23,6 +23,10 @@ if($has_error){return;}
 if(!empty($params['wtext'])){
 	$textParam = $this->js_urldecode($params['wtext']);
 }
+$pageParam = null;
+if(!empty($params['page_id'])){
+	$pageParam = $params['page_id'];
+}
 if($titleParam == null){
 	$errors[] = 'title_mandatory';
 } 
@@ -43,10 +47,22 @@ $page = null;
 if($pageParam != null){
 	$page = OrmCore::findById(new Page(),$pageParam);
 } else {
-	$page = new Page();
-	$page->set('prefix', '');
-	$page->set('title', $titleParam);
-	$page = $page->save();
+	//Avoid conflict with existing version with same lang / same title
+	$example = new OrmExample();
+	$example->addCriteria('title', OrmTypeCriteria::$EQ, array($titleParam));
+	$example->addCriteria('lang_id', OrmTypeCriteria::$EQ, array($lang->get($lang->getPk()->getName())));
+	$example->addCriteria('status', OrmTypeCriteria::$EQ, array(Version::$STATUS_CURRENT));
+	$versions = OrmCore::findByExample(new Version(),$example, null, new OrmLimit(0,1));
+	if(empty($versions)){
+		$page = new Page();
+		$page->set('prefix', '');
+		$page->set('title', $titleParam);
+		$page = $page->save();
+	} else {
+		$version = $versions[0];
+		$page = OrmCore::findById(new Page(),$version->get('page_id'));
+	}
+	
 }
 
 //Avoid edit title of version "en_US/home"

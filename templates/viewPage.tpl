@@ -49,8 +49,8 @@
 			<li><a href="#" class='new'>de_DE</a></li>
 			<li><a href="#">fr_FR</a></li>
 		<li><label>Revisions</label></li>
-		{foreach $oldvals as $oldval}
-			<li><a href="{$oldval.viewUrl}">{if $oldval.version_id==$version.version_id}&raquo; {/if}The <b>{$oldval.dt_creation|cms_date_format|utf8_encode}</b> by <b>{$oldval.author_name}</b> </a></li>
+		{foreach $oldRevisions as $revision}
+			<li><a href="{$revision.viewUrl}">{$revision.version_id}{if $revision.version_id==$version.version_id}&raquo; {/if}The <b>{$revision.dt_creation|cms_date_format|utf8_encode}</b> by <b>{$revision.author_name}</b> </a></li>
 		{/foreach} 
 	</ul>
 </aside> 

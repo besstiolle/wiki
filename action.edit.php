@@ -46,9 +46,6 @@ if($page != null && $page->get('title') == $this->_getDefaultTitle()
 }
 $smarty->assign('isDefaultPage', $isDefaultPage);
 
-//Include last 10 versions
-include_once('inc.last10versions.php');
-
 if($page == null || $version == null){
 	//Creation
 	include_once('inc.createPage.php');
