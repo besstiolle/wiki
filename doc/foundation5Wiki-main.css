@@ -1,5 +1,5 @@
 a.new{
-    color: #93000C;
+    color: #93000C !important;
 }
 
 a.follow{
@@ -8,4 +8,32 @@ a.follow{
 textarea.wikiarea{
     height: 500px;
     resize: vertical;
+}
+div.panel.no-margin{
+    margin: 0;
+}
+ul.in-off-bar{
+    margin-top: 4px;
+}
+ul.in-off-bar input.button{
+    margin: 0;
+}
+button.in-off-bar, .button.in-off-bar{
+    background-color: #3F3F3F;
+    border-color: #333333;
+    color: #fff;
+}
+button.in-off-bar.disabled, button.in-off-bar[disabled], .button.in-off-bar.disabled, .button.in-off-bar[disabled] {
+    background-color: #333333;
+    border-color: #333333;
+    box-shadow: none;
+    color: #C2C2C2;
+    cursor: default;
+    opacity: 0.7;
+}
+button.in-off-bar:hover, button.in-off-bar:focus, .button.in-off-bar:hover, .button.in-off-bar:focus {
+    background-color: #636363;
+}
+button.in-off-bar.disabled:hover, button.in-off-bar.disabled:focus, button.in-off-bar[disabled]:hover, button.in-off-bar[disabled]:focus, .button.in-off-bar.disabled:hover, .button.in-off-bar.disabled:focus, .button.in-off-bar[disabled]:hover, .button.in-off-bar[disabled]:focus {
+    background-color: #3D3D3D;
 }
