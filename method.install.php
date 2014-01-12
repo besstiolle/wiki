@@ -24,11 +24,15 @@ $page->set('title','home');
 $page = $page->save();
 
 //Create first indeletable-lang
-$lang = new Lang();
-$lang->set('code','en_US');
-$lang->set('label','English');
-//$lang->set('page_id',$page->get($page->getPk()->getName()));
-$lang = $lang->save();
+$en_US = new Lang();
+$en_US->set('code','en_US');
+$en_US->set('label','English');
+$en_US = $en_US->save();
+//Create second lang
+$fr_FR = new Lang();
+$fr_FR->set('code','fr_FR');
+$fr_FR->set('label','Français');
+$fr_FR = $fr_FR->save();
 
 // Create first version of text
 $version = new Version();
@@ -39,7 +43,7 @@ $version->set('dt_creation',$currentTS);
 $version->set('author_name','admin');
 $version->set('author_id',0);
 $version->set('page_id',$page->get($page->getPk()->getName()));
-$version->set('lang_id',$lang->get($lang->getPk()->getName()));
+$version->set('lang_id',$en_US->get($en_US->getPk()->getName()));
 $version->set('status',$version::$STATUS_CURRENT);
 $version = $version->save();
 

@@ -1,7 +1,7 @@
 <?php
 
 $prefix = $this->GetPreference('prefix');
-$prefix_lang = ($this->GetPreference('show_prefix_lang', true)?"/{$lang->get('prefix')}":"");
+$prefix_lang = ($this->GetPreference('show_prefix_lang', true)?"/{$lang->get('code')}":"");
 
 $vals['raw'] = $vals['text'];	
 //$vals['text'] = htmlentities(file_get_contents($config['root_path'].'/modules/Wiki/default.txt'));	
