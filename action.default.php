@@ -21,6 +21,7 @@ if($has_error){return;}
  * $prefix from preferences prefix
  * $prefix_lang with preferences show_prefix_lang
  * $engine
+ * $all_langs_by_code && $all_langs_by_id
  *
  **/
 
@@ -67,13 +68,15 @@ if($version_id != null && $version == null){
 	return;
 }
 
-//Include last 10 versions
-include_once('inc.last10versions.php');
 
 if($page == null || $version == null){
 	//Creation
 	include_once('inc.createPage.php');
 } else {
+	//Include langs
+	include_once('inc.langs.php');
+	//Include last 10 versions
+	include_once('inc.last10versions.php');
 	//Breadcrumbs
 	include_once('inc.breadcrumbs.php');
 	//Display

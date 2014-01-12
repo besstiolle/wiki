@@ -28,7 +28,7 @@ $example->addCriteria('lang_id', OrmTypeCriteria::$EQ, array($lang->get($lang->g
 $example->addCriteria('status', OrmTypeCriteria::$EQ, array(Version::$STATUS_CURRENT));
 
 $versions = OrmCore::findByExample(new Version(),$example, null, new OrmLimit(0,1));
-if(count($versions) == 0){
+if(empty($versions)){
 	$version = null;
 	$vals = null;
 	$page = null;

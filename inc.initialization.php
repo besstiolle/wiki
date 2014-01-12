@@ -25,6 +25,14 @@ if(!empty($params['wlang'])){
 	$langParam = $params['wlang'];
 }
 
+$langs = OrmCore::findAll(new Lang());
+$all_langs_by_code = array();
+$all_langs_by_id = array();
+foreach($langs as $lang){
+	$all_langs_by_code[$lang->get("code")] = $lang->getValues();
+	$all_langs_by_id[$lang->get("lang_id")] = $lang->getValues();
+}
+
 //Get lang db entity, panic only if there is no lang.
 
 /************* LANG ****************/

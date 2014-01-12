@@ -45,9 +45,9 @@
 <aside class="right-off-canvas-menu">
 	<ul class="off-canvas-list">
 		<li><label>Lang</label></li>
-			<li><a href="#">en_US</a></li>
-			<li><a href="#" class='new'>de_DE</a></li>
-			<li><a href="#">fr_FR</a></li>
+		{foreach $other_langs as $other_lang}
+			<li><a href="{$other_lang.viewUrl}" {if isset($other_lang.class)}class='{$other_lang.class}'{/if}>{$other_lang.label}</a></li>
+		{/foreach}
 		<li><label>Revisions</label></li>
 		{foreach $oldRevisions as $revision}
 			<li class='small'><a href="{$revision.viewUrl}">{if $revision.version_id==$version.version_id}&raquo; {/if}The <b>{$revision.dt_creation|cms_date_format|utf8_encode}</b> by <b>{$revision.author_name}</b> </a></li>

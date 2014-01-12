@@ -23,10 +23,6 @@
 		</ul>
 			
 	</section>
-	
-	<section class="right-small">
-		<a class="right-off-canvas-toggle menu-icon" ><span></span></a>
-	</section>
 </nav>
 <aside class="left-off-canvas-menu">
 	<ul class="off-canvas-list">
@@ -41,14 +37,6 @@
 		<li><a href="#">Other options</a></li>
 	</ul>
 </aside>
-<aside class="right-off-canvas-menu">
-	<ul class="off-canvas-list">
-		<li><label>Lang</label></li>
-			<li><a href="#">en_US</a></li>
-			<li><a href="#" class='new'>de_DE</a></li>
-			<li><a href="#">fr_FR</a></li>
-	</ul>
-</aside> 
 
 
 <section class="main-section">
