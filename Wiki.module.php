@@ -210,5 +210,9 @@ class Wiki extends Orm
 	function _getDefaultTitle(){
 		return 'home';
 	}
+	
+	function _getDefaultEngine(){
+		return Engines::$MARKDOWN;
+	}
 } 
 ?>

@@ -1,35 +1,24 @@
 <?php
 
+define('_JS_ACTION_',FALSE);
+$has_error = false;
+
 //Common initialization
 include_once('inc.initialization.php');
 
-/*******************************************/
+if($has_error){return;}
 
-if(!empty($params['wtitle'])){
-	$titleParam = $this->clean_title($params['wtitle']);
-}
-if(!empty($params['wlang'])){
-	$langParam = $params['wlang'];
-}
+/* Variables available :
+ *
+ * $errors & $messages
+ * $smarty
+ * $titleParam & $langParam
+ * $lang
+ * $prefix from preferences prefix
+ * $prefix_lang with preferences show_prefix_lang
+ *
+ **/
 
-//Get Lang
-$example = new OrmExample();
-$example->addCriteria('code', OrmTypeCriteria::$EQ, array($langParam));
-$langs = OrmCore::findByExample(new Lang(),$example);
-if(count($langs) == 0){
-	$lang = null;
-} else {
-	$lang = $langs[0];
-}
-
-if($lang == null){
-	$errors[] = 'lang_mandatory';
-	$url = $this->CreateLink ($id, "default", $returnid, '', array(), '', true, false, '', '', RouteMaker::getViewRoute($this->_getDefaultLang(), $this->_getDefaultTitle()));
-	$smarty->assign('errors',$errors);
-	$smarty->assign('url',$url);
-	echo $this->ProcessTemplate('message.tpl');
-	return;
-}
 
 //Get Version
 $example = new OrmExample();
@@ -48,11 +37,6 @@ if(count($versions) == 0){
 	$page = OrmCore::findById(new Page(),$version->get('page_id'));
 }
 
-if(!empty($params['werrors'])){
-	$errors = explode('|',$params['werrors']);
-	$smarty->assign('errors', $errors);
-}
-
 //Avoid edit title of default page/default lang
 $isDefaultPage = false;
 if($page != null && $page->get('title') == $this->_getDefaultTitle()
@@ -60,6 +44,9 @@ if($page != null && $page->get('title') == $this->_getDefaultTitle()
 	$isDefaultPage = true;
 }
 $smarty->assign('isDefaultPage', $isDefaultPage);
+
+//Include last 10 versions
+include_once('inc.last10versions.php');
 
 if($page == null || $version == null){
 	//Creation

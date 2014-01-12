@@ -1,62 +1,41 @@
 <?php
 
+define('_JS_ACTION_',TRUE);
+$has_error = false;
+
 //Common initialization
 include_once('inc.initialization.php');
 
-/*******************************************/
+if($has_error){return;}
 
+/* Variables available :
+ *
+ * $errors & $messages
+ * $smarty
+ * $titleParam & $langParam
+ * $lang
+ * $prefix from preferences prefix
+ * $prefix_lang with preferences show_prefix_lang
+ * $engine
+ *
+ **/
 
-if(!empty($params['page_id'])){
-	$pageParam = $params['page_id'];
-}
-if(!empty($params['lang_id'])){
-	$langParam = $params['lang_id'];
-}
-if(!empty($params['wtitle'])){
-	$params['wtitle'] = $this->clean_title($this->js_urldecode($params['wtitle']));
-	//$params['wtitle'] = preg_replace('`[^\p{L}0-9\-:_]*`u','', html_entity_decode($params['wtitle']));
-	$titleParam = $params['wtitle'];
-}
 if(!empty($params['wtext'])){
-	$params['wtext'] = $this->js_urldecode($params['wtext']);
-	$textParam = $params['wtext'];
-}
-if($langParam == null){
-	$errors[] = 'lang_id_mandatory';
-	$url = RouteMaker::getViewRoute($this->_getDefaultLang(), $this->_getDefaultTitle());
-	$smarty->assign('errors',$errors);
-	$smarty->assign('url',$url);
-	echo $this->ProcessTemplate('message.tpl');
-	return;
-}
-
-//Get Lang
-$lang = OrmCore::findById(new Lang(),$langParam);
-
-if($lang == null){
-	$errors[] = 'lang_mandatory';
+	$textParam = $this->js_urldecode($params['wtext']);
 }
 if($titleParam == null){
 	$errors[] = 'title_mandatory';
 } 
-
-//$titleParam = preg_replace('`[^\p{L}0-9\-:_]*`u','', html_entity_decode($titleParam));
-
 if($textParam == null){
 	$errors[] = 'text_mandatory';
 }
+
 if(!empty($errors)) {
-	if($lang != null) {
-		$url = RouteMaker::getEditRoute($this->_getDefaultLang(), $this->_getDefaultTitle());
-	} else {
-		$url = RouteMaker::getViewRoute($this->_getDefaultLang(), $this->_getDefaultTitle());
-	}
-	
+	$url = RouteMaker::getEditRoute($this->_getDefaultLang(), $this->_getDefaultTitle());
 	$smarty->assign('errors',$errors);
 	$smarty->assign('url',$url);
 	echo $this->ProcessTemplate('message.tpl');
 	return;
-	
 }
 
 //get Page

@@ -108,6 +108,9 @@
 			});
 		});
 		
+		$("input.save").click(function () { 
+			$( "#{/literal}{$actionid}{literal}moduleform_1" ).submit();
+		});
 		
 		function count(fieldId) {
 		  if(label==null){
@@ -127,22 +130,14 @@
 	</script>
 	{/literal}
 
-	{if !empty($errors)}
-	{foreach $errors as $error}{if !empty($error)}
-	<div data-alert class="alert-box warning radius">
-	  {$mod->Lang($error)}
-	  <a href="#" class="close">&times;</a>
-	</div>{/if}{/foreach}
-	{/if}
-
 	<div class='fancybox' id='preview_result'></div>
 
 	{$form}
 		{if !empty($version.page_id)}<input type='hidden' name='{$actionid}page_id' id='{$actionid}page_id' value='{$version.page_id}'/>{/if}
-		{if !empty($version.lang_id)}<input type='hidden' name='{$actionid}lang_id' id='{$actionid}lang_id' value='{$version.lang_id}'/>{/if}
+		{if !empty($lang.code)}<input type='hidden' name='{$actionid}wlang' id='{$actionid}wlang' value='{$lang.code}'/>{/if}
 
 		<div class="name-field">
-			<label for='{$actionid}wtitle' >Title : </label><input type='text' value='{$version.title}' name='{$actionid}wtitle' id='{$actionid}wtitle' required {if $isDefaultPage}disabled='disabled' title="You can't edit the title of the default page"{/if}/>{if $isDefaultPage}<input type='hidden' value='{$version.title}' name='{$actionid}wtitle' id='{$actionid}wtitle' />{/if}
+			<label for='{$actionid}wtitle' >Title : </label><input type='text' value='{$version.title}' name='{$actionid}wtitle' {if !$isDefaultPage}id='{$actionid}wtitle'{/if} required {if $isDefaultPage}disabled='disabled' title="You can't edit the title of the default page"{/if}/>{if $isDefaultPage}<input type='hidden' value='{$version.title}' name='{$actionid}wtitle' id='{$actionid}wtitle' />{/if}
 			<small class="error">Title is required.</small>
 		</div>
 		<div class="name-field">

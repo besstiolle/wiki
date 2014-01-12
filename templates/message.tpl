@@ -2,7 +2,8 @@
 	{if !empty($errors)}
 	{foreach $errors as $error}{if !empty($error)}
 	<div data-alert class="alert-box warning radius">
-	  {$mod->Lang($error)}
+	  {if !is_array($error)}{$mod->Lang($error)}{/if}
+	  {if is_array($error)}{$mod->Lang($error[0],$error[1])}{/if}
 	  <a href="#" class="close">&times;</a>
 	</div>{/if}{/foreach}
 	{/if}

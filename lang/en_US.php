@@ -19,6 +19,7 @@ $lang['default_page_with_new_title'] = 'You can\'t change the title of the defau
 $lang['default_version_undeletable'] = 'You can\'t delete the default page';
 $lang['title_format'] = 'Title is required and must be an alphanumerique string (symbols "-_:" are accepted too).';
 $lang['version_unknow'] = 'The current page is not know. Maybe it\'s already deleted ?';
+$lang['revision_unknow'] = 'The version %s of the page is not known.';
 
 
 $lang['save_success'] = 'Page saved with success.';
