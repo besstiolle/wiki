@@ -26,7 +26,7 @@ foreach($allPages as $a_page){
 		$menu[$a_page->get('title')]['class'] = '';
 	}
 }
-//die();
+
 $smarty->assign('wiki_menu', $menu);
 
 ?>

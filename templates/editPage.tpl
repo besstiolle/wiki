@@ -27,11 +27,11 @@
 <aside class="left-off-canvas-menu">
 	<ul class="off-canvas-list">
 		<li><label>Menu</label></li>
-		<li><a href="#">Home</a></li>
-		<li><a href="#">A Page</a></li>
-		<li><a href="#">Another page</a></li>
-		<li><a href="#" class='new'>A no-existing page</a></li>
-		<li><a href="#">Ho ! another one with a very long entry</a></li>
+	
+		{foreach $wiki_menu as $elt}
+			<li><a href="{$elt.viewUrl}" {if !empty($elt.class)}class='{$elt.class}'{/if}>{$elt.label|capitalize}</a></li>
+		{/foreach}
+		
 		<li><label>Options</label></li>
 		<li><a href="#">Some options</a></li>
 		<li><a href="#">Other options</a></li>
