@@ -37,3 +37,7 @@ button.in-off-bar:hover, button.in-off-bar:focus, .button.in-off-bar:hover, .but
 button.in-off-bar.disabled:hover, button.in-off-bar.disabled:focus, button.in-off-bar[disabled]:hover, button.in-off-bar[disabled]:focus, .button.in-off-bar.disabled:hover, .button.in-off-bar.disabled:focus, .button.in-off-bar[disabled]:hover, .button.in-off-bar[disabled]:focus {
     background-color: #3D3D3D;
 }
+
+li.small{
+    font-size: 0.75rem;
+}

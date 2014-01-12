@@ -12,7 +12,7 @@ foreach($oldversions as $oldversion){
 		$revisionval['viewUrl'] = RouteMaker::getViewRoute($prefix_lang, $titleParam);
 	} else {
 		$revisionval['viewUrl'] = RouteMaker::getViewOldRoute($prefix_lang, $revisionval['title'], $revisionval['version_id']);
-	}echo "#{$revisionval['status']}#";
+	}
 	$oldRevisions[] = $revisionval;
 }
 $smarty->assign('oldRevisions', $oldRevisions);
