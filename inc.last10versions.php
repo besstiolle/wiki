@@ -9,10 +9,11 @@ $oldRevisions = array();
 foreach($oldversions as $oldversion){
 	$revisionval = $oldversion->getValues();
 	if($revisionval['status'] == Version::$STATUS_CURRENT){
-		$revisionval['viewUrl'] = RouteMaker::getViewRoute($prefix_lang, $titleParam);
+		$prettyUrl = RouteMaker::getViewRoute($prefix_lang, $titleParam);
 	} else {
-		$revisionval['viewUrl'] = RouteMaker::getViewOldRoute($prefix_lang, $revisionval['title'], $revisionval['version_id']);
+		$prettyUrl = RouteMaker::getViewOldRoute($prefix_lang, $revisionval['title'], $revisionval['version_id']);
 	}
+	$revisionval['viewUrl'] = $this->CreateLink ($id, "default", $returnid, '', array(), '', true, false, '', '', $prettyUrl);
 	$oldRevisions[] = $revisionval;
 }
 $smarty->assign('oldRevisions', $oldRevisions);
