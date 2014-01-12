@@ -77,6 +77,8 @@ if($page == null || $version == null){
 } else {
 	//Menu
 	include_once('inc.menu.php');
+	//SubPage
+	include_once('inc.childrens.php');
 	//Include langs
 	include_once('inc.langs.php');
 	//Include last 10 versions

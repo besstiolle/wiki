@@ -62,24 +62,15 @@
 <section class="main-section">
 
 <div class='panel no-margin'>
-
+	{if !empty($sub_entries)}
 	<dl class="sub-nav">
 		<dt>Sub page:</dt>
-		<dd{* class="active"*}><a href="#">First</a></dd>
-		<dd><a href="#">Second</a></dd>
-		<dd><a href="#">Third</a></dd>
-		<dd><a href="#">Suspended</a></dd>
-		<dd><a href="#">Active</a></dd>
-		<dd><a href="#">Pending</a></dd>
-		<dd><a href="#">Suspended</a></dd>
-		<dd><a href="#">Active</a></dd>
-		<dd><a href="#">Pending</a></dd>
-		<dd><a href="#">Suspended</a></dd>
-		<dd><a href="#">Active</a></dd>
-		<dd><a href="#">Pending</a></dd>
-		<dd><a href="#">Suspended</a></dd>
+		
+		{foreach $sub_entries as $elt}
+			<dd><a href="{$elt.viewUrl}" {if !empty($elt.class)}class='{$elt.class}'{/if}>{$elt.label|capitalize}</a></dd>
+		{/foreach}
 	</dl>
-
+	{/if}
 	{literal}
 	<script type="text/javascript">
 	//<![CDATA[
