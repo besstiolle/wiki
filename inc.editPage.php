@@ -1,11 +1,6 @@
 <?php
 
 
-
-
-
-
-
 $form = $this->CreateFormStart($id, 'save', $returnid, 'post','',false,'',array(), ' data-abide');
 $cancel = $this->CreateLink ($id, "default", $returnid, '', array(), '', true, false, '', '', RouteMaker::getViewRoute($langParam, $titleParam));
 $preview = $this->CreateLink ($id, "preview", $returnid, '', array(), '', true, false, '', '', RouteMaker::getPreviewRoute($langParam, $titleParam));

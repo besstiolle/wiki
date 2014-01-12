@@ -1,8 +1,5 @@
 <?php
 
-
-$vals['raw'] = $vals['text'];	
-//$vals['text'] = htmlentities(file_get_contents($config['root_path'].'/modules/Wiki/default.txt'));	
 $vals['text'] = Engines::process($vals['text'], $prefix, $prefix_lang, $version->get('engine'));
 
 
