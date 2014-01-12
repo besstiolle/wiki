@@ -15,7 +15,7 @@ if(!empty($params['wlang'])){
 
 //Get Lang
 $example = new OrmExample();
-$example->addCriteria('label', OrmTypeCriteria::$EQ, array($langParam));
+$example->addCriteria('code', OrmTypeCriteria::$EQ, array($langParam));
 $langs = OrmCore::findByExample(new Lang(),$example);
 if(count($langs) == 0){
 	$lang = null;
@@ -59,7 +59,7 @@ if($version == null){ //Go back to home
 	return;
 }
 
-if($page->get('title') == $this->_getDefaultTitle() && $lang->get('label') == $this->_getDefaultLang()){ //Don't allow that.
+if($page->get('title') == $this->_getDefaultTitle() && $lang->get('code') == $this->_getDefaultLang()){ //Don't allow that.
 	$errors[] = 'default_version_undeletable';
 	$url = $this->CreateLink ($id, "default", $returnid, '', array(), '', true, false, '', '', RouteMaker::getViewRoute($langParam, $this->_getDefaultTitle()));
 	$smarty->assign('errors',$errors);

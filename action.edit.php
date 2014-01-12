@@ -14,7 +14,7 @@ if(!empty($params['wlang'])){
 
 //Get Lang
 $example = new OrmExample();
-$example->addCriteria('label', OrmTypeCriteria::$EQ, array($langParam));
+$example->addCriteria('code', OrmTypeCriteria::$EQ, array($langParam));
 $langs = OrmCore::findByExample(new Lang(),$example);
 if(count($langs) == 0){
 	$lang = null;
@@ -56,7 +56,7 @@ if(!empty($params['werrors'])){
 //Avoid edit title of default page/default lang
 $isDefaultPage = false;
 if($page != null && $page->get('title') == $this->_getDefaultTitle()
-	&& $lang != null && $lang->get('label') == $this->_getDefaultLang()){
+	&& $lang != null && $lang->get('code') == $this->_getDefaultLang()){
 	$isDefaultPage = true;
 }
 $smarty->assign('isDefaultPage', $isDefaultPage);

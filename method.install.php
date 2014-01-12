@@ -25,9 +25,9 @@ $page = $page->save();
 
 //Create first indeletable-lang
 $lang = new Lang();
-$lang->set('prefix','en_US');
-$lang->set('label','en_US');
-$lang->set('page_id',$page->get($page->getPk()->getName()));
+$lang->set('code','en_US');
+$lang->set('label','English');
+//$lang->set('page_id',$page->get($page->getPk()->getName()));
 $lang = $lang->save();
 
 // Create first version of text

@@ -38,7 +38,7 @@ if($textParam == null){
 if(count($errors) !== 0){
 	$params['werrors'] = $errors;
 	if($lang != null) {
-		$params['wlang'] = $lang->get('label');
+		$params['wlang'] = $lang->get('code');
 	}
 	echo $this->Lang("lang_mandatory");
 	return;

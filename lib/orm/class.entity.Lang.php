@@ -14,9 +14,9 @@ class Lang extends OrmEntity {
 			, OrmKEY::$PK	
 		));
 		
-		$this->add(new OrmField('prefix'		
+		$this->add(new OrmField('code'		
 			, OrmCAST::$STRING
-			, 255
+			, 50
 			, TRUE	
 		));
 		
@@ -24,7 +24,7 @@ class Lang extends OrmEntity {
 			, OrmCAST::$STRING
 			, 255	
 		));
-		
+	/*	
 		$this->add(new OrmField('page_id'		
 			, OrmCAST::$INTEGER
 			, 50	
@@ -32,7 +32,7 @@ class Lang extends OrmEntity {
 			, OrmKEY::$FK
 			, "Page.page_id"
 		));
-		
+	*/	
 		$this->garnishAutoincrement();	
 		
 		$this->garnishDefaultOrderBy(new OrmOrderBy(array('lang_id'=>OrmOrderBy::$ASC)));
