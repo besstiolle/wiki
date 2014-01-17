@@ -20,7 +20,8 @@ if($has_error){return;}
  *
  **/
 
-if(!empty($params['wtext'])){
+ $textParam = '';
+ if(!empty($params['wtext'])){
 	$textParam = $this->js_urldecode($params['wtext']);
 }
 $pageParam = null;

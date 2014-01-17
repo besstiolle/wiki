@@ -125,7 +125,9 @@
 		{if !empty($lang.code)}<input type='hidden' name='{$actionid}wlang' id='{$actionid}wlang' value='{$lang.code}'/>{/if}
 
 		<div class="name-field">
-			<label for='{$actionid}wtitle' >Title : </label><input type='text' value='{$version.title}' name='{$actionid}wtitle' {if !$isDefaultPage}id='{$actionid}wtitle'{/if} required {if $isDefaultPage}disabled='disabled' title="You can't edit the title of the default page"{/if}/>{if $isDefaultPage}<input type='hidden' value='{$version.title}' name='{$actionid}wtitle' id='{$actionid}wtitle' />{/if}
+			<label>Title : </label>
+			<input type='text' value='{$version.title}' name='{$actionid}wtitle' {if !$isDefaultPage}id='{$actionid}wtitle'{/if} required {if $isDefaultPage}disabled='disabled' title="You can't edit the title of the default page"{/if}/>
+			{if $isDefaultPage}<input type='hidden' value='{$version.title}' name='{$actionid}wtitle' id='{$actionid}wtitle' />{/if}
 			<small class="error">Title is required.</small>
 		</div>
 		<div class="name-field">
