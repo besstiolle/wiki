@@ -81,7 +81,7 @@ if($page->get('title') == $this->_getDefaultTitle() && $titleParam != $this->_ge
 $version = new Version();
 
 //Update old version in "last version"
-$query = "UPDATE {$version->getDbname()} SET status={$version::$STATUS_OLD} WHERE status={$version::$STATUS_CURRENT} AND lang_id={$lang->get('lang_id')} AND page_id={$page->get("page_id")}";
+$query = "UPDATE {$version->getDbname()} SET status={$version::$STATUS_OLD} WHERE status={$version::$STATUS_CURRENT} AND lang={$lang->get('lang_id')} AND page={$page->get("page_id")}";
 OrmDb::execute($query);
 
 
@@ -90,18 +90,18 @@ $version->set('engine',Engines::$MARKDOWN);
 $version->set('dt_creation',$currentTS);
 $version->set('author_name','admin');
 $version->set('author_id',0);
-$version->set('page',$page->get('page_id');
-$version->set('lang',$lang->get('lang_id')));
+$version->set('page',$page->get('page_id'));
+$version->set('lang',$lang->get('lang_id'));
 $version->set('status',$version::$STATUS_CURRENT);
 $version->set('title',$titleParam);
 $version->set('text',$textParam);
-
 $version = $version->save();
 
 
 $url = $this->CreateLink ($id, "default", $returnid, '', array(), '', true, false, '', '', RouteMaker::getViewRoute($lang->get('code'), $titleParam));
 header("Location: {$url}");
 return;
+
 
 
 ?>
