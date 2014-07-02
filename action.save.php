@@ -51,7 +51,7 @@ if($pageParam != null){
 	//Avoid conflict with existing version with same lang / same title
 	$example = new OrmExample();
 	$example->addCriteria('title', OrmTypeCriteria::$EQ, array($titleParam));
-	$example->addCriteria('lang_id', OrmTypeCriteria::$EQ, array($lang->get($lang->getPk()->getName())));
+	$example->addCriteria('lang', OrmTypeCriteria::$EQ, array($lang->get('lang_id')));
 	$example->addCriteria('status', OrmTypeCriteria::$EQ, array(Version::$STATUS_CURRENT));
 	$versions = OrmCore::findByExample(new Version(),$example, null, new OrmLimit(0,1));
 	if(empty($versions)){
@@ -61,7 +61,7 @@ if($pageParam != null){
 		$page = $page->save();
 	} else {
 		$version = $versions[0];
-		$page = OrmCore::findById(new Page(),$version->get('page_id'));
+		$page = $version->get('page');
 	}
 	
 }
@@ -81,7 +81,7 @@ if($page->get('title') == $this->_getDefaultTitle() && $titleParam != $this->_ge
 $version = new Version();
 
 //Update old version in "last version"
-$query = "UPDATE {$version->getDbname()} SET status={$version::$STATUS_OLD} WHERE status={$version::$STATUS_CURRENT} AND lang_id={$lang->get($lang->getPk()->getName())} AND page_id={$page->get($page->getPk()->getName())}";
+$query = "UPDATE {$version->getDbname()} SET status={$version::$STATUS_OLD} WHERE status={$version::$STATUS_CURRENT} AND lang_id={$lang->get('lang_id')} AND page_id={$page->get("page_id")}";
 OrmDb::execute($query);
 
 
@@ -90,8 +90,8 @@ $version->set('engine',Engines::$MARKDOWN);
 $version->set('dt_creation',$currentTS);
 $version->set('author_name','admin');
 $version->set('author_id',0);
-$version->set('page_id',$page->get($page->getPk()->getName()));
-$version->set('lang_id',$lang->get($lang->getPk()->getName()));
+$version->set('page',$page->get('page_id');
+$version->set('lang',$lang->get('lang_id')));
 $version->set('status',$version::$STATUS_CURRENT);
 $version->set('title',$titleParam);
 $version->set('text',$textParam);

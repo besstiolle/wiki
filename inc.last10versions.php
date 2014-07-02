@@ -2,8 +2,8 @@
 
 //Get 10 Lasts Versions
 $example = new OrmExample();
-$example->addCriteria('page_id', OrmTypeCriteria::$EQ, array($version->get('page_id')));
-$example->addCriteria('lang_id', OrmTypeCriteria::$EQ, array($lang->get($lang->getPk()->getName())));
+$example->addCriteria('page', OrmTypeCriteria::$EQ, array($version->get('page')->get('page_id')));
+$example->addCriteria('lang', OrmTypeCriteria::$EQ, array($lang->get('lang_id')));
 $oldversions = OrmCore::findByExample(new Version(),$example, null, new OrmLimit(0,10));
 $oldRevisions = array();
 foreach($oldversions as $oldversion){

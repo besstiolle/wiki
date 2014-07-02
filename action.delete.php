@@ -23,7 +23,7 @@ if($has_error){return;}
 //Get Version
 $example = new OrmExample();
 $example->addCriteria('title', OrmTypeCriteria::$EQ, array($titleParam));
-$example->addCriteria('lang_id', OrmTypeCriteria::$EQ, array($lang->get($lang->getPk()->getName())));
+$example->addCriteria('lang', OrmTypeCriteria::$EQ, array($lang->get('lang_id')));
 $example->addCriteria('status', OrmTypeCriteria::$EQ, array(Version::$STATUS_CURRENT));
 
 
@@ -35,7 +35,7 @@ if(count($versions) == 0){
 } else {
 	$version = $versions[0];
 	$vals = $version->getValues();
-	$page = OrmCore::findById(new Page(),$version->get('page_id'));
+	$page = $version->get('page');
 }
 	
  
@@ -58,7 +58,7 @@ if($page->get('title') == $this->_getDefaultTitle() && $lang->get('code') == $th
 }
 
 //Update to "old version"
-$query = "UPDATE {$version->getDbname()} SET status={$version::$STATUS_OLD} WHERE status={$version::$STATUS_CURRENT} AND lang_id={$lang->get($lang->getPk()->getName())} AND page_id={$page->get($page->getPk()->getName())}";
+$query = "UPDATE {$version->getDbname()} SET status={$version::$STATUS_OLD} WHERE status={$version::$STATUS_CURRENT} AND lang_id={$lang->get('lang_id')} AND page_id={$page->get('page_id')}";
 OrmDb::execute($query);
 
 

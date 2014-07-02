@@ -24,7 +24,7 @@ if($has_error){return;}
 //Get Version
 $example = new OrmExample();
 $example->addCriteria('title', OrmTypeCriteria::$EQ, array($titleParam));
-$example->addCriteria('lang_id', OrmTypeCriteria::$EQ, array($lang->get($lang->getPk()->getName())));
+$example->addCriteria('lang', OrmTypeCriteria::$EQ, array($lang->get('lang_id')));
 $example->addCriteria('status', OrmTypeCriteria::$EQ, array(Version::$STATUS_CURRENT));
 
 $versions = OrmCore::findByExample(new Version(),$example, null, new OrmLimit(0,1));
@@ -33,7 +33,7 @@ if(empty($versions)){
 	//Ok, we try to find a link to a page with another lang
 	$example = new OrmExample();
 	$example->addCriteria('title', OrmTypeCriteria::$EQ, array($titleParam));
-	$example->addCriteria('lang_id', OrmTypeCriteria::$NEQ, array($lang->get($lang->getPk()->getName())));
+	$example->addCriteria('lang', OrmTypeCriteria::$NEQ, array($lang->get('lang_id')));
 	$example->addCriteria('status', OrmTypeCriteria::$EQ, array(Version::$STATUS_CURRENT));
 
 	$versions = OrmCore::findByExample(new Version(),$example, null, new OrmLimit(0,1));
@@ -44,12 +44,12 @@ if(empty($versions)){
 	} else {
 		$version = $versions[0];
 		$vals = $version->getValues();
-		$page = OrmCore::findById(new Page(),$version->get('page_id'));
+		$page = $version->get('page');
 	}
 } else {
 	$version = $versions[0];
 	$vals = $version->getValues();
-	$page = OrmCore::findById(new Page(),$version->get('page_id'));
+	$page = $version->get('page');
 }
 
 //Avoid edit title of default page/default lang

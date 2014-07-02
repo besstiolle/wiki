@@ -4,7 +4,7 @@
 //Get All active Versions
 $example = new OrmExample();
 $example->addCriteria('status', OrmTypeCriteria::$EQ, array(Version::$STATUS_CURRENT));
-$example->addCriteria('lang_id', OrmTypeCriteria::$EQ, array($lang->get($lang->getPk()->getName())));
+$example->addCriteria('lang', OrmTypeCriteria::$EQ, array($lang->get('lang_id')));
 $allPages = OrmCore::findByExample(new Version(),$example);
 $menu = array();
 foreach($allPages as $a_page){

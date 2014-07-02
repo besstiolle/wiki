@@ -3,7 +3,7 @@
 //Get active Versions of each langs
 $example = new OrmExample();
 $example->addCriteria('status', OrmTypeCriteria::$EQ, array(Version::$STATUS_CURRENT));
-$example->addCriteria('lang_id', OrmTypeCriteria::$EQ, array($lang->get($lang->getPk()->getName())));
+$example->addCriteria('lang', OrmTypeCriteria::$EQ, array($lang->get('lang_id')));
 $example->addCriteria('title', OrmTypeCriteria::$LIKE, array($version->get('title').':%'));
 $childrens = OrmCore::findByExample(new Version(),$example);
 

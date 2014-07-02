@@ -1,3 +1,4 @@
+
 <?php
 
 define('_JS_ACTION_',FALSE);
@@ -11,7 +12,6 @@ $langParam = $this->_getDefaultLang();
 include_once('inc.initialization.php');
 
 if($has_error){return;}
-
 /* Variables available :
  *
  * $errors & $messages
@@ -29,11 +29,10 @@ if($has_error){return;}
 if(!empty($params['version_id'])){
 	$version_id = $params['version_id'];
 }
-
 //Get Version
 $example = new OrmExample();
 $example->addCriteria('title', OrmTypeCriteria::$EQ, array($titleParam));
-$example->addCriteria('lang_id', OrmTypeCriteria::$EQ, array($lang->get($lang->getPk()->getName())));
+$example->addCriteria('lang', OrmTypeCriteria::$EQ, array($lang->get('lang_id')));
 
 if($version_id != null){ // Case wiki/en_US/home/view/2
 	$example->addCriteria('version_id', OrmTypeCriteria::$EQ, array($version_id));
@@ -42,6 +41,7 @@ if($version_id != null){ // Case wiki/en_US/home/view/2
 }
 
 $versions = OrmCore::findByExample(new Version(),$example, null, new OrmLimit(0,1));
+
 if(count($versions) == 0){
 	$version = null;
 	$vals = null;
@@ -49,8 +49,9 @@ if(count($versions) == 0){
 } else {
 	$version = $versions[0];
 	$vals = $version->getValues();
-	$page = OrmCore::findById(new Page(),$version->get('page_id'));
+	$page = $version->get('page');
 }
+
 
 //Avoid delete default page/default lang
 $isDefaultPage = false;
@@ -66,7 +67,7 @@ if($version_id != null && $version == null){
 	$smarty->assign('errors',$errors);
 	echo $this->ProcessTemplate('message.tpl');
 	return;
-}
+}	
 
 
 if($page == null || $version == null){

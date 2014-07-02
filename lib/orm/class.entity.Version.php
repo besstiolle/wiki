@@ -40,7 +40,7 @@ class Version extends OrmEntity {
 		));
 		
 		// Link to the original page to preserve the history
-		$this->add(new OrmField('page_id'		
+		$this->add(new OrmField('page'		
 			, OrmCAST::$INTEGER
 			, null	
 			, null
@@ -49,7 +49,7 @@ class Version extends OrmEntity {
 		));
 		
 		// Link to the lang category to offer Multi-Lang edition
-		$this->add(new OrmField('lang_id'		
+		$this->add(new OrmField('lang'		
 			, OrmCAST::$INTEGER
 			, null	
 			, null

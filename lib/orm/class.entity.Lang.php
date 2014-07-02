@@ -1,7 +1,4 @@
 <?php
-/**
- * A very simple example of how you can define a "User" without any relation to another Object.
- */ 
 class Lang extends OrmEntity {
 
 	public function __construct() {

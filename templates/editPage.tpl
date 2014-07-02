@@ -121,7 +121,7 @@
 	<div class='fancybox' id='preview_result'></div>
 
 	{$form}
-		{if !empty($version.page_id)}<input type='hidden' name='{$actionid}page_id' id='{$actionid}page_id' value='{$version.page_id}'/>{/if}
+		{if !empty($version.page)}<input type='hidden' name='{$actionid}page_id' id='{$actionid}page_id' value='{$version.page_id}'/>{/if}
 		{if !empty($lang.code)}<input type='hidden' name='{$actionid}wlang' id='{$actionid}wlang' value='{$lang.code}'/>{/if}
 
 		<div class="name-field">

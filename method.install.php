@@ -42,8 +42,8 @@ $version->set('engine',Engines::$MARKDOWN);
 $version->set('dt_creation',$currentTS);
 $version->set('author_name','admin');
 $version->set('author_id',0);
-$version->set('page_id',$page->get($page->getPk()->getName()));
-$version->set('lang_id',$en_US->get($en_US->getPk()->getName()));
+$version->set('page',$page->get('page_id'));
+$version->set('lang',$en_US->get('lang_id'));
 $version->set('status',$version::$STATUS_CURRENT);
 $version = $version->save();
 

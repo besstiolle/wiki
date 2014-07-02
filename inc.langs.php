@@ -2,7 +2,7 @@
 
 //Get active Versions of each langs
 $example = new OrmExample();
-$example->addCriteria('page_id', OrmTypeCriteria::$EQ, array($version->get('page_id')));
+$example->addCriteria('page', OrmTypeCriteria::$EQ, array($version->get('page')->get('page_id')));
 $example->addCriteria('status', OrmTypeCriteria::$EQ, array(Version::$STATUS_CURRENT));
 $version_by_langs = OrmCore::findByExample(new Version(),$example);
 
@@ -20,12 +20,12 @@ foreach($all_langs_by_code as $a_lang_code => $a_lang){
 }
 
 foreach($version_by_langs as $version_by_lang){
-	if(isset($all_langs_by_id[$version_by_lang->get("lang_id")])){
+	if(isset($all_langs_by_id[$version_by_lang->get("lang")])){
 	
-		$prettyUrl = RouteMaker::getViewRoute($all_langs_by_id[$version_by_lang->get("lang_id")]['code'], $version_by_lang->get('title'));
+		$prettyUrl = RouteMaker::getViewRoute($all_langs_by_id[$version_by_lang->get("lang")]['code'], $version_by_lang->get('title'));
 		
-		$other_langs[$all_langs_by_id[$version_by_lang->get("lang_id")]['code']]['viewUrl'] = $this->CreateLink ($id, "default", $returnid, '', array(), '', true, false, '', '', $prettyUrl);
-		$other_langs[$all_langs_by_id[$version_by_lang->get("lang_id")]['code']]['class'] = '';
+		$other_langs[$all_langs_by_id[$version_by_lang->get("lang")]['code']]['viewUrl'] = $this->CreateLink ($id, "default", $returnid, '', array(), '', true, false, '', '', $prettyUrl);
+		$other_langs[$all_langs_by_id[$version_by_lang->get("lang")]['code']]['class'] = '';
 	} 
 }
 $smarty->assign('other_langs', $other_langs);
