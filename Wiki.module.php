@@ -12,6 +12,7 @@ require_once($Orm);
 class Wiki extends Orm
 {   
 	function __construct() {
+		parent::__construct();
 		spl_autoload_register(array($this,'autoload_framework'));
 		$this->scan();
 	}
