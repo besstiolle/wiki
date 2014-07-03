@@ -1,22 +1,8 @@
 <?php
 
-/* Force the loading of Orm Framework BEFORE this module */
-$config = cmsms()->GetConfig();
-$Orm = $config['root_path'].'/modules/Orm/Orm.module.php';
-if( !is_readable( $Orm ) ) {
-  echo '<h1><font color="red">ERROR: The Orm Framework could not be found [<a href="https://github.com/besstiolle/orm-ms/wiki">help</a>].</font></h1>';
-  return;
-}
-require_once($Orm);
 
 class Wiki extends Orm
 {   
-	function __construct() {
-		parent::__construct();
-		spl_autoload_register(array($this,'autoload_framework'));
-		$this->scan();
-	}
-
 	function GetName() {
 		return 'Wiki';
 	}
