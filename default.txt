@@ -14,7 +14,7 @@ In fact, the "MarkDown" language is a **editorial language** and not a **program
  
 And finally, here some advice by "Duky", the loyal Duck.
 
-![quack]({root_url}/modules/Wiki/img/Mallard.jpg)
+![quack]({root_url}/modules/Wiki/img/mallard.jpg)
 
 > Quack, quack quack quack...  
 
