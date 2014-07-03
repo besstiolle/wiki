@@ -20,12 +20,12 @@ foreach($all_langs_by_code as $a_lang_code => $a_lang){
 }
 
 foreach($version_by_langs as $version_by_lang){
-	if(isset($all_langs_by_id[$version_by_lang->get("lang")])){
+	if(isset($all_langs_by_id[$version_by_lang->get("lang")->get('lang_id')])){
 	
-		$prettyUrl = RouteMaker::getViewRoute($all_langs_by_id[$version_by_lang->get("lang")]['code'], $version_by_lang->get('title'));
+		$prettyUrl = RouteMaker::getViewRoute($all_langs_by_id[$version_by_lang->get("lang")->get("lang_id")]['code'], $version_by_lang->get('title'));
 		
-		$other_langs[$all_langs_by_id[$version_by_lang->get("lang")]['code']]['viewUrl'] = $this->CreateLink ($id, "default", $returnid, '', array(), '', true, false, '', '', $prettyUrl);
-		$other_langs[$all_langs_by_id[$version_by_lang->get("lang")]['code']]['class'] = '';
+		$other_langs[$all_langs_by_id[$version_by_lang->get("lang")->get('lang_id')]['code']]['viewUrl'] = $this->CreateLink ($id, "default", $returnid, '', array(), '', true, false, '', '', $prettyUrl);
+		$other_langs[$all_langs_by_id[$version_by_lang->get("lang")->get('lang_id')]['code']]['class'] = '';
 	} 
 }
 $smarty->assign('other_langs', $other_langs);
