@@ -36,7 +36,7 @@ class RouteMaker{
 		$url .= $wiki->GetPreference('prefix');
 		
 		// "/en_US"
-		$url .= ($wiki->GetPreference('show_prefix_lang', true)?'/'.$langPrefix:"");
+		$url .= ($wiki->GetPreference('show_prefix_lang', true) && $langPrefix != null ?'/'.$langPrefix:"");
 		
 		// "/title"
 		$url .= '/'.$title;
@@ -46,7 +46,7 @@ class RouteMaker{
 		
 		// "/version_id"
 		$url .= ($version_id==null?'':'/'.$version_id);
-		
+
 		return $url;
 	}
 
