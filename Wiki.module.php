@@ -24,7 +24,7 @@ class Wiki extends Orm
 	}
 
 	function GetDependencies() {
-		return array('Orm'=>'0.3.0-SNAPSHOT');
+		return array('Orm'=>'0.3.0');
 	}
 
 	function GetHelp() {

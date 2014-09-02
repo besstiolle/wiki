@@ -61,4 +61,12 @@ $prefix = $this->GetPreference('prefix');
 $prefix_lang = ($this->GetPreference('show_prefix_lang', true)?"/{$lang->get('code')}":"");
 $engine = $this->_getDefaultEngine();
 
+//Is this the default Lang ?
+$isDefaultLang = true;
+if(count($all_langs_by_code) != 1){
+	if($lang->get("code") !== $this->_getDefaultLang()){
+		$isDefaultLang = false;
+	}
+}
+
 ?>

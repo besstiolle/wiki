@@ -16,6 +16,9 @@ if($has_error){return;}
  * $lang
  * $prefix from preferences prefix
  * $prefix_lang with preferences show_prefix_lang
+ * $engine
+ * $all_langs_by_code && $all_langs_by_id
+ * $isDefaultLang
  *
  **/
 

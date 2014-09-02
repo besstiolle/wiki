@@ -126,7 +126,8 @@
 
 		<div class="name-field">
 			<label>Title : </label>
-			<input type='text' value='{$version.title}' name='{$actionid}wtitle' {if !$isDefaultPage}id='{$actionid}wtitle'{/if} required {if $isDefaultPage}disabled='disabled' title="You can't edit the title of the default page"{/if}/>
+			<input type='text' value='{$version.title}' disabled="disabled" title="You can't edit the title" />
+			<input type='hidden' value='{$version.title}' name='{$actionid}wtitle' id='{$actionid}wtitle' />
 			{if $isDefaultPage}<input type='hidden' value='{$version.title}' name='{$actionid}wtitle' id='{$actionid}wtitle' />{/if}
 			<small class="error">Title is required.</small>
 		</div>

@@ -12,6 +12,7 @@ $langParam = $this->_getDefaultLang();
 include_once('inc.initialization.php');
 
 if($has_error){return;}
+
 /* Variables available :
  *
  * $errors & $messages
@@ -22,6 +23,7 @@ if($has_error){return;}
  * $prefix_lang with preferences show_prefix_lang
  * $engine
  * $all_langs_by_code && $all_langs_by_id
+ * $isDefaultLang
  *
  **/
 
@@ -51,7 +53,6 @@ if(count($versions) == 0){
 	$vals = $version->getValues();
 	$page = $version->get('page');
 }
-
 
 //Avoid delete default page/default lang
 $isDefaultPage = false;

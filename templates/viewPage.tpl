@@ -15,15 +15,29 @@
 
 	<section class="middle tab-bar-section"> 
 		
+		
+
+	<ul class="button-group in-off-bar right">
+		{if $version.status!=1}
+			<li><input class='tiny button in-off-bar goLast' type='button' value='See the last version of this page'></li>
+		{elseif !$isUpToDate}
+			<li><input class='tiny button in-off-bar goLastDefaultLang' type='button' value='The page is a translation and may be outdated. See the original here'></li>
+		{elseif !$isDefaultLang}
+			<li><input class='tiny button in-off-bar goLastDefaultLang' type='button' value='The page is a translation. See the original here.'></li>
+		{/if}
+	</ul>
 
 	<ul class="button-group in-off-bar">
 		<li><input class='tiny button in-off-bar raw' type='button' value='Show Raw Code'></li>
 		<li><input class='tiny button in-off-bar edit' type='button' value='Edit'{if $version.status!=1} disabled='disabled' title='you can not edit an old version'{/if}></li>
 		<li><input class='tiny button in-off-bar deletePre' type='button' value='Delete'{if $version.status!=1} disabled='disabled' title='you can not delete an old version'{elseif $isDefaultPage} disabled='disabled' title='you can not delete the default page'{/if}></li>
 		<li><input class='tiny button in-off-bar deletePost alert' type='button' value='Delete (Are You Sure?)'></li>
-	</ul>
-			
+
+	</ul>	
+
 	</section>
+
+
 	
 	<section class="right-small">
 		<a class="right-off-canvas-toggle menu-icon" ><span></span></a>
@@ -97,6 +111,15 @@
 				location.href = "{/literal}{$edit}{literal}";
 			});
 			
+			$('.goLast').click(function () { 
+				location.href = "{/literal}{$goLast}{literal}";
+			});
+			
+			$('.goLastDefaultLang').click(function () { 
+				location.href = "{/literal}{$defaultLangCanonical}{literal}";
+			});
+			
+
 			$(fieldPost).click(function () { 
 				location.href = "{/literal}{$delete}{literal}";
 			});
