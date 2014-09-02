@@ -126,40 +126,43 @@ class Wiki extends Orm
 		$title = '(?P<wtitle>[a-zA-Z0-9\-\_\:]+)';
 		$version = '(?P<version_id>[0-9]+)';
 
-		//WIth nothing
-		$route = new CmsRoute("/{$prefix}$/", $this->GetName(), array('action'=>'default','returnid'=>$returnid));
-		cms_route_manager::add_static($route);
+		//With nothing
+		$route = $this->_generateRoute($prefix);
+		$this->_add_static($route, array('action'=>'default','returnid'=>$returnid));
 				
 		//With Lang
-		$route = new CmsRoute("/{$prefix}{$pipe}{$lang}{$pipe}{$title}$/", 
-				$this->GetName(), array('action'=>'default','returnid'=>$returnid));
-		cms_route_manager::add_static($route);
+		$route = $this->_generateRoute($prefix, $lang, $title);
+		$this->_add_static($route, array('action'=>'default','returnid'=>$returnid));
 		
-		$route = new CmsRoute("/{$prefix}{$pipe}{$lang}{$pipe}{$title}{$pipe}view$/", 
-				$this->GetName(), array('action'=>'default','returnid'=>$returnid));
-		cms_route_manager::add_static($route);
+		$route = $this->_generateRoute($prefix, $lang, $title, 'view');
+		$this->_add_static($route, array('action'=>'view','returnid'=>$returnid));
 		
-		$route = new CmsRoute("/{$prefix}{$pipe}{$lang}{$pipe}{$title}{$pipe}view{$pipe}{$version}$/", 
-				$this->GetName(), array('action'=>'default','returnid'=>$returnid));
-		cms_route_manager::add_static($route);
+		$route = $this->_generateRoute($prefix, $lang, $title, 'view', $version);
+		$this->_add_static($route, array('action'=>'view','returnid'=>$returnid));
 		
-		$route = new CmsRoute("/{$prefix}{$pipe}{$lang}{$pipe}{$title}{$pipe}edit$/", 
-				$this->GetName(), array('action'=>'edit','returnid'=>$returnid));
-		cms_route_manager::add_static($route);
+		$route = $this->_generateRoute($prefix, $lang, $title, 'edit');
+		$this->_add_static($route, array('action'=>'edit','returnid'=>$returnid));
 		
-		$route = new CmsRoute("/{$prefix}{$pipe}{$lang}{$pipe}{$title}{$pipe}delete$/", 
-				$this->GetName(), array('action'=>'delete','returnid'=>$returnid));
-		cms_route_manager::add_static($route);
+		$route = $this->_generateRoute($prefix, $lang, $title, 'delete');
+		$this->_add_static($route, array('action'=>'delete','returnid'=>$returnid));
 		
-		$route = new CmsRoute("/{$prefix}{$pipe}{$lang}{$pipe}([a-zA-Z0-9\-\_\:]+){$pipe}preview$/", 
-				$this->GetName(), array('action'=>'preview','returnid'=>$returnid));
-		cms_route_manager::add_static($route);
+		$route = $this->_generateRoute($prefix, $lang, '([a-zA-Z0-9\-\_\:]+)', 'preview');
+		$this->_add_static($route, array('action'=>'preview','returnid'=>$returnid));
 		
-		$route = new CmsRoute("/{$prefix}{$pipe}{$lang}{$pipe}{$title}{$pipe}raw{$pipe}{$version}$/", 
-				$this->GetName(), array('action'=>'raw','returnid'=>$returnid));
-		cms_route_manager::add_static($route);
+		$route = $this->_generateRoute($prefix, $lang, $title, 'raw', $version);
+		$this->_add_static($route, array('action'=>'raw','returnid'=>$returnid));
+		
 		
    }
+
+    private function _generateRoute(){
+   		return '/'.implode('\/', func_get_args()).'$/';
+    }
+
+    private function _add_static($route, $params){
+		cms_route_manager::add_static(new CmsRoute($route, $this->GetName(), $params));
+    }
+
 	
 	/**
 	 * a inner function for factorize some recurrent code
