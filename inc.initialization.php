@@ -58,7 +58,7 @@ $smarty->assign('lang', $lang->getValues());
 
 // Get preferences
 $prefix = $this->GetPreference('prefix');
-$prefix_lang = ($this->GetPreference('show_prefix_lang', true)?"/{$lang->get('code')}":"");
+$prefix_lang = ($this->GetPreference('show_prefix_lang', true)?"{$lang->get('code')}":"");
 $engine = $this->_getDefaultEngine();
 
 //Is this the default Lang ?
