@@ -116,13 +116,10 @@ class Wiki extends Orm
 	}  
 	
 	public function CreateStaticRoutes() {
-		$this->_inner_createStaticRoutes('[wW]iki', '(?P<wlang>[a-zA-Z0-9\-\_]*?)');
-	}
-	
-	public function _inner_createStaticRoutes($prefix, $lang) {
-	
+		
 		$returnid = cmsms()->GetContentOperations()->GetDefaultContent();
-		$pipe = '\/';
+		$prefix = '[wW]iki';
+		$lang = '(?P<wlang>[a-zA-Z0-9\-\_]*?)';
 		$title = '(?P<wtitle>[a-zA-Z0-9\-\_\:]+)';
 		$version = '(?P<version_id>[0-9]+)';
 
