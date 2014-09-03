@@ -20,11 +20,11 @@ foreach($childrens as $child){
 		$label = substr($child->get('title'), strlen($version->get('title')) + 1 , $pos - strlen($child->get('title')));
 	}
 	
-	$prettyUrl = RouteMaker::getViewRoute($langParam, $version->get('title').':'.$label);
+	$prettyUrl = RouteMaker::getViewRoute($id, $returnid, $langParam, $version->get('title').':'.$label);
 
 	$sub_entries[$label] = array(
 				'label' => $version->get('title').':'.$label,
-				'viewUrl' => $this->CreateLink ($id, "default", $returnid, '', array(), '', true, false, '', '', $prettyUrl),
+				'viewUrl' => $prettyUrl,
 				'class' => 'new'
 				);
 	

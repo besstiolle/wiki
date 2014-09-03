@@ -4,7 +4,7 @@ $elts = explode($glue,$titleParam);
 $previous = '';
 $breadcrumbs = array();
 foreach($elts as $elt){
-	$b_url = RouteMaker::getViewRoute($langParam, $previous.$elt);
+	$b_url = RouteMaker::getViewRoute($id, $returnid, $langParam, $previous.$elt);
 	$b_name = $elt;
 	
 	

@@ -38,7 +38,7 @@ if($textParam == null){
 }
 
 if(!empty($errors)) {
-	$url = RouteMaker::getEditRoute($this->_getDefaultLang(), $this->_getDefaultTitle());
+	$url = RouteMaker::getEditRoute($id, $returnid, $this->_getDefaultLang(), $this->_getDefaultTitle());
 	$smarty->assign('errors',$errors);
 	$smarty->assign('url',$url);
 	echo $this->ProcessTemplate('message.tpl');
@@ -71,7 +71,7 @@ if($pageParam != null){
 //Avoid edit title of version "en_US/home"
 if($page->get('title') == $this->_getDefaultTitle() && $titleParam != $this->_getDefaultTitle() && $lang->get('code') == $this->_getDefaultLang()){
 	$errors[] = 'default_page_with_new_title';
-	$url = RouteMaker::getEditRoute($this->_getDefaultLang(), $this->_getDefaultTitle());
+	$url = RouteMaker::getEditRoute($id, $returnid, $this->_getDefaultLang(), $this->_getDefaultTitle());
 	$smarty->assign('errors',$errors);
 	$smarty->assign('url',$url);
 	echo $this->ProcessTemplate('message.tpl');
@@ -100,7 +100,7 @@ $version->set('text',$textParam);
 $version = $version->save();
 
 
-$url = $this->CreateLink ($id, "default", $returnid, '', array(), '', true, false, '', '', RouteMaker::getViewRoute($lang->get('code'), $titleParam));
+$url = RouteMaker::getViewRoute($id, $returnid, $lang->get('code'), $titleParam);
 header("Location: {$url}");
 return;
 

@@ -3,6 +3,7 @@
 define('_JS_ACTION_',FALSE);
 $has_error = false;
 
+
 //Common initialization
 include_once('inc.initialization.php');
 

@@ -3,8 +3,8 @@
 
 $form = $this->CreateFrontendFormStart ($id, $returnid, 'save', 'get', '',true,'', array());//,'',false,true,  ' data-abide');
 
-$cancel = $this->CreateLink ($id, "default", $returnid, '', array(), '', true, false, '', '', RouteMaker::getViewRoute($langParam, $titleParam));
-$preview = $this->CreateLink ($id, "preview", $returnid, '', array(), '', true, false, '', '', RouteMaker::getPreviewRoute($langParam, $titleParam));
+$cancel = RouteMaker::getViewRoute($id, $returnid, $langParam, $titleParam);
+$preview = RouteMaker::getPreviewRoute($id, $returnid, $langParam, $titleParam);
 
 //Case : get in edition after an error : keep the previous text.
 if(!empty($params['wtext'])){

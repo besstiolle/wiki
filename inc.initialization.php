@@ -23,7 +23,7 @@ if(!empty($params['wtitle'])){
 }
 if(!empty($params['wlang'])){
 	$langParam = $params['wlang'];
-}
+} 
 
 $langs = OrmCore::findAll(new Lang());
 $all_langs_by_code = array();
@@ -45,9 +45,10 @@ if(count($langs) == 0){
 	$lang = $langs[0];
 }
 
+
 if($lang == null){
 	$errors[] = 'lang_mandatory';
-	$url = $this->CreateLink ($id, "default", $returnid, '', array(), '', true, false, '', '', RouteMaker::getViewRoute($this->_getDefaultLang(), $this->_getDefaultTitle()));
+	$url = RouteMaker::getViewRoute($id, $returnid, $this->_getDefaultLang(), $this->_getDefaultTitle());
 	$smarty->assign('errors',$errors);
 	$smarty->assign('url',$url);
 	echo $this->ProcessTemplate('message.tpl');

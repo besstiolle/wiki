@@ -44,7 +44,7 @@ if(count($versions) == 0){
  
 if($version == null){ //Go back to home
 	$errors[] = 'version_unknow';
-	$url = $this->CreateLink ($id, "default", $returnid, '', array(), '', true, false, '', '', RouteMaker::getViewRoute($langParam, $this->_getDefaultTitle()));
+	$url = RouteMaker::getViewRoute($id, $returnid, $langParam, $this->_getDefaultTitle());
 	$smarty->assign('errors',$errors);
 	$smarty->assign('url',$url);
 	echo $this->ProcessTemplate('message.tpl');
@@ -53,7 +53,7 @@ if($version == null){ //Go back to home
 
 if($page->get('title') == $this->_getDefaultTitle() && $lang->get('code') == $this->_getDefaultLang()){ //Don't allow that.
 	$errors[] = 'default_version_undeletable';
-	$url = $this->CreateLink ($id, "default", $returnid, '', array(), '', true, false, '', '', RouteMaker::getViewRoute($langParam, $this->_getDefaultTitle()));
+	$url = RouteMaker::getViewRoute($id, $returnid, $langParam, $this->_getDefaultTitle());
 	$smarty->assign('errors',$errors);
 	$smarty->assign('url',$url);
 	echo $this->ProcessTemplate('message.tpl');
@@ -69,7 +69,7 @@ OrmDb::execute($query);
 $smarty->assign('title', $vals['title']);
 
 $messages[] = 'delete_success';
-$url = $this->CreateLink ($id, "default", $returnid, '', array(), '', true, false, '', '', RouteMaker::getViewRoute($langParam, $titleParam));
+$url = RouteMaker::getViewRoute($id, $returnid, $langParam, $titleParam);
 $smarty->assign('messages',$messages);
 $smarty->assign('url',$url);
 echo $this->ProcessTemplate('message.tpl');

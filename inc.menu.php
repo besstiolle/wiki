@@ -10,14 +10,14 @@ $menu = array();
 foreach($allPages as $a_page){
 	$elts = explode(':', $a_page->get('title'));
 	
-	$prettyUrl = RouteMaker::getViewRoute($langParam, $elts[0]);
+	$prettyUrl = RouteMaker::getViewRoute($id, $returnid, $langParam, $elts[0]);
 	
 	//Initiate a no-existing page
 	if(!isset($menu[$elts[0]])){
 	
 		$menu[$elts[0]] = array(
 				'label' => $elts[0],
-				'viewUrl' => $this->CreateLink ($id, "default", $returnid, '', array(), '', true, false, '', '', $prettyUrl),
+				'viewUrl' => $prettyUrl,
 				'class' => 'new'
 				);
 	}

@@ -7,8 +7,8 @@ $version->set('lang', $lang->get('lang_id'));
 
 
 $form = $this->CreateFormStart($id, 'save', $returnid, 'post');
-$cancel = $this->CreateLink ($id, "default", $returnid, '', array(), '', true, false, '', '', RouteMaker::getViewRoute($langParam, $this->_getDefaultTitle()));
-$preview = $this->CreateLink ($id, "preview", $returnid, '', array(), '', true, false, '', '', RouteMaker::getPreviewRoute($langParam, $titleParam));
+$cancel = RouteMaker::getViewRoute($id, $returnid, $langParam, $this->_getDefaultTitle());
+$preview = RouteMaker::getPreviewRoute($id, $returnid, $langParam, $titleParam);
 
 $smarty->assign('version', $version->getValues());
 $smarty->assign('title', $titleParam);
