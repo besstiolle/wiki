@@ -2,6 +2,8 @@
 
 class RouteMaker{
 
+	private static $wiki;
+
 	public static function getDeleteRoute($id, $returnid, $langPrefix = null, $title){
 		return RouteMaker::getRoute($id, $returnid, $langPrefix, $title, 'delete');
 	}
@@ -27,16 +29,19 @@ class RouteMaker{
 	}
 	
 	protected static function getRoute($id, $returnid, $langPrefix = null, $title, $action = null, $version_id = null){
-		$modops = cmsms()->GetModuleOperations(); 
-		$wiki = $modops->get_module_instance('Wiki');
+		if(self::$wiki == null){
+			$modops = cmsms()->GetModuleOperations(); 
+			self::$wiki = $modops->get_module_instance('Wiki');
+		}
+		
 		
 		$url = '';
 		
 		// "wiki"
-		$url .= $wiki->GetPreference('prefix');
+		$url .= self::$wiki->GetPreference('prefix');
 		
 		// "/en_US"
-		$url .= ($wiki->GetPreference('show_prefix_lang', true) && $langPrefix != null ?'/'.$langPrefix:"");
+		$url .= (self::$wiki->GetPreference('show_prefix_lang', true) && $langPrefix != null ?'/'.$langPrefix:"");
 		
 		// "/title"
 		$url .= '/'.$title;
@@ -47,11 +52,13 @@ class RouteMaker{
 		// "/version_id"
 		$url .= ($version_id==null?'':'/'.$version_id);
 
-		$finalUrl = $wiki->CreateLink ($id, $action, $returnid, '', 
+		$finalUrl = self::$wiki->CreateLink ($id, (empty($action) || $action == 'view' ?'default':$action), $returnid, '', 
 				array('wlang' => ($langPrefix != null ? $langPrefix : ""), 'wtitle'=> $title)
 				, '', true, false, '', '', 
 				$url
 		);
+
+		echo $finalUrl.'<br/>';
 
 		return $finalUrl;
 

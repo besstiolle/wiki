@@ -4,7 +4,7 @@ $vals['text'] = Engines::process($vals['text'], $prefix, $prefix_lang, $version-
 
 
 $edit = RouteMaker::getEditRoute($id, $returnid, $prefix_lang, $titleParam);
-$delete = RouteMaker::getDeleteRoute($prefix_lang, $titleParam);
+$delete = RouteMaker::getDeleteRoute($id, $returnid, $prefix_lang, $titleParam);
 $raw = RouteMaker::getRawRoute($id, $returnid, $prefix_lang, $titleParam, $vals['version_id']);
 $canonical = RouteMaker::getViewRoute($id, $returnid, $prefix_lang, $titleParam);
 $goLast = '';
