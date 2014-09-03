@@ -101,6 +101,7 @@ $version = $version->save();
 
 
 $url = RouteMaker::getViewRoute($id, $returnid, $lang->get('code'), $titleParam);
+$url = str_replace('&amp;', '&', $url);
 header("Location: {$url}");
 return;
 
