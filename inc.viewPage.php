@@ -1,6 +1,6 @@
 <?php
 
-$vals['text'] = Engines::process($vals['text'], $prefix, $prefix_lang, $version->get('engine'));
+$vals['text'] = Engines::process($id, $returnid, $vals['text'], $prefix, $prefix_lang, $version->get('engine'));
 
 
 $edit = RouteMaker::getEditRoute($id, $returnid, $prefix_lang, $titleParam);

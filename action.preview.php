@@ -39,7 +39,7 @@ if(!empty($errors)) {
 }
 
 $vals['title'] = $titleParam;
-$vals['text'] = Engines::process($textParam, $prefix, $prefix_lang, $engine);
+$vals['text'] = Engines::process($id, $returnid, $textParam, $prefix, $prefix_lang, $engine);
 
 $smarty->assign('version', $vals);
 $smarty->assign('title', $titleParam);
