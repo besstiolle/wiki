@@ -70,7 +70,7 @@
 			});
 			
 			$(fieldPost).click(function () { 
-				location.href = "{/literal}{$cancel}{literal}";
+				location.href = "{/literal}{$cancel|replace:'&amp;':'&'}{literal}";
 			});
 			
 			$(fieldPost).hide();	

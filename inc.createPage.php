@@ -6,11 +6,19 @@ $version->set('text', "## Your title <h2> for the new page {$titleParam}\r\nWrit
 $version->set('lang', $lang->get('lang_id'));
 
 
-$form = $this->CreateFormStart($id, 'save', $returnid, 'post');
+$form = $this->CreateFrontendFormStart ($id, $returnid, 'save', 'post', '', true, '', array());
 $cancel = RouteMaker::getViewRoute($id, $returnid, $langParam, $this->_getDefaultTitle());
 $preview = RouteMaker::getPreviewRoute($id, $returnid, $langParam, $titleParam);
 
+
+
+
+
+
+
+
 $smarty->assign('version', $version->getValues());
+
 $smarty->assign('title', $titleParam);
 $smarty->assign('action', 'Create');
 

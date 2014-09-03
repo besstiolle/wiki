@@ -52,13 +52,20 @@ class RouteMaker{
 		// "/version_id"
 		$url .= ($version_id==null?'':'/'.$version_id);
 
-		$finalUrl = self::$wiki->CreateLink ($id, (empty($action) || $action == 'view' ?'default':$action), $returnid, '', 
-				array('wlang' => ($langPrefix != null ? $langPrefix : ""), 'wtitle'=> $title)
-				, '', true, false, '', '', 
+		$parameters = array();
+		$parameters['wlang'] = ($langPrefix != null ? $langPrefix : "");
+		$parameters['wtitle'] = $title;
+		if ($version_id != null){
+			$parameters['version_id'] = $version_id;
+		}
+
+		$finalUrl = self::$wiki->CreateFrontendLink ($id, $returnid, (empty($action) || $action == 'view' ?'default':$action), '', 
+				$parameters
+				, '', true, true, '', '', 
 				$url
 		);
 
-		echo $finalUrl.'<br/>';
+		//echo "<a href='".$finalUrl."'>".$finalUrl.'</a><br/><br/>';
 
 		return $finalUrl;
 

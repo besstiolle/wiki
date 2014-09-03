@@ -108,20 +108,20 @@
 			});
 			
 			$('.edit').click(function () { 
-				location.href = "{/literal}{$edit}{literal}";
+				location.href = "{/literal}{$edit|replace:'&amp;':'&'}{literal}";
 			});
-			
+
 			$('.goLast').click(function () { 
-				location.href = "{/literal}{$goLast}{literal}";
+				location.href = "{/literal}{$goLast|replace:'&amp;':'&'}{literal}";
 			});
 			
 			$('.goLastDefaultLang').click(function () { 
-				location.href = "{/literal}{$defaultLangCanonical}{literal}";
+				location.href = "{/literal}{$defaultLangCanonical|replace:'&amp;':'&'}{literal}";
 			});
 			
 
 			$(fieldPost).click(function () { 
-				location.href = "{/literal}{$delete}{literal}";
+				location.href = "{/literal}{$delete|replace:'&amp;':'&'}{literal}";
 			});
 			
 			
