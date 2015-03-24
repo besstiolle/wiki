@@ -4,32 +4,40 @@ class RouteMaker{
 
 	private static $wiki;
 
-	public static function getDeleteRoute($id, $returnid, $langPrefix = null, $title, $additionnalParameters = null){
-		return RouteMaker::getRoute($id, $returnid, $langPrefix, $title, 'delete', null, $additionnalParameters);
-	}
-	
-	public static function getEditRoute($id, $returnid, $langPrefix = null, $title, $additionnalParameters = null){
-		return RouteMaker::getRoute($id, $returnid, $langPrefix, $title, 'edit', null, $additionnalParameters);
-	}
-	
-	public static function getPreviewRoute($id, $returnid, $langPrefix = null, $title, $additionnalParameters = null){
-		return RouteMaker::getRoute($id, $returnid, $langPrefix, $title, 'preview', null, $additionnalParameters);
-	}
-	
-	public static function getRawRoute($id, $returnid, $langPrefix = null, $title, $version_id, $additionnalParameters = null){
-		return RouteMaker::getRoute($id, $returnid, $langPrefix, $title, 'raw', $version_id, $additionnalParameters);
-	}
-	
-	public static function getViewOldRoute($id, $returnid, $langPrefix = null, $title, $version_id, $additionnalParameters = null){
-		return RouteMaker::getRoute($id, $returnid, $langPrefix, $title, 'view', $version_id, $additionnalParameters);
-	}
-	
-	public static function getViewRoute($id, $returnid, $langPrefix = null, $title, $additionnalParameters = null){
-		return RouteMaker::getRoute($id, $returnid, $langPrefix, $title, null, null, $additionnalParameters);
+	private static $id;
+	private static $returnid;
+
+	public static function init($id, $returnid){
+		RouteMaker::$id = $id;
+		RouteMaker::$returnid = $returnid;
 	}
 
-	public static function getRootRoute($id, $returnid, $langPrefix = null, $additionnalParameters = null){
-		return RouteMaker::getRoute($id, $returnid, $langPrefix, null, null, null, $additionnalParameters);
+	public static function getDeleteRoute($langPrefix = null, $title, $additionnalParameters = null){
+		return RouteMaker::getRoute($langPrefix, $title, 'delete', null, $additionnalParameters);
+	}
+	
+	public static function getEditRoute($langPrefix = null, $title, $additionnalParameters = null){
+		return RouteMaker::getRoute($langPrefix, $title, 'edit', null, $additionnalParameters);
+	}
+	
+	public static function getPreviewRoute($langPrefix = null, $title, $additionnalParameters = null){
+		return RouteMaker::getRoute($langPrefix, $title, 'preview', null, $additionnalParameters);
+	}
+	
+	public static function getRawRoute($langPrefix = null, $title, $version_id, $additionnalParameters = null){
+		return RouteMaker::getRoute($langPrefix, $title, 'raw', $version_id, $additionnalParameters);
+	}
+	
+	public static function getViewOldRoute($langPrefix = null, $title, $version_id, $additionnalParameters = null){
+		return RouteMaker::getRoute($langPrefix, $title, 'view', $version_id, $additionnalParameters);
+	}
+	
+	public static function getViewRoute($langPrefix = null, $title, $additionnalParameters = null){
+		return RouteMaker::getRoute($langPrefix, $title, null, null, $additionnalParameters);
+	}
+
+	public static function getRootRoute($langPrefix = null, $additionnalParameters = null){
+		return RouteMaker::getRoute($langPrefix, null, null, null, $additionnalParameters);
 	}
 	
 	protected static function getRoute($id, $returnid, $langPrefix = null, $title = null, $action = null, $version_id = null, $additionnalParameters = null){
@@ -45,7 +53,7 @@ class RouteMaker{
 		$url .= self::$wiki->GetPreference('prefix');
 		
 		// "/en_US"
-		$url .= (self::$wiki->GetPreference('show_prefix_lang', true) && $langPrefix != null ?'/'.$langPrefix:"");
+		$url .= (self::$wiki->GetPreference('show_code_iso', true) && $langPrefix != null ?'/'.$langPrefix:"");
 		
 		// "/title"
 		$url .= ($title==null?'':'/'.$title);
@@ -70,14 +78,14 @@ class RouteMaker{
 			$url .= '&'.$id.$key.'='.$value;
 			$parameters = array_merge($parameters, $additionnalParameters);
 		}
-		$parameters['wlang'] = ($langPrefix != null ? $langPrefix : "");
-		$parameters['wtitle'] = $title;
+		$parameters['vlang'] = ($langPrefix != null ? $langPrefix : "");
+		$parameters['vtitle'] = $title;
 		$parameters['prefix'] = self::$wiki->GetPreference('prefix');
 		if ($version_id != null){
 			$parameters['version_id'] = $version_id;
 		}
 
-		$finalUrl = self::$wiki->CreateFrontendLink ($id, $returnid, (empty($action) || $action == 'view' ?'default':$action), '', 
+		$finalUrl = self::$wiki->CreateFrontendLink ((empty($action) || $action == 'view' ?'default':$action), '', 
 				$parameters
 				, '', true, true, '', '', 
 				$url

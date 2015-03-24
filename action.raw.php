@@ -1,4 +1,5 @@
 <?php
+if (!function_exists('cmsms')) exit;
 
 //Default values
 $version_id = null;

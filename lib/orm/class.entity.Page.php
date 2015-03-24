@@ -13,21 +13,21 @@ class Page extends OrmEntity {
 		
 		$this->add(new OrmField('prefix'		
 			, OrmCAST::$STRING
-			, 255
+			, 50
 			, TRUE	
 		));
 		
-		$this->add(new OrmField('title'		
+		$this->add(new OrmField('alias'		
 			, OrmCAST::$STRING
-			, 255	
+			, 100
 		));
 			
 		$this->garnishAutoincrement();
 
-		//$this->addIndexes(array('prefix', 'title'));
+		$this->addIndexes(array('prefix', 'alias'));
 		
 		
-		$this->garnishDefaultOrderBy(new OrmOrderBy(array('title'=>OrmOrderBy::$ASC)));
+		$this->garnishDefaultOrderBy(new OrmOrderBy(array('alias'=>OrmOrderBy::$ASC)));
 	}	
 }
 ?>

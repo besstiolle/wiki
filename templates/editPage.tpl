@@ -48,15 +48,15 @@
 	<div class='fancybox' id='preview_result'></div>
 
 	{$form}
-		{if !empty($page)}<input type='hidden' name='{$actionid}page_id' id='{$actionid}page_id' value='{$page.page_id}'/>{/if}
-		{if !empty($lang.code)}<input type='hidden' name='{$actionid}wlang' id='{$actionid}wlang' value='{$lang.code}'/>{/if}
+		{*{if !empty($page)}<input type='hidden' name='{$actionid}page_id' id='{$actionid}page_id' value='{$page.page_id}'/>{/if}
+		{if !empty($lang.code)}<input type='hidden' name='{$actionid}vlang' id='{$actionid}vlang' value='{$lang.code}'/>{/if}*}
 
 		<div class="name-field">
 			<label>Title : </label>
-			<input type='text' value='{$version.title}' name='{$actionid}wtitle' id='{$actionid}wtitle' />
+			<input type='text' value='{$version.title}' name='{$actionid}vtitle' id='{$actionid}vtitle' />
 		</div>
 		<div class="name-field">
-			<textarea name='{$actionid}wtext' id='{$actionid}wtext' rows='10' cols='20' class='wikiarea' required>{$version.text}</textarea>
+			<textarea name='{$actionid}vtext' id='{$actionid}vtext' rows='10' cols='20' class='wikiarea' required>{$version.text}</textarea>
 		</div>
 		
 	</form>

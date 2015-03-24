@@ -13,9 +13,10 @@
 	  
 	  $(document).ready(function () {
 		  $("input.preview").click(function () { 
-				query = "{$actionid}wtitle=" + escape($("#{$actionid}wtitle").val()) + "&" 
-					+ "{$actionid}wtext=" + escape($("#{$actionid}wtext").val()) + "&" 
-					+ "{$actionid}lang_id=" + $("#{$actionid}lang_id").val();
+				query = "{$actionid}vtitle=" + escape($("#{$actionid}vtitle").val()) + "&" 
+					+ "{$actionid}vtext=" + escape($("#{$actionid}vtext").val()) + "&" 
+					+ "{$actionid}palias=" + escape($("#{$actionid}palias").val()) + "&" 
+					+ "{$actionid}vlang=" + $("#{$actionid}vlang").val();
 		
 				$.post( url, query).done(function( data ) {
 					$("#preview_result").html(data);

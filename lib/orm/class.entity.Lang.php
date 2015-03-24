@@ -21,18 +21,20 @@ class Lang extends OrmEntity {
 			, OrmCAST::$STRING
 			, 255	
 		));
-	/*	
-		$this->add(new OrmField('page_id'		
-			, OrmCAST::$INTEGER
-			, 50	
-			, null
-			, OrmKEY::$FK
-			, "Page.page_id"
-		));
-	*/	
-		$this->garnishAutoincrement();	
 		
-		$this->garnishDefaultOrderBy(new OrmOrderBy(array('lang_id'=>OrmOrderBy::$ASC)));
+		$this->add(new OrmField('isdefault'		
+			, OrmCAST::$INTEGER
+			, 1	
+		));
+
+		$this->garnishAutoincrement();	
+
+		$this->addIndexes(array('code'), true);
+		$this->addIndexes(array('isdefault'));
+
+		$this->garnishDefaultValue('isdefault',0);
+		
+		$this->garnishDefaultOrderBy(new OrmOrderBy(array('isdefault'=>OrmOrderBy::$DESC, 'code'=>OrmOrderBy::$ASC)));
 	}	
 }
 ?>

@@ -1,7 +1,7 @@
 <?php
+if (!function_exists('cmsms')) exit;
 
 define('_JS_ACTION_',FALSE);
-$has_error = false;
 
 //Common initialization
 include_once('inc.initialization.php');
@@ -12,59 +12,32 @@ if($has_error){return;}
  *
  * $errors & $messages
  * $smarty
- * $titleParam & $langParam
- * $lang
+ * $aliasParam & $langParam
+ * $page & $lang
  * $prefix from preferences prefix
- * $prefix_lang with preferences show_prefix_lang
+ * $code_iso with preferences show_code_iso
  * $engine
  * $all_langs_by_code && $all_langs_by_id
- * $isDefaultLang
+ * $isDefaultLang $isDefaultPage $isDefaultVersion
  *
  **/
 
+$version = VersionsService::getOne($page->get('page_id'), $lang->get('lang_id'), 
+							 null, Version::$STATUS_CURRENT);
 
-//Get Version
-$example = new OrmExample();
-$example->addCriteria('title', OrmTypeCriteria::$EQ, array($titleParam));
-$pages = OrmCore::findByExample(new Page(),$example);
-if(count($pages) == 0){
-	$version = null;
-	$vals = null;
-	$page = null;
-} else {
-	$page = $pages[0];
-	$example = new OrmExample();
-	$example->addCriteria('page', OrmTypeCriteria::$EQ, array($page->get('page_id')));
-	$example->addCriteria('lang', OrmTypeCriteria::$EQ, array($lang->get('lang_id')));
-	$example->addCriteria('status', OrmTypeCriteria::$EQ, array(Version::$STATUS_CURRENT));
-
-
-	$versions = OrmCore::findByExample(new Version(),$example);
-	if(count($versions) == 0){
-		$version = null;
-		$vals = null;
-		$page = null;
-	} else {
-		$version = $versions[0];
-		$vals = $version->getValues();
-		$page = $version->get('page');
-	}
-}
-
-	
  
 if($version == null){ //Go back to home
 	$errors[] = 'version_unknow';
-	$url = RouteMaker::getViewRoute($id, $returnid, $langParam, $this->_getDefaultTitle());
+	$url = RouteMaker::getViewRoute($id, $returnid, $langParam, $this->_getDefaultAlias());
 	$smarty->assign('errors',$errors);
 	$smarty->assign('url',$url);
 	echo $this->ProcessTemplate('message.tpl');
 	return;
 }
 
-if($page->get('title') == $this->_getDefaultTitle() && $lang->get('code') == $this->_getDefaultLang()){ //Don't allow that.
+if($isDefaultVersion){ //Don't allow that.
 	$errors[] = 'default_version_undeletable';
-	$url = RouteMaker::getViewRoute($id, $returnid, $langParam, $this->_getDefaultTitle());
+	$url = RouteMaker::getViewRoute($id, $returnid, $langParam, $this->_getDefaultAlias());
 	$smarty->assign('errors',$errors);
 	$smarty->assign('url',$url);
 	echo $this->ProcessTemplate('message.tpl');
@@ -76,11 +49,10 @@ $query = "UPDATE {$version->getDbname()} SET status={$version::$STATUS_OLD} WHER
 OrmDb::execute($query);
 
 
-
-$smarty->assign('title', $vals['title']);
+$smarty->assign('title', $version->get('title'));
 
 $messages[] = 'delete_success';
-$url = RouteMaker::getViewRoute($id, $returnid, $langParam, $titleParam);
+$url = RouteMaker::getViewRoute($id, $returnid, $langParam, $aliasParam);
 $smarty->assign('messages',$messages);
 $smarty->assign('url',$url);
 echo $this->ProcessTemplate('message.tpl');

@@ -14,9 +14,9 @@ class PagesService{
 		return null;
 	}
 
-	public static function getOneByTitle($title){
+	public static function getOneByAlias($alias){
 		$example = new OrmExample();
-		$example->addCriteria('title', OrmTypeCriteria::$EQ, array($title));
+		$example->addCriteria('alias', OrmTypeCriteria::$EQ, array($alias));
 		$pages = OrmCore::findByExample(new Page(),$example);
 		if(!empty($pages)){
 			return $pages[0];
@@ -24,9 +24,9 @@ class PagesService{
 		return null;
 	}
 
-	public static function getByTitleLike($title){
+	public static function getByAliasLike($alias){
 		$example = new OrmExample();
-		$example->addCriteria('title', OrmTypeCriteria::$LIKE, array($title));
+		$example->addCriteria('alias', OrmTypeCriteria::$LIKE, array($alias));
 		$pages = OrmCore::findByExample(new Page(),$example);
 		return $pages;
 	}

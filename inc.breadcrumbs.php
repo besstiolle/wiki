@@ -1,6 +1,6 @@
 <?php
 $glue = ':';
-$elts = explode($glue,$titleParam);
+$elts = explode($glue,$aliasParam);
 $previous = '';
 $breadcrumbs = array();
 foreach($elts as $elt){
@@ -12,7 +12,7 @@ foreach($elts as $elt){
 	$b_title  = '';
 
 	//Test existance of Internal link
-	$pageOfChild = PagesService::getOneByTitle($previous.$elt);
+	$pageOfChild = PagesService::getOneByAlias($previous.$elt);
 	if($pageOfChild == null){
 		$b_class = 'new'; 
 		$b_title = "Clic to create the page {$previous}{$elt}";

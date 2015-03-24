@@ -5,7 +5,7 @@ class Engines{
 
 	public static $MARKDOWN = 1;
 
-	public static function process($id, $returnid, $text, $prefix, $prefix_lang, $engine = 1){
+	public static function process($id, $returnid, $text, $prefix, $code_iso, $engine = 1){
 		//Prepare configuration
 		$config = cmsms()->GetConfig();
 		include_once($config['root_path'].'/modules/Wiki/lib/Michelf/MarkdownExtra.inc.php');
@@ -50,7 +50,7 @@ class Engines{
 					$cssClass = 'follow';
 					$title = "";
 				}
-				$url = RouteMaker::getViewRoute($id, $returnid, $prefix_lang, $match[2]);
+				$url = RouteMaker::getViewRoute($id, $returnid, $code_iso, $match[2]);
 
 			}
 			//Replace plain text without regex anymore

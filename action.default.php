@@ -1,66 +1,62 @@
-
 <?php
+if (!function_exists('cmsms')) exit;
 
 define('_JS_ACTION_',FALSE);
-$has_error = false;
 
-//Default values in view class
-$titleParam = $this->_getDefaultTitle();
-$langParam = $this->_getDefaultLang();
+//Default values in view class in case of {Wiki} 
+if(empty($params['palias'])) {
+	$params['palias'] = $this->_getDefaultAlias();
+}
+if(empty($params['vlang'])) {
+	$params['vlang'] = $this->_getDefaultLang();
+}
 
 //Common initialization
 include_once('inc.initialization.php');
 
 if($has_error){return;}
 
+
 /* Variables available :
  *
  * $errors & $messages
  * $smarty
- * $titleParam & $langParam
- * $lang
+ * $aliasParam & $langParam
+ * $page & $lang
  * $prefix from preferences prefix
- * $prefix_lang with preferences show_prefix_lang
+ * $code_iso with preferences show_code_iso
  * $engine
  * $all_langs_by_code && $all_langs_by_id
- * $isDefaultLang
+ * $isDefaultLang $isDefaultPage $isDefaultVersion
  *
  **/
 
-// Case wiki/en_US/home/view/2
-if(!empty($params['version_id'])){
+
+$statusToCheck = null;
+$version_id = null;
+if(!empty($params['version_id'])){ // Case wiki/en_US/home/view/2
 	$version_id = $params['version_id'];
+} else {
+	$statusToCheck = Version::$STATUS_CURRENT;
 }
 
-$page = PagesService::getOneByTitle($titleParam);
-$vals = null;
-
-if($page !== null){
-
-	$statusToCheck = null;
-	if($version_id == null){ // Case wiki/en_US/home/view/2
-		$statusToCheck = Version::$STATUS_CURRENT;
-	}
-
-	$version = VersionsService::getOne(
-			$page->get('page_id'), 
-			$lang->get('lang_id'),
-			$version_id,
-			$statusToCheck);
+$version = VersionsService::getOne(
+		$page->get('page_id'), 
+		$lang->get('lang_id'),
+		$version_id,
+		$statusToCheck);
 
 
-	if($version !== null){
-		$vals = $version->getValues();
-	}
+if($version !== null){
+	$vals = $version->getValues();
 }
 
-//Avoid delete default page/default lang
+
+/*//Avoid delete default page/default lang
 $isDefaultPage = false;
-if($page != null && $page->get('title') == $this->_getDefaultTitle() 
-	&& $lang != null && $lang->get('code') == $this->_getDefaultLang()){
+if($page != null && $page->get('alias') == $this->_getDefaultAlias() && $isDefaultLang){
 	$isDefaultPage = true;
-}
-$smarty->assign('isDefaultPage', $isDefaultPage);
+}*/
 
 // Case wiki/en_US/home/view/999999
 if($version_id != null && $version == null){
@@ -71,7 +67,7 @@ if($version_id != null && $version == null){
 }	
 
 
-if($page == null || $version == null){
+if($version == null){
 	//Menu
 	include_once('inc.menu.php');
 	//Creation

@@ -71,17 +71,20 @@ class Wiki extends Orm
 		$this->RegisterModulePlugin(true, false);
 		$this->RestrictUnknownParams();
 		
-		$this->SetParameterType('wtitle',CLEAN_STRING);
-		$this->SetParameterType('wlang',CLEAN_STRING);
+		$this->SetParameterType('vtitle',CLEAN_STRING);
+		$this->SetParameterType('vtext',CLEAN_STRING);
+		$this->SetParameterType('vlang',CLEAN_STRING);
+
+		$this->SetParameterType('palias',CLEAN_STRING);
+		$this->SetParameterType('pprefix',CLEAN_STRING);
 		
 		//save
-		$this->SetParameterType('wtext',CLEAN_STRING);
 		$this->SetParameterType('save',CLEAN_STRING);
-		$this->SetParameterType('page_id',CLEAN_INT);
-		$this->SetParameterType('lang_id',CLEAN_INT);
+	//	$this->SetParameterType('page_id',CLEAN_INT);
+	//	$this->SetParameterType('lang_id',CLEAN_INT);
 		$this->SetParameterType('version_id',CLEAN_INT); // raw action
 		$this->SetParameterType('werrors',CLEAN_NONE);
-		$this->SetParameterType('create_page_title',CLEAN_STRING);
+	//	$this->SetParameterType('create_page_title',CLEAN_STRING);
 		
 	}
 
@@ -120,8 +123,8 @@ class Wiki extends Orm
 		
 		$returnid = cmsms()->GetContentOperations()->GetDefaultContent();
 		$prefix = '[wW]iki';
-		$lang = '(?P<wlang>[a-zA-Z0-9\-\_]*?)';
-		$title = '(?P<wtitle>[a-zA-Z0-9\-\_\:]+)';
+		$lang = '(?P<vlang>[a-zA-Z0-9\-\_]*?)';
+		$alias = '(?P<palias>[a-zA-Z0-9\-\_\:]+)';
 		$version = '(?P<version_id>[0-9]+)';
 
 		//With nothing
@@ -130,28 +133,28 @@ class Wiki extends Orm
 				
 		//With Lang
 		$route = $this->_generateRoute($prefix, $lang);
-		$this->_add_static($route, array('action'=>'default','returnid'=>$returnid, 'wtitle' => 'home'));
+		$this->_add_static($route, array('action'=>'default','returnid'=>$returnid, 'palias' => 'home'));
 		
-		//With Lang & title
-		$route = $this->_generateRoute($prefix, $lang, $title);
+		//With Lang & alias
+		$route = $this->_generateRoute($prefix, $lang, $alias);
 		$this->_add_static($route, array('action'=>'default','returnid'=>$returnid));
 		
-		$route = $this->_generateRoute($prefix, $lang, $title, 'view');
+		$route = $this->_generateRoute($prefix, $lang, $alias, 'view');
 		$this->_add_static($route, array('action'=>'default','returnid'=>$returnid));
 		
-		$route = $this->_generateRoute($prefix, $lang, $title, 'view', $version);
+		$route = $this->_generateRoute($prefix, $lang, $alias, 'view', $version);
 		$this->_add_static($route, array('action'=>'default','returnid'=>$returnid));
 		
-		$route = $this->_generateRoute($prefix, $lang, $title, 'edit');
+		$route = $this->_generateRoute($prefix, $lang, $alias, 'edit');
 		$this->_add_static($route, array('action'=>'edit','returnid'=>$returnid));
 		
-		$route = $this->_generateRoute($prefix, $lang, $title, 'delete');
+		$route = $this->_generateRoute($prefix, $lang, $alias, 'delete');
 		$this->_add_static($route, array('action'=>'delete','returnid'=>$returnid));
 		
 		$route = $this->_generateRoute($prefix, $lang, '([a-zA-Z0-9\-\_\:]+)', 'preview');
 		$this->_add_static($route, array('action'=>'preview','returnid'=>$returnid));
 		
-		$route = $this->_generateRoute($prefix, $lang, $title, 'raw', $version);
+		$route = $this->_generateRoute($prefix, $lang, $alias, 'raw', $version);
 		$this->_add_static($route, array('action'=>'raw','returnid'=>$returnid));
 		
 		
@@ -209,15 +212,19 @@ class Wiki extends Orm
 	}
 		
 	function _getDefaultLang(){
-		return 'en_US';
+		return $this->GetPreference('default_lang','en_US');
 	}
 	
-	function _getDefaultTitle(){
-		return 'home';
+	function _getDefaultAlias(){
+		return  $this->GetPreference('default_alias','home');
 	}
 	
 	function _getDefaultEngine(){
 		return Engines::$MARKDOWN;
+	}
+
+	function _getDefaultPrefix(){
+		return $this->SetPreference('prefix','wiki');
 	}
 } 
 ?>

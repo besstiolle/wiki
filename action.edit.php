@@ -1,7 +1,7 @@
 <?php
+if (!function_exists('cmsms')) exit;
 
 define('_JS_ACTION_',FALSE);
-$has_error = false;
 
 
 //Common initialization
@@ -13,48 +13,36 @@ if($has_error){return;}
  *
  * $errors & $messages
  * $smarty
- * $titleParam & $langParam
- * $lang
+ * $aliasParam & $langParam
+ * $page & $lang
  * $prefix from preferences prefix
- * $prefix_lang with preferences show_prefix_lang
+ * $code_iso with preferences show_code_iso
  * $engine
  * $all_langs_by_code && $all_langs_by_id
- * $isDefaultLang
+ * $isDefaultLang $isDefaultPage $isDefaultVersion
  *
  **/
 
 
 //Get Version
-$page = PagesService::getOneByTitle($titleParam);
 $version = null;
 $vals = null;
 
-if($page != null){
+$version = VersionsService::getOne($page->get('page_id'), $lang->get('lang_id'), 
+							null, Version::$STATUS_CURRENT);
+if($version == null){
 
-	$version = VersionsService::getOne($page->get('page_id'), $lang->get('lang_id'), 
-								null, Version::$STATUS_CURRENT);
-	if($version == null){
-
-		//Ok, we try to find a link to a page with another lang
-		$version = VersionsService::getOne($page->get('page_id'), null, 
-								null, Version::$STATUS_CURRENT);
-	}
-
-	if($version != null){
-		$vals = $version->getValues();
-	}
+	//Ok, we try to find a link to a page with another lang
+	$version = VersionsService::getOne($page->get('page_id'), null, 
+							null, Version::$STATUS_CURRENT);
 }
 
-
-//Avoid edit title of default page/default lang
-$isDefaultPage = false;
-if($page != null && $page->get('title') == $this->_getDefaultTitle()
-	&& $lang != null && $lang->get('code') == $this->_getDefaultLang()){
-	$isDefaultPage = true;
+/*if($version != null){
+	$vals = $version->getValues();
 }
-$smarty->assign('isDefaultPage', $isDefaultPage);
+*/
 
-if($page == null || $version == null){
+if($version == null){
 	//Menu
 	include_once('inc.menu.php');
 	//Creation

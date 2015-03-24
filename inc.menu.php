@@ -6,7 +6,7 @@ $allVersions = VersionsService::getAll(null, $lang->get('lang_id'),
 							null, Version::$STATUS_CURRENT);
 $menu = array();
 foreach($allVersions as $a_version){
-	$elts = explode(':', $a_version->get('page')->get('title'));
+	$elts = explode(':', $a_version->get('page')->get('alias'));
 	
 	$prettyUrl = RouteMaker::getViewRoute($id, $returnid, $langParam, $elts[0]);
 	
@@ -20,9 +20,9 @@ foreach($allVersions as $a_version){
 				);
 	}
 	
-	if(isset($menu[$a_version->get('page')->get('title')])){
-		$menu[$a_version->get('page')->get('title')]['class'] = '';
-		$menu[$a_version->get('page')->get('title')]['label'] = $a_version->get('title');
+	if(isset($menu[$a_version->get('page')->get('alias')])){
+		$menu[$a_version->get('page')->get('alias')]['class'] = '';
+		$menu[$a_version->get('page')->get('alias')]['label'] = $a_version->get('title');
 	}
 }
 

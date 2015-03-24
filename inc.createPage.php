@@ -1,22 +1,25 @@
 <?php
 
-$version = new Version();
-$version->set('lang', $lang->get('lang_id'));
+$vals = array();
+$vals['lang'] = $lang->get('lang_id');
 
-if(!empty($params['wtitle'])){
-	$version->set('title', html_entity_decode($params['wtitle']));
+if(!empty($params['vtitle'])){
+	$vals['title'] = html_entity_decode($params['vtitle']);
 } else {
-	$version->set('title', $titleParam);
+	$vals['title'] = $aliasParam.' ['.$lang->get('label').']';
 }
 
-if(!empty($params['wtext'])){
-	$version->set('text', html_entity_decode($params['wtext']));
+if(!empty($params['vtext'])){
+	$vals['text'] = html_entity_decode($params['vtext']);
 } else {
-	$version->set('text', "## Your title <h2> for the new page {$titleParam}\r\nWrite here some text");
+	$vals['text'] = "## Your subTitle for the new page {$aliasParam} [".$lang->get('label')."]\r\nWrite here some text";
 }
-$form = $this->CreateFrontendFormStart ($id, $returnid, 'save', 'post', '', true, '', array('create_page_title' => $titleParam));
+$form = $this->CreateFrontendFormStart ($id, $returnid, 'save', 'post', '', true, '', array(
+					'vlang' => $lang->get('code'),
+					'palias' => $page->get('alias')
+					));
 $cancel = RouteMaker::getRootRoute($id, $returnid, $langParam);
-$preview = RouteMaker::getPreviewRoute($id, $returnid, $langParam, $titleParam);
+$preview = RouteMaker::getPreviewRoute($id, $returnid, $langParam, $aliasParam);
 
 
 
@@ -25,15 +28,14 @@ $preview = RouteMaker::getPreviewRoute($id, $returnid, $langParam, $titleParam);
 
 
 
-$smarty->assign('version', $version->getValues());
+$smarty->assign('version', $vals);
 
-$smarty->assign('title', $titleParam);
+$smarty->assign('title', $vals['title']);
 $smarty->assign('action', 'Create');
 
 $smarty->assign('cancel', $cancel);
 $smarty->assign('preview', $preview);
 $smarty->assign('form', $form);
-
 
 $js = $this->ProcessTemplate('editPage.js.tpl');
 $smarty->assign('wiki_js', $js);

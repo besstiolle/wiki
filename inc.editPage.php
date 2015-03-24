@@ -6,23 +6,36 @@
 
 
 
-$form = $this->CreateFrontendFormStart ($id, $returnid, 'save', 'get', '', true, '', array());//,'',false,true,  ' data-abide');
-$cancel = RouteMaker::getViewRoute($id, $returnid, $langParam, $titleParam);
-$preview = RouteMaker::getPreviewRoute($id, $returnid, $langParam, $titleParam);
+
+
+
+
+
+
+
+
+$form = $this->CreateFrontendFormStart ($id, $returnid, 'save', 'get', '', true, '', array(
+					'vlang' => $lang->get('code'),
+					'palias' => $page->get('alias')
+							));
+$cancel = RouteMaker::getViewRoute($id, $returnid, $lang->get('code'), $page->get('alias'));
+$preview = RouteMaker::getPreviewRoute($id, $returnid, $lang->get('code'), $page->get('alias'));
+
+$vals = $version->getValues();
 
 //Case : get in edition after an error : keep the previous text.
-if(!empty($params['wtext'])){
-	$vals['text'] = html_entity_decode($params['wtext']);
+if(!empty($params['vtext'])){
+	$vals['text'] = html_entity_decode($params['vtext']);
 }
-if(!empty($params['wtitle'])){
-	$vals['title'] = html_entity_decode($params['wtitle']);
+if(!empty($params['vtitle'])){
+	$vals['title'] = html_entity_decode($params['vtitle']);
 }
 
 $page_values = $page->getValues();
 
 $smarty->assign('version', $vals);
 $smarty->assign('page', $page_values);
-$smarty->assign('title', $titleParam);
+$smarty->assign('title', $vals['title']);
 $smarty->assign('action', 'Edit');
 
 $smarty->assign('cancel', $cancel);

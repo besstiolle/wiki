@@ -1,11 +1,11 @@
 <?php
 
-$vals['text'] = Engines::process($id, $returnid, $vals['text'], $prefix, $prefix_lang, $version->get('engine'));
+$vals['text'] = Engines::process($id, $returnid, $vals['text'], $prefix, $code_iso, $version->get('engine'));
 
-$edit = RouteMaker::getEditRoute($id, $returnid, $prefix_lang, $titleParam);
-$delete = RouteMaker::getDeleteRoute($id, $returnid, $prefix_lang, $titleParam);
-$raw = RouteMaker::getRawRoute($id, $returnid, $prefix_lang, $titleParam, $vals['version_id']);
-$canonical = RouteMaker::getViewRoute($id, $returnid, $prefix_lang, $titleParam);
+$edit = RouteMaker::getEditRoute($id, $returnid, $code_iso, $aliasParam);
+$delete = RouteMaker::getDeleteRoute($id, $returnid, $code_iso, $aliasParam);
+$raw = RouteMaker::getRawRoute($id, $returnid, $code_iso, $aliasParam, $vals['version_id']);
+$canonical = RouteMaker::getViewRoute($id, $returnid, $code_iso, $aliasParam);
 $goLast = '';
 if($vals['status'] != 1){
 	$goLast = $canonical;
@@ -17,15 +17,14 @@ $isUpToDate = true;
 $defaultLangCanonical = '';
 if($version != null && !$isDefaultLang){
 	$example = new OrmExample();
-	$example->addCriteria('title', OrmTypeCriteria::$EQ, array($titleParam));
-	$example->addCriteria('lang', OrmTypeCriteria::$EQ, array($all_langs_by_code[$this->_getDefaultLang()]['lang_id'] ));
-	$example->addCriteria('version_id', OrmTypeCriteria::$GTE, array($version->get('version_id')));
-	$defaultLangVersions = OrmCore::findByExample(new Version(),$example, null, new OrmLimit(0,10));
-	$isUpToDate = (count($defaultLangVersions) === 0);
-	$defaultLangCanonical = RouteMaker::getViewRoute($id, $returnid, $this->_getDefaultLang(), $titleParam);
+	$example->addCriteria('page', OrmTypeCriteria::$EQ, array($page->get('page_id')));
+	$example->addCriteria('lang', OrmTypeCriteria::$NEQ, array($lang->get('lang_id')));
+	$example->addCriteria('version_id', OrmTypeCriteria::$GT, array($version->get('version_id')));
+	$cptNewerVersion = OrmCore::selectCountByExample(new Version(),$example);
+	$isUpToDate = ($cptNewerVersion == 0);
+	$defaultLangCanonical = RouteMaker::getViewRoute($id, $returnid, $this->_getDefaultLang(), $aliasParam);
 }
 
-$smarty->assign('isDefaultLang', $isDefaultLang);
 $smarty->assign('isUpToDate', $isUpToDate);
 
 

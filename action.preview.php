@@ -1,7 +1,7 @@
 <?php
+if (!function_exists('cmsms')) exit;
 
 define('_JS_ACTION_',TRUE);
-$has_error = false;
 
 //Common initialization
 include_once('inc.initialization.php');
@@ -12,24 +12,23 @@ if($has_error){return;}
  *
  * $errors & $messages
  * $smarty
- * $titleParam & $langParam
- * $lang
+ * $aliasParam & $langParam
+ * $page & $lang
  * $prefix from preferences prefix
- * $prefix_lang with preferences show_prefix_lang
+ * $code_iso with preferences show_code_iso
  * $engine
  * $all_langs_by_code && $all_langs_by_id
- * $isDefaultLang
+ * $isDefaultLang $isDefaultPage $isDefaultVersion
  *
  **/
 
-if(!empty($params['wtext'])){
-	$textParam = $this->js_urldecode($params['wtext']);
-}
-if($titleParam == null){
-	$errors[] = 'title_mandatory';
-}
-if($textParam == null){
+if(!empty($params['vtext'])){
+	$textParam = $this->js_urldecode($params['vtext']);
+} else {
 	$errors[] = 'text_mandatory';
+}
+if(empty($params['vtitle'])){
+	$errors[] = 'title_mandatory';
 }
 
 if(!empty($errors)) {
@@ -38,11 +37,11 @@ if(!empty($errors)) {
 	return;
 }
 
-$vals['title'] = $titleParam;
-$vals['text'] = Engines::process($id, $returnid, $textParam, $prefix, $prefix_lang, $engine);
+$vals['title'] = $params['vtitle'];
+$vals['text'] = Engines::process($id, $returnid, $textParam, $prefix, $code_iso, $engine);
 
 $smarty->assign('version', $vals);
-$smarty->assign('title', $titleParam);
+$smarty->assign('title', $params['vtitle']);
 $smarty->assign('action', 'Preview');
 
 echo $this->ProcessTemplate('previewPage.tpl');
