@@ -31,27 +31,27 @@ if($has_error){return;}
 if(!empty($params['version_id'])){
 	$version_id = $params['version_id'];
 }
-//Get Version
-$example = new OrmExample();
-$example->addCriteria('title', OrmTypeCriteria::$EQ, array($titleParam));
-$example->addCriteria('lang', OrmTypeCriteria::$EQ, array($lang->get('lang_id')));
 
-if($version_id != null){ // Case wiki/en_US/home/view/2
-	$example->addCriteria('version_id', OrmTypeCriteria::$EQ, array($version_id));
-} else {
-	$example->addCriteria('status', OrmTypeCriteria::$EQ, array(Version::$STATUS_CURRENT));
-}
+$page = PagesService::getOneByTitle($titleParam);
+$vals = null;
 
-$versions = OrmCore::findByExample(new Version(),$example, null, new OrmLimit(0,1));
+if($page !== null){
 
-if(count($versions) == 0){
-	$version = null;
-	$vals = null;
-	$page = null;
-} else {
-	$version = $versions[0];
-	$vals = $version->getValues();
-	$page = $version->get('page');
+	$statusToCheck = null;
+	if($version_id == null){ // Case wiki/en_US/home/view/2
+		$statusToCheck = Version::$STATUS_CURRENT;
+	}
+
+	$version = VersionsService::getOne(
+			$page->get('page_id'), 
+			$lang->get('lang_id'),
+			$version_id,
+			$statusToCheck);
+
+
+	if($version !== null){
+		$vals = $version->getValues();
+	}
 }
 
 //Avoid delete default page/default lang

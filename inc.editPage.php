@@ -14,6 +14,9 @@ $preview = RouteMaker::getPreviewRoute($id, $returnid, $langParam, $titleParam);
 if(!empty($params['wtext'])){
 	$vals['text'] = html_entity_decode($params['wtext']);
 }
+if(!empty($params['wtitle'])){
+	$vals['title'] = html_entity_decode($params['wtitle']);
+}
 
 $page_values = $page->getValues();
 
@@ -25,6 +28,9 @@ $smarty->assign('action', 'Edit');
 $smarty->assign('cancel', $cancel);
 $smarty->assign('preview', $preview);
 $smarty->assign('form', $form);
+
+$js = $this->ProcessTemplate('editPage.js.tpl');
+$smarty->assign('wiki_js', $js);
 
 echo $this->ProcessTemplate('editPage.tpl');
 

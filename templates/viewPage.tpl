@@ -1,10 +1,11 @@
+
 {if !empty($breadcrumbs)}<ul class="breadcrumbs">
 {foreach $breadcrumbs as $bread}
 	 <li {if $bread@last}class='current'{/if}><a href="{$bread.url}" {if !empty($bread.class)}class='{$bread.class}'{/if} {if !empty($bread.title)}title='{$bread.title}'{/if}>{$bread.name}</a></li>
 {/foreach}</ul>
 {/if}
 
-<div class="off-canvas-wrap">
+<div class="off-canvas-wrap" data-offcanvas>
 <div class="inner-wrap">
 
 <nav class="tab-bar">
@@ -50,9 +51,11 @@
 		{foreach $wiki_menu as $elt}
 			<li><a href="{$elt.viewUrl}" {if !empty($elt.class)}class='{$elt.class}'{/if}>{$elt.label|capitalize}</a></li>
 		{/foreach}
+		{*
 		<li><label>Options</label></li>
 		<li><a href="#">Some options</a></li>
 		<li><a href="#">Other options</a></li>
+		*}
 	</ul>
 </aside>
 <aside class="right-off-canvas-menu">
@@ -85,87 +88,6 @@
 		{/foreach}
 	</dl>
 	{/if}
-	{literal}
-	<script type="text/javascript">
-	//<![CDATA[
-
-	  var timeoutID;
-	  var label;
-	  var cnt = 4;
-	  var fieldPre = '.deletePre';
-	  var fieldPost = '.deletePost';
-	  
-	  $(document).ready(function () {
-		  $("input.raw").click(function () { 
-				query = "";
-				url = '{/literal}{$raw|unescape:"htmlall"}{literal}&showtemplate=false';
-			
-				$.post( url, query).done(function( data ) {
-					$("#raw_result").html(data);
-									
-					$.fancybox.open( {href : '#raw_result', title : 'Raw Code', autoSize : false});
-				});
-			});
-			
-			$('.edit').click(function () { 
-				location.href = "{/literal}{$edit|replace:'&amp;':'&'}{literal}";
-			});
-
-			$('.goLast').click(function () { 
-				location.href = "{/literal}{$goLast|replace:'&amp;':'&'}{literal}";
-			});
-			
-			$('.goLastDefaultLang').click(function () { 
-				location.href = "{/literal}{$defaultLangCanonical|replace:'&amp;':'&'}{literal}";
-			});
-			
-
-			$(fieldPost).click(function () { 
-				location.href = "{/literal}{$delete|replace:'&amp;':'&'}{literal}";
-			});
-			
-			
-			$(fieldPost).hide();	
-			//All but fieldPre
-			$(document).bind('click', function (e) {
-				window.clearTimeout(timeoutID);
-				$(fieldPre).show();
-				$(fieldPost).hide();
-				$(fieldPost).attr('disabled','disabled');
-				if(label==null){
-					label = $(fieldPost).val();
-				}
-				$(fieldPost).val(label);
-				cnt=4;
-			});
-
-			$(fieldPre).bind('click', function(e) {
-				e.stopPropagation();
-				$(fieldPre).hide();
-				$(fieldPost).show().attr('disabled','disabled');
-				count(fieldPost);
-				
-			});
-		});
-		
-		function count(fieldId) {
-		  if(label==null){
-			label = $(fieldId).val();
-		  }
-		  if(cnt <= 0){
-			  $(fieldId).val(label);
-			  $(fieldId).removeAttr('disabled');
-		  } else {
-			  $(fieldId).val(label + " " + (cnt) + "s");
-			  cnt--;
-			  timeoutID = window.setTimeout(function() {count(fieldId);}, 1000);
-		  }
-		}
-
-		
-	// ]]>
-	</script>
-	{/literal}
 
 	{if !empty($errors)}
 	{foreach $errors as $error}{if !empty($error)}

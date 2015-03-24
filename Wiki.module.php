@@ -24,7 +24,7 @@ class Wiki extends Orm
 	}
 
 	function GetDependencies() {
-		return array('Orm'=>'0.3.0');
+		return array('Orm'=>'0.3.2');
 	}
 
 	function GetHelp() {
@@ -81,6 +81,7 @@ class Wiki extends Orm
 		$this->SetParameterType('lang_id',CLEAN_INT);
 		$this->SetParameterType('version_id',CLEAN_INT); // raw action
 		$this->SetParameterType('werrors',CLEAN_NONE);
+		$this->SetParameterType('create_page_title',CLEAN_STRING);
 		
 	}
 
@@ -128,14 +129,18 @@ class Wiki extends Orm
 		$this->_add_static($route, array('action'=>'default','returnid'=>$returnid));
 				
 		//With Lang
+		$route = $this->_generateRoute($prefix, $lang);
+		$this->_add_static($route, array('action'=>'default','returnid'=>$returnid, 'wtitle' => 'home'));
+		
+		//With Lang & title
 		$route = $this->_generateRoute($prefix, $lang, $title);
 		$this->_add_static($route, array('action'=>'default','returnid'=>$returnid));
 		
 		$route = $this->_generateRoute($prefix, $lang, $title, 'view');
-		$this->_add_static($route, array('action'=>'view','returnid'=>$returnid));
+		$this->_add_static($route, array('action'=>'default','returnid'=>$returnid));
 		
 		$route = $this->_generateRoute($prefix, $lang, $title, 'view', $version);
-		$this->_add_static($route, array('action'=>'view','returnid'=>$returnid));
+		$this->_add_static($route, array('action'=>'default','returnid'=>$returnid));
 		
 		$route = $this->_generateRoute($prefix, $lang, $title, 'edit');
 		$this->_add_static($route, array('action'=>'edit','returnid'=>$returnid));
@@ -153,7 +158,12 @@ class Wiki extends Orm
    }
 
     private function _generateRoute(){
-   		return '/'.implode('\/', func_get_args()).'$/';
+    	$config = cmsms()->GetConfig();
+    	$ext = $config["page_extension"]; 
+    	if($ext !== ''){
+    		$ext = str_replace('.', '\.', $ext);
+    	}
+   		return '/'.implode('\/', func_get_args()).$ext.'$/';
     }
 
     private function _add_static($route, $params){

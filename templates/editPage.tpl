@@ -4,7 +4,7 @@
 {/foreach}</ul>
 {/if}
 
-<div class="off-canvas-wrap">
+<div class="off-canvas-wrap" data-offcanvas>
 <div class="inner-wrap">
 
 <nav class="tab-bar">
@@ -32,9 +32,11 @@
 			<li><a href="{$elt.viewUrl}" {if !empty($elt.class)}class='{$elt.class}'{/if}>{$elt.label|capitalize}</a></li>
 		{/foreach}
 		
+		{*
 		<li><label>Options</label></li>
 		<li><a href="#">Some options</a></li>
 		<li><a href="#">Other options</a></li>
+		*}
 	</ul>
 </aside>
 
@@ -42,98 +44,19 @@
 <section class="main-section">
 
 <div class='panel no-margin'>
-	{literal}
-	<script type="text/javascript">
-	//<![CDATA[
-
-	  var timeoutID;
-	  var label;
-	  var cnt = 1;
-	  var fieldPre = '.cancelPre';
-	  var fieldPost = '.cancelPost';
-	  
-	  $(document).ready(function () {
-		  $("input.preview").click(function () { 
-				query = "{/literal}{$actionid}{literal}wtitle=" + escape($("#{/literal}{$actionid}{literal}wtitle").val()) + "&" 
-					+ "{/literal}{$actionid}{literal}wtext=" + escape($("#{/literal}{$actionid}{literal}wtext").val()) + "&" 
-					+ "{/literal}{$actionid}{literal}lang_id=" + $("#{/literal}{$actionid}{literal}lang_id").val();
-				
-				url = '{/literal}{$preview|unescape:"htmlall"}{literal}&showtemplate=false';
-			
-				$.post( url, query).done(function( data ) {
-					$("#preview_result").html(data);
-					
-					$("a.wikilinks").attr("target","_blank");
-					
-					$.fancybox.open( {href : '#preview_result', title : 'Preview', autoSize : false});
-				});
-			});
-			
-			$(fieldPost).click(function () { 
-				location.href = "{/literal}{$cancel|replace:'&amp;':'&'}{literal}";
-			});
-			
-			$(fieldPost).hide();	
-			//All but fieldPre
-			$(document).bind('click', function (e) {
-				window.clearTimeout(timeoutID);
-				$(fieldPre).show();
-				$(fieldPost).hide();
-				$(fieldPost).attr('disabled','disabled');
-				if(label==null){
-					label = $(fieldPost).val();
-				}
-				$(fieldPost).val(label);
-				cnt=1;
-			});
-
-			$(fieldPre).bind('click', function(e) {
-				e.stopPropagation();
-				$(fieldPre).hide();
-				$(fieldPost).show().attr('disabled','disabled');
-				count(fieldPost);
-				
-			});
-		});
-		
-		$("input.save").click(function () { 
-			$( "#{/literal}{$actionid}{literal}moduleform_1" ).submit();
-		});
-		
-		function count(fieldId) {
-		  if(label==null){
-			label = $(fieldId).val();
-		  }
-		  if(cnt <= 0){
-			  $(fieldId).val(label);
-			  $(fieldId).removeAttr('disabled');
-		  } else {
-			  $(fieldId).val(label + " " + (cnt) + "s");
-			  cnt--;
-			  timeoutID = window.setTimeout(function() {count(fieldId);}, 1000);
-		  }
-		}
-
-	// ]]>
-	</script>
-	{/literal}
 
 	<div class='fancybox' id='preview_result'></div>
 
 	{$form}
-		{if !empty($version.page)}<input type='hidden' name='{$actionid}page_id' id='{$actionid}page_id' value='{$page.page_id}'/>{/if}
+		{if !empty($page)}<input type='hidden' name='{$actionid}page_id' id='{$actionid}page_id' value='{$page.page_id}'/>{/if}
 		{if !empty($lang.code)}<input type='hidden' name='{$actionid}wlang' id='{$actionid}wlang' value='{$lang.code}'/>{/if}
 
 		<div class="name-field">
 			<label>Title : </label>
-			<input type='text' value='{$version.title}' disabled="disabled" title="You can't edit the title" />
-			<input type='hidden' value='{$version.title}' name='{$actionid}wtitle' id='{$actionid}wtitle' />
-			{if $isDefaultPage}<input type='hidden' value='{$version.title}' name='{$actionid}wtitle' id='{$actionid}wtitle' />{/if}
-			<small class="error">Title is required.</small>
+			<input type='text' value='{$version.title}' name='{$actionid}wtitle' id='{$actionid}wtitle' />
 		</div>
 		<div class="name-field">
 			<textarea name='{$actionid}wtext' id='{$actionid}wtext' rows='10' cols='20' class='wikiarea' required>{$version.text}</textarea>
-			<small class="error">Text is required.</small>
 		</div>
 		
 	</form>

@@ -23,6 +23,9 @@ class Page extends OrmEntity {
 		));
 			
 		$this->garnishAutoincrement();
+
+		//$this->addIndexes(array('prefix', 'title'));
+		
 		
 		$this->garnishDefaultOrderBy(new OrmOrderBy(array('title'=>OrmOrderBy::$ASC)));
 	}	

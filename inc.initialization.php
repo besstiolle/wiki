@@ -5,6 +5,7 @@ if(!isset($titleParam)){$titleParam = null;}
 if(!isset($langParam)){$langParam = null;}
 if(!isset($version_id)){$version_id = null;}
 
+
 //Array for errors and messages
 $errors = array();
 $messages[] = array();
@@ -36,15 +37,7 @@ foreach($langs as $lang){
 //Get lang db entity, panic only if there is no lang.
 
 /************* LANG ****************/
-$example = new OrmExample();
-$example->addCriteria('code', OrmTypeCriteria::$EQ, array($langParam));
-$langs = OrmCore::findByExample(new Lang(),$example);
-if(count($langs) == 0){
-	$lang = null;
-} else {
-	$lang = $langs[0];
-}
-
+$lang = LangsService::findOne($langParam);
 
 if($lang == null){
 	$errors[] = 'lang_mandatory';

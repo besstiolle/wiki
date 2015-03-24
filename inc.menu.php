@@ -2,13 +2,11 @@
 
 
 //Get All active Versions
-$example = new OrmExample();
-$example->addCriteria('status', OrmTypeCriteria::$EQ, array(Version::$STATUS_CURRENT));
-$example->addCriteria('lang', OrmTypeCriteria::$EQ, array($lang->get('lang_id')));
-$allPages = OrmCore::findByExample(new Version(),$example);
+$allVersions = VersionsService::getAll(null, $lang->get('lang_id'), 
+							null, Version::$STATUS_CURRENT);
 $menu = array();
-foreach($allPages as $a_page){
-	$elts = explode(':', $a_page->get('title'));
+foreach($allVersions as $a_version){
+	$elts = explode(':', $a_version->get('page')->get('title'));
 	
 	$prettyUrl = RouteMaker::getViewRoute($id, $returnid, $langParam, $elts[0]);
 	
@@ -22,8 +20,9 @@ foreach($allPages as $a_page){
 				);
 	}
 	
-	if(isset($menu[$a_page->get('title')])){
-		$menu[$a_page->get('title')]['class'] = '';
+	if(isset($menu[$a_version->get('page')->get('title')])){
+		$menu[$a_version->get('page')->get('title')]['class'] = '';
+		$menu[$a_version->get('page')->get('title')]['label'] = $a_version->get('title');
 	}
 }
 

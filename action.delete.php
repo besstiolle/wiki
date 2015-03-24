@@ -26,20 +26,31 @@ if($has_error){return;}
 //Get Version
 $example = new OrmExample();
 $example->addCriteria('title', OrmTypeCriteria::$EQ, array($titleParam));
-$example->addCriteria('lang', OrmTypeCriteria::$EQ, array($lang->get('lang_id')));
-$example->addCriteria('status', OrmTypeCriteria::$EQ, array(Version::$STATUS_CURRENT));
-
-
-$versions = OrmCore::findByExample(new Version(),$example, null, new OrmLimit(0,1));
-if(count($versions) == 0){
+$pages = OrmCore::findByExample(new Page(),$example);
+if(count($pages) == 0){
 	$version = null;
 	$vals = null;
 	$page = null;
 } else {
-	$version = $versions[0];
-	$vals = $version->getValues();
-	$page = $version->get('page');
+	$page = $pages[0];
+	$example = new OrmExample();
+	$example->addCriteria('page', OrmTypeCriteria::$EQ, array($page->get('page_id')));
+	$example->addCriteria('lang', OrmTypeCriteria::$EQ, array($lang->get('lang_id')));
+	$example->addCriteria('status', OrmTypeCriteria::$EQ, array(Version::$STATUS_CURRENT));
+
+
+	$versions = OrmCore::findByExample(new Version(),$example);
+	if(count($versions) == 0){
+		$version = null;
+		$vals = null;
+		$page = null;
+	} else {
+		$version = $versions[0];
+		$vals = $version->getValues();
+		$page = $version->get('page');
+	}
 }
+
 	
  
 if($version == null){ //Go back to home
@@ -61,7 +72,7 @@ if($page->get('title') == $this->_getDefaultTitle() && $lang->get('code') == $th
 }
 
 //Update to "old version"
-$query = "UPDATE {$version->getDbname()} SET status={$version::$STATUS_OLD} WHERE status={$version::$STATUS_CURRENT} AND lang_id={$lang->get('lang_id')} AND page_id={$page->get('page_id')}";
+$query = "UPDATE {$version->getDbname()} SET status={$version::$STATUS_OLD} WHERE status={$version::$STATUS_CURRENT} AND lang={$lang->get('lang_id')} AND page={$version->get('page')->get('page_id')}";
 OrmDb::execute($query);
 
 

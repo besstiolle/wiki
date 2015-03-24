@@ -1,36 +1,38 @@
 <?php
 
 //Get active Versions of each langs
-$example = new OrmExample();
-$example->addCriteria('status', OrmTypeCriteria::$EQ, array(Version::$STATUS_CURRENT));
-$example->addCriteria('lang', OrmTypeCriteria::$EQ, array($lang->get('lang_id')));
-$example->addCriteria('title', OrmTypeCriteria::$LIKE, array($version->get('title').':%'));
-$childrens = OrmCore::findByExample(new Version(),$example);
-
+$childrensPages = PagesService::getByTitleLike($page->get('title').':%');
+$childrens = array();
 $sub_entries = array();
 
-//initiate all langs
-foreach($childrens as $child){
+foreach ($childrensPages as $childrensPage) {
 
-	$pos = strpos ( $child->get('title'), ':' , strlen($version->get('title').':%'));
-	$label = '';
-	if($pos === FALSE){  //Last Child
-		$label = substr($child->get('title'), strlen($version->get('title')) + 1);
-	} else {
-		$label = substr($child->get('title'), strlen($version->get('title')) + 1 , $pos - strlen($child->get('title')));
+	$subTitle = substr($childrensPage->get('title'), strlen($page->get('title') ) + 1);
+
+	if(substr_count($subTitle, ':')){
+		continue;
 	}
-	
-	$prettyUrl = RouteMaker::getViewRoute($id, $returnid, $langParam, $version->get('title').':'.$label);
 
-	$sub_entries[$label] = array(
-				'label' => $version->get('title').':'.$label,
-				'viewUrl' => $prettyUrl,
-				'class' => 'new'
-				);
-	
-	
-	if($pos === FALSE){
-		$sub_entries[$label]['class'] = '';
+	$child = VersionsService::getOne($childrensPage->get('page_id'), $lang->get('lang_id'), 
+							null, Version::$STATUS_CURRENT);
+
+	if($child != null){
+		$pos = strpos ( $child->get('title'), ':' , strlen($page->get('title').':%'));
+		
+		$prettyUrl = RouteMaker::getViewRoute($id, $returnid, $langParam, $child->get('page')->get('title'));
+
+		$class = '';
+		if($pos === TRUE){
+			$class = 'new';
+		}
+
+		$label = $child->get('title');
+
+		$sub_entries[$label] = array(
+					'label' => $label,
+					'viewUrl' => $prettyUrl,
+					'class' => $class
+					);
 	}
 }
 
