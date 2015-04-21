@@ -1,4 +1,3 @@
-
 {if !empty($breadcrumbs)}<ul class="breadcrumbs">
 {foreach $breadcrumbs as $bread}
 	 <li {if $bread@last}class='current'{/if}><a href="{$bread.url}" {if !empty($bread.class)}class='{$bread.class}'{/if} {if !empty($bread.title)}title='{$bread.title}'{/if}>{$bread.name}</a></li>
@@ -81,14 +80,6 @@
 		{foreachelse}
 			{*<li>There is no siblings entry in this wiki</li>*}
 		{/foreach}
-<<<<<<< 4b92f3e5512b80b22b72f1ccd054456cfc6addcc
-		{*
-		<li><label>Options</label></li>
-		<li><a href="#">Some options</a></li>
-		<li><a href="#">Other options</a></li>
-		*}
-=======
->>>>>>> 4b4a4edfddda6e68495bfc89ce95a31e5ac0de0e
 	</ul>
 </aside>
 <aside class="right-off-canvas-menu">

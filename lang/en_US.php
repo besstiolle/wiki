@@ -3,15 +3,9 @@ $lang['friendlyname'] = 'Simple Wiki';
 $lang['postinstall'] = '';
 $lang['postuninstall'] = 'Module Wiki uninstalled, bye !"';
 $lang['really_uninstall'] = 'Really? Are you sure you want to uninstall this fine module?';
-<<<<<<< 4b92f3e5512b80b22b72f1ccd054456cfc6addcc
-$lang['uninstalled'] = 'Module Uninstalled.';
-$lang['installed'] = 'Module version %s installed.';
-$lang['reseted '] = 'Module version %s reseted with success ';
-=======
 $lang['uninstalled'] = 'Module Wiki Uninstalled.';
 $lang['installed'] = 'Module Wiki version %s installed.';
 $lang['reseted'] = 'Module Wiki version %s reseted with success ';
->>>>>>> 4b4a4edfddda6e68495bfc89ce95a31e5ac0de0e
 $lang['moddescription'] = 'This module is a simple implementation of a WIKI into CmsMadeSimple';
 $lang['changelog'] = 'see changelog : <a href="https://github.com/besstiolle/wiki-ms" target="_blank">https://github.com/besstiolle/wiki-ms</a>';
 
@@ -109,9 +103,6 @@ $lang['help'] = '<h3>What Does This Do?</h3>
 </h4>
 ';
 $lang['xxx'] = 'xxx';
-<<<<<<< 4b92f3e5512b80b22b72f1ccd054456cfc6addcc
-=======
 
->>>>>>> 4b4a4edfddda6e68495bfc89ce95a31e5ac0de0e
 
 ?>

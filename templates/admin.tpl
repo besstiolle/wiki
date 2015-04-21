@@ -1,8 +1,3 @@
-<<<<<<< 4b92f3e5512b80b22b72f1ccd054456cfc6addcc
-{$form_save}
-
-	<div>
-=======
 <style>
 
 .box{
@@ -71,22 +66,11 @@
 	<div class='choice'>
 		<h2>Prefix of the wiki</h2>
 		<p>You can personalize the prefix of your WIKI.</p>
->>>>>>> 4b4a4edfddda6e68495bfc89ce95a31e5ac0de0e
 		<label for='{$actionid}prefix'>
 			Prefix for URLs : 
 			<input type='text' name='{$actionid}prefix' value='{$prefix}' />
 		</label>
 	</div>
-<<<<<<< 4b92f3e5512b80b22b72f1ccd054456cfc6addcc
-	<div>
-		<label for='{$actionid}show_code_iso'>
-			Show langs in URL : 
-			<input type='radio' name='{$actionid}show_code_iso' value='1' checked='1'>
-			 YES : NO
-			<input type='radio' name='{$actionid}show_code_iso' value='0' checked='0'>
-		</label>
-	</div>
-=======
 </div>
 <div class='box'>
 	<div class='choice'>
@@ -119,16 +103,12 @@
 	</div>
 </div>
 
->>>>>>> 4b4a4edfddda6e68495bfc89ce95a31e5ac0de0e
 	<div>
 		<input type='submit' value='save' />
 	</div>
 </form>
 
-<<<<<<< 4b92f3e5512b80b22b72f1ccd054456cfc6addcc
-=======
 {tab_start name='tab2'}
->>>>>>> 4b4a4edfddda6e68495bfc89ce95a31e5ac0de0e
 <table class="pagetable">
 	<thead>
 		<tr>
@@ -136,11 +116,7 @@
 			<th>Label</th>
 			<th>Actives Pages</th>
 			<th>&nbsp;</th>
-<<<<<<< 4b92f3e5512b80b22b72f1ccd054456cfc6addcc
-			<th>&nbsp;</th>
-=======
 			<th><a href='{$addLang}'>[+] Add new Lang</a></th>
->>>>>>> 4b4a4edfddda6e68495bfc89ce95a31e5ac0de0e
 		</tr>
 	</thead>
 	<tbody>
@@ -172,11 +148,6 @@
 	</tbody>
 </table>
 
-<<<<<<< 4b92f3e5512b80b22b72f1ccd054456cfc6addcc
-<div><p>Clic <span onclick='$("#resetme").show();' style='color:#F00;cursor: no-drop;'>here</span> if you really <b>really</b> want to reset the wiki</p>
-	<p id='resetme' style='display:none;'><a href='{$reset}' >Reset the entire Wiki (trust me, you certainly don't want to clic on this link...)</a></p>
-</div>
-=======
 {tab_start name='tab3'}
 
 {form_start action="admin_template_save"}
@@ -197,4 +168,3 @@
 </div>
 {/if}
 {tab_end}
->>>>>>> 4b4a4edfddda6e68495bfc89ce95a31e5ac0de0e

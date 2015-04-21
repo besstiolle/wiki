@@ -13,19 +13,11 @@
 	  
 	  $(document).ready(function () {
 		  $("input.preview").click(function () { 
-<<<<<<< 4b92f3e5512b80b22b72f1ccd054456cfc6addcc
-				query = "{$actionid}vtitle=" + escape($("#{$actionid}vtitle").val()) + "&" 
-					+ "{$actionid}vtext=" + escape($("#{$actionid}vtext").val()) + "&" 
-					+ "{$actionid}palias=" + escape($("#{$actionid}palias").val()) + "&" 
-					+ "{$actionid}vlang=" + $("#{$actionid}vlang").val();
-		
-=======
 				query = "{$wiki_action_id}vtitle=" + encodeURI($("#{$wiki_action_id}vtitle").val()) + "&" 
 					+ "{$wiki_action_id}vtext=" + encodeURI($("#{$wiki_action_id}vtext").val());
 
 				/*	console.debug(url);
 					console.debug(query); */
->>>>>>> 4b4a4edfddda6e68495bfc89ce95a31e5ac0de0e
 				$.post( url, query).done(function( data ) {
 					$("#preview_result").html(data);
 					
@@ -65,11 +57,7 @@
 		});
 		
 		$("input.save").click(function () { 
-<<<<<<< 4b92f3e5512b80b22b72f1ccd054456cfc6addcc
-			$( "#{$actionid}moduleform_1" ).submit();
-=======
 			$( "#{$wiki_action_id}moduleform_1" ).submit();
->>>>>>> 4b4a4edfddda6e68495bfc89ce95a31e5ac0de0e
 		});
 		
 		function count(fieldId) {

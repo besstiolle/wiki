@@ -34,19 +34,11 @@
 			<li><a href="{$elt.viewUrl}" {if !empty($elt.class)}class='{$elt.class}'{/if}>{$elt.label|capitalize}</a></li>
 		{/foreach}
 		
-<<<<<<< 4b92f3e5512b80b22b72f1ccd054456cfc6addcc
-		{*
-		<li><label>Options</label></li>
-		<li><a href="#">Some options</a></li>
-		<li><a href="#">Other options</a></li>
-		*}
-=======
 		
 		<li><label>Options</label></li>
 		<li><a href="#">Some options</a></li>
 		<li><a href="#">Other options</a></li>
 		
->>>>>>> 4b4a4edfddda6e68495bfc89ce95a31e5ac0de0e
 	</ul>
 </aside>*}
 
@@ -58,17 +50,6 @@
 	<div class='fancybox' id='preview_result'></div>
 
 	{$form}
-<<<<<<< 4b92f3e5512b80b22b72f1ccd054456cfc6addcc
-		{*{if !empty($page)}<input type='hidden' name='{$actionid}page_id' id='{$actionid}page_id' value='{$page.page_id}'/>{/if}
-		{if !empty($lang.code)}<input type='hidden' name='{$actionid}vlang' id='{$actionid}vlang' value='{$lang.code}'/>{/if}*}
-
-		<div class="name-field">
-			<label>Title : </label>
-			<input type='text' value='{$version.title}' name='{$actionid}vtitle' id='{$actionid}vtitle' />
-		</div>
-		<div class="name-field">
-			<textarea name='{$actionid}vtext' id='{$actionid}vtext' rows='10' cols='20' class='wikiarea' required>{$version.text}</textarea>
-=======
 	
 		<div class="name-field">
 			<label>Title : </label>
@@ -76,7 +57,6 @@
 		</div>
 		<div class="name-field">
 			<textarea name='{$wiki_action_id}vtext' id='{$wiki_action_id}vtext' rows='10' cols='20' class='wikiarea' required>{$version.text}</textarea>
->>>>>>> 4b4a4edfddda6e68495bfc89ce95a31e5ac0de0e
 		</div>
 		
 	</form>

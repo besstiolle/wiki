@@ -14,15 +14,6 @@ if (!function_exists('cmsms')) exit;
 
 
 
-<<<<<<< 4b92f3e5512b80b22b72f1ccd054456cfc6addcc
-
-$form = $this->CreateFrontendFormStart ($id, $returnid, 'save', 'get', '', true, '', array(
-					'vlang' => $lang->get('code'),
-					'palias' => $page->get('alias')
-							));
-$cancel = RouteMaker::getViewRoute($id, $returnid, $lang->get('code'), $page->get('alias'));
-$preview = RouteMaker::getPreviewRoute($id, $returnid, $lang->get('code'), $page->get('alias'));
-=======
 $form = $this->CreateFrontendFormStart ($id, $returnid, 'save', 'get', '', true, '', array(
 					'vlang' => $lang->get('code'),
 					'palias' => $page->get('alias'),
@@ -30,7 +21,6 @@ $form = $this->CreateFrontendFormStart ($id, $returnid, 'save', 'get', '', true,
 							));
 $cancel = RouteMaker::getViewRoute($lang->get('code'), $page->get('alias'));
 $preview = RouteMaker::getPreviewRoute($lang->get('code'), $page->get('alias'));
->>>>>>> 4b4a4edfddda6e68495bfc89ce95a31e5ac0de0e
 
 $vals = $version->getValues();
 

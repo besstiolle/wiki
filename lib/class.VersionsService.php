@@ -2,27 +2,15 @@
 
 class VersionsService{
 
-<<<<<<< 4b92f3e5512b80b22b72f1ccd054456cfc6addcc
-	public static function getOne($page_id = null, $lang_id = null, 
-							$version_id = null, $status = null){
-
-		$versions = VersionsService::getAll($page_id, $lang_id, 
-							$version_id, $status);
-=======
 	public static function getOne($page_id, $lang_id = null, $status = null){
 
 		$versions = VersionsService::getAll($page_id, $lang_id, $status);
->>>>>>> 4b4a4edfddda6e68495bfc89ce95a31e5ac0de0e
 
 		if(!empty($versions)){
 			return $versions[0];
 		}
 		return null;
 	}
-<<<<<<< 4b92f3e5512b80b22b72f1ccd054456cfc6addcc
-	public static function getAll($page_id = null, $lang_id = null, 
-							$version_id = null, $status = null, $ormLimit = null){
-=======
 	
 	public static function getAll($page_id, $lang_id = null, $status = null, $ormLimit = null){
 
@@ -66,7 +54,6 @@ class VersionsService{
 	}
 
 	public static function getOneByVersionId($page_id, $lang_id = null, $version_id = null){
->>>>>>> 4b4a4edfddda6e68495bfc89ce95a31e5ac0de0e
 
 		$example = new OrmExample();
 
@@ -82,13 +69,6 @@ class VersionsService{
 			$example->addCriteria('version_id', OrmTypeCriteria::$EQ, array($version_id));
 		} 
 
-<<<<<<< 4b92f3e5512b80b22b72f1ccd054456cfc6addcc
-		if($status != null){
-			$example->addCriteria('status', OrmTypeCriteria::$EQ, array($status));
-		}
-
-		return OrmCore::findByExample(new Version(),$example, null, $ormLimit);
-=======
 		$versions =  OrmCore::findByExample(new Version(),$example);
 		if(!empty($versions)){
 			return $versions[0];
@@ -103,6 +83,5 @@ class VersionsService{
 		$example->addCriteria('version_id', OrmTypeCriteria::$GT, array($version->get('version_id')));
 		$cptNewerVersion = OrmCore::selectCountByExample(new Version(),$example);
 		return $cptNewerVersion;
->>>>>>> 4b4a4edfddda6e68495bfc89ce95a31e5ac0de0e
 	}
 }

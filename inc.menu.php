@@ -4,12 +4,7 @@ if (!function_exists('cmsms')) exit;
 
 
 //Get All active Versions
-<<<<<<< 4b92f3e5512b80b22b72f1ccd054456cfc6addcc
-$allVersions = VersionsService::getAll(null, $lang->get('lang_id'), 
-							null, Version::$STATUS_CURRENT);
-=======
 $allVersions = VersionsService::getAll(null, $lang->get('lang_id'), Version::$STATUS_CURRENT);
->>>>>>> 4b4a4edfddda6e68495bfc89ce95a31e5ac0de0e
 $menu = array();
 foreach($allVersions as $a_version){
 	$elts = explode(':', $a_version->get('page')->get('alias'));
