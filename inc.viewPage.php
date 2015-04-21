@@ -1,11 +1,23 @@
 <?php
+if (!function_exists('cmsms')) exit;
 
+<<<<<<< 4b92f3e5512b80b22b72f1ccd054456cfc6addcc
 $vals['text'] = Engines::process($id, $returnid, $vals['text'], $prefix, $code_iso, $version->get('engine'));
 
 $edit = RouteMaker::getEditRoute($id, $returnid, $code_iso, $aliasParam);
 $delete = RouteMaker::getDeleteRoute($id, $returnid, $code_iso, $aliasParam);
 $raw = RouteMaker::getRawRoute($id, $returnid, $code_iso, $aliasParam, $vals['version_id']);
 $canonical = RouteMaker::getViewRoute($id, $returnid, $code_iso, $aliasParam);
+=======
+
+$vals['text'] = WikiUtils::parseText($vals['text'], $prefix, $code_iso);
+
+
+$edit = RouteMaker::getEditRoute($code_iso, $aliasParam);
+$delete = RouteMaker::getDeleteRoute($code_iso, $aliasParam);
+$raw = RouteMaker::getRawRoute($code_iso, $aliasParam, $vals['version_id']);
+$canonical = RouteMaker::getViewRoute($code_iso, $aliasParam);
+>>>>>>> 4b4a4edfddda6e68495bfc89ce95a31e5ac0de0e
 $goLast = '';
 if($vals['status'] != 1){
 	$goLast = $canonical;
@@ -16,13 +28,23 @@ if($vals['status'] != 1){
 $isUpToDate = true;
 $defaultLangCanonical = '';
 if($version != null && !$isDefaultLang){
+<<<<<<< 4b92f3e5512b80b22b72f1ccd054456cfc6addcc
 	$example = new OrmExample();
+=======
+	/*$example = new OrmExample();
+>>>>>>> 4b4a4edfddda6e68495bfc89ce95a31e5ac0de0e
 	$example->addCriteria('page', OrmTypeCriteria::$EQ, array($page->get('page_id')));
 	$example->addCriteria('lang', OrmTypeCriteria::$NEQ, array($lang->get('lang_id')));
 	$example->addCriteria('version_id', OrmTypeCriteria::$GT, array($version->get('version_id')));
 	$cptNewerVersion = OrmCore::selectCountByExample(new Version(),$example);
+<<<<<<< 4b92f3e5512b80b22b72f1ccd054456cfc6addcc
 	$isUpToDate = ($cptNewerVersion == 0);
 	$defaultLangCanonical = RouteMaker::getViewRoute($id, $returnid, $this->_getDefaultLang(), $aliasParam);
+=======
+	$isUpToDate = ($cptNewerVersion == 0);*/
+	$isUpToDate = (VersionsService::countNewerVersion($page, $lang, $version) == 0);
+	$defaultLangCanonical = RouteMaker::getViewRoute($this->_getDefaultLang(), $aliasParam);
+>>>>>>> 4b4a4edfddda6e68495bfc89ce95a31e5ac0de0e
 }
 
 $smarty->assign('isUpToDate', $isUpToDate);

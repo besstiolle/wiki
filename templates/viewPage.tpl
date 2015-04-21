@@ -17,23 +17,44 @@
 	<section class="middle tab-bar-section"> 
 		
 		
+	<div class="right">
+	{if $version.status!=1}
+		<span data-tooltip aria-haspopup="true" class="has-tip" title="The page is an old version. See the last version of this page">
+			<i class="fi-clock ico-bar ico-warning goLast"></i></span>
+	{elseif !$isUpToDate}
+		<span data-tooltip aria-haspopup="true" class="has-tip" title="The page is a translation and may be outdated. See the original here">
+			<i class="fi-comments ico-bar ico-alert goLastDefaultLang"></i></span>
+	{elseif !$isDefaultLang}
+		<span data-tooltip aria-haspopup="true" class="has-tip" title="The page is a translation. See the original here.">
+			<i class="fi-comment ico-bar ico-success goLastDefaultLang"></i></span>
+	{else}
+		<span data-tooltip aria-haspopup="true" class="has-tip" title="You're looking the last version.">
+			<i class="fi-check ico-bar ico-success"></i></span>
+	{/if}
+		<span data-tooltip aria-haspopup="true" class="has-tip" title="Go back home">
+			<a href='{$root_wiki_url}'><i class="fi-home ico-bar ico-secondary"></i></a></span>
+		<span data-tooltip aria-haspopup="true" class="has-tip" title="See the sitemap of the wiki.">
+			<a href='{$root_wiki_url}/sitemap'><i class="fi-map ico-bar ico-secondary"></i></a></span>
+		
+	</div>
+<!-- 	.fi-results
+	.fi-thumbnails
+	.fi-map
+	.fi-list-bullet
+	.fi-foundation
 
-	<ul class="button-group in-off-bar right">
-		{if $version.status!=1}
-			<li><input class='tiny button in-off-bar goLast' type='button' value='See the last version of this page'></li>
-		{elseif !$isUpToDate}
-			<li><input class='tiny button in-off-bar goLastDefaultLang' type='button' value='The page is a translation and may be outdated. See the original here'></li>
-		{elseif !$isDefaultLang}
-			<li><input class='tiny button in-off-bar goLastDefaultLang' type='button' value='The page is a translation. See the original here.'></li>
-		{/if}
-	</ul>
+	.fi-arrows-in
+	.fi-arrows-out -->
 
 	<ul class="button-group in-off-bar">
 		<li><input class='tiny button in-off-bar raw' type='button' value='Show Raw Code'></li>
+		{if $wiki_access.is_writable}
 		<li><input class='tiny button in-off-bar edit' type='button' value='Edit'{if $version.status!=1} disabled='disabled' title='you can not edit an old version'{/if}></li>
+		{/if}
+		{if $wiki_access.is_deletable}
 		<li><input class='tiny button in-off-bar deletePre' type='button' value='Delete'{if $version.status!=1} disabled='disabled' title='you can not delete an old version'{elseif $isDefaultPage} disabled='disabled' title='you can not delete the default page'{/if}></li>
 		<li><input class='tiny button in-off-bar deletePost alert' type='button' value='Delete (Are You Sure?)'></li>
-
+		{/if}
 	</ul>	
 
 	</section>
@@ -50,22 +71,35 @@
 	
 		{foreach $wiki_menu as $elt}
 			<li><a href="{$elt.viewUrl}" {if !empty($elt.class)}class='{$elt.class}'{/if}>{$elt.label|capitalize}</a></li>
+		{foreachelse}
+			<li>There is no entry in this wiki</li>
 		{/foreach}
+		<li><label>Siblings Entries</label></li>
+	
+		{foreach $wiki_menu_siblings as $elt}
+			<li><a href="{$elt.viewUrl}" {if !empty($elt.class)}class='{$elt.class}'{/if}>{$elt.label|capitalize}</a></li>
+		{foreachelse}
+			{*<li>There is no siblings entry in this wiki</li>*}
+		{/foreach}
+<<<<<<< 4b92f3e5512b80b22b72f1ccd054456cfc6addcc
 		{*
 		<li><label>Options</label></li>
 		<li><a href="#">Some options</a></li>
 		<li><a href="#">Other options</a></li>
 		*}
+=======
+>>>>>>> 4b4a4edfddda6e68495bfc89ce95a31e5ac0de0e
 	</ul>
 </aside>
 <aside class="right-off-canvas-menu">
 	<ul class="off-canvas-list">
+{if $showLangs}
 		<li><label>Lang</label></li>
 		
 		{foreach $other_langs as $elt}
 			<li><a href="{$elt.viewUrl}" {if !empty($elt.class)}class='{$elt.class}'{/if}>{$elt.label|capitalize}</a></li>
 		{/foreach}
-		
+{/if}		
 		<li><label>Revisions</label></li>
 		
 		{foreach $oldRevisions as $elt}
@@ -74,6 +108,7 @@
 		
 	</ul>
 </aside> 
+
 
 
 <section class="main-section">
@@ -99,6 +134,11 @@
 
 	<div class='fancybox' id='raw_result'></div>
 	<div class='wikiContent'>{$version.text}</div>
+	<div><small>
+		Last edition 
+			{if !empty($version.author_name)}by <b><span title="{if !empty($version.author_id)}#{$version.author_id} : {/if}{$version.author_name}">{$version.author_name}</span></b>{/if}
+			the <b>{$version.dt_creation|cms_date_format}</b>
+		</small></div>
 
 </div>
 

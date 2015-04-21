@@ -44,3 +44,26 @@ button.in-off-bar.disabled:hover, button.in-off-bar.disabled:focus, button.in-of
 li.small{
     font-size: 0.75rem;
 }
+
+.ico-bar{
+    font-size: 1.2em;
+}
+
+.ico-success{
+    color:#43AC6A;
+}
+.ico-warning{
+    color:#f08a24;
+}
+.ico-info{
+    color:#a0d3e8;
+}
+.ico-alert{
+    color:#f04124;
+}
+.ico-secondary{
+    color:#e7e7e7;
+}
+pre code{
+        display: block;
+    }

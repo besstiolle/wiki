@@ -29,11 +29,6 @@ class Version extends OrmEntity {
 			, OrmCAST::$BUFFER 
 		));
 		
-		// the inner engine
-		$this->add(new OrmField('engine'
-			, OrmCAST::$INTEGER	
-		));
-		
 		// DateTime of Creation (a modification = a new creation)
 		$this->add(new OrmField('dt_creation'
 			, OrmCAST::$DATETIME

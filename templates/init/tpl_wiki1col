@@ -1,0 +1,48 @@
+{process_pagedata}{content assign='content'}<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{Sitename} | {if isset($title)}{$title}{else}{title}{/if}</title>
+    {cms_stylesheet}
+
+    <link rel='stylesheet' type='text/css' href='{root_url}/modules/Wiki/scripts/fancybox/jquery.fancybox.css?v=2.1.5' media='screen' />
+
+    <script src="{root_url}/uploads/foundation/js/vendor/modernizr.js"></script>
+  </head>
+  <body>
+    
+  <div class="row">
+      <div class="large-12 columns">
+        <h1>{if isset($title)}{$title}{else}{title}{/if}</h1>
+      </div>
+    </div>
+    
+      <div class="row">
+        <div class="large-12 columns">
+          <div class="">
+            {$content}
+          </div>
+        </div>
+      </div>
+    <script>window.jQuery || document.write('<script src="{root_url}/uploads/foundation/js/vendor/jquery.js"><\/script>')</script>
+    <script src="{root_url}/uploads/foundation/js/foundation.min.js"></script>
+    <script src="{root_url}/uploads/foundation/js/foundation/foundation.abide.js"></script>
+    <script src="{root_url}/uploads/foundation/js/foundation/foundation.topbar.js"></script>
+    <script src="{root_url}/uploads/foundation/js/foundation/foundation.equalizer.js"></script>
+    <script src="{root_url}/uploads/foundation/js/foundation/foundation.offcanvas.js"></script>
+    <script src="{root_url}/uploads/foundation/js/foundation/foundation.tooltip.js"></script>
+
+    <!-- Add mousewheel plugin (this is optional) -->
+    <script type='text/javascript' src='{root_url}/modules/Wiki/scripts/jquery/jquery.mousewheel-3.0.6.pack.js'></script>
+
+    <!-- Add fancyBox main JS and CSS files -->
+    <script type='text/javascript' src='{root_url}/modules/Wiki/scripts/fancybox/jquery.fancybox.js?v=2.1.5'></script>
+
+    <script>
+      $(document).foundation();
+    </script>
+{if isset($wiki_js)}{$wiki_js}{/if}
+  </body>
+</html>
