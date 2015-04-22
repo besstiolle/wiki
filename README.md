@@ -18,7 +18,8 @@ A small and powerfull wiki implementation for CmsMadeSimple
   
 You can find it on my [project's page](http://dev.cmsmadesimple.org/project/files/1256#package-1302)
 
-The module need also [ORM](http://dev.cmsmadesimple.org/project/files/1250#package-1234) (version 0.3.3) and [Markdown Parser](http://dev.cmsmadesimple.org/project/files/1331#package-1297) (version 1.0.0) to work.
+The module need also [ORM](http://dev.cmsmadesimple.org/project/files/1250#package-1234) (version 0.3.3) and [Markdown Parser](http://dev.cmsmadesimple.org/project/files/1331#package-1297) (version 1.0.0) to work and need you to activate the pretty-url.
+
 
 The installation of the module Wiki will create 2 templates, 4 css file and a new design. The templates and the CSS will need some stuff to work.
 
