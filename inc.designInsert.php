@@ -22,7 +22,7 @@ $c_tpl2 = file_get_contents($config['root_path'].'/modules/Wiki/templates/init/t
 try {
 
   //Using core::page type
-  $wiki_type = CmsLayoutTemplateType::load("Core::page");
+  $wiki_type = CmsLayoutTemplateType::load("__CORE__::page");
 
   try{
     $tpl1 = CmsLayoutTemplate::load('Wiki Sample 1 col');

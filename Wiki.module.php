@@ -5,7 +5,7 @@ class Wiki extends Orm {
 
 	function GetName() { return 'Wiki'; }
 	function GetFriendlyName() { return $this->Lang('friendlyname'); }
-	function GetVersion() { return '1.0.0'; }
+	function GetVersion() { return '1.0.1'; }
 	function GetDependencies() { return array('Orm'=>'0.3.3', 'Parser'=>'1.0.0'); }
 	function GetHelp() { return $this->Lang('help'); }
 	function GetAuthor() { return 'Kevin Danezis (aka Bess)'; }
