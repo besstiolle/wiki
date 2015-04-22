@@ -55,7 +55,6 @@ class RouteMaker{
 		if(!self::$isInitiated) {
 			throw new Exception("Error RouteMaker is not initiated", 1);
 		}
-		
 		$url = '';
 		
 		// "wiki"
