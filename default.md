@@ -8,7 +8,7 @@ Some tips :
 *   If you can't see the button Edition, it's maybe because you are not logged or maybe the page is protected. See the admin panel to learn more.
 *   Like most of wiki, you don't have to create a page before linking it. Every links pointing to a [no-existing page will be coloured in RED](aNewPage). On the other side, a link pointing on an another wiki page will be [coloured in BLUE](home)
 *   HTML tags like `<b>bold</b>` or `<a href='#'>links</a>` could be processed by the engine "MarkDown" in a normal case but for security reasons it's disabled in the module WIKI by default.
-*   Smarty tags and CmsMadeSimple tags like `{"hello"|capitalize}` or `{News}` are not processed by the engine "MarkDown" unless the administrator setted it in the admin panel of the module. The tag root_url is the only Smarty tag to be processed : {root_url}
+*   Smarty tags and CmsMadeSimple tags like `{"hello"|capitalize}` or `{News}` are not processed by the engine "MarkDown" unless the administrator setted it in the admin panel of the module.
 
 In fact, the "MarkDown" language is a **editorial language** and not a **programmatic language** (like Smarty is)
  
