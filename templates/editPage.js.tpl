@@ -13,8 +13,8 @@
 	  
 	  $(document).ready(function () {
 		  $("input.preview").click(function () { 
-				query = "{$wiki_action_id}vtitle=" + encodeURI($("#{$wiki_action_id}vtitle").val()) + "&" 
-					+ "{$wiki_action_id}vtext=" + encodeURI($("#{$wiki_action_id}vtext").val());
+				query = "{$wiki_action_id}vtitle=" + encodeURIComponent($("#{$wiki_action_id}vtitle").val()) + "&" 
+					+ "{$wiki_action_id}vtext=" + encodeURIComponent($("#{$wiki_action_id}vtext").val());
 
 				/*	console.debug(url);
 					console.debug(query); */

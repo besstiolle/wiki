@@ -33,7 +33,7 @@ if($has_error){return;}
 
 
 if(!empty($params['vtext'])){
-	$textParam = $this->js_urldecode($params['vtext']);
+	$textParam = $params['vtext'];//$this->js_urldecode($params['vtext']);
 } else {
 	$errors[] = 'text_mandatory';
 }
