@@ -7,7 +7,7 @@ $lang['uninstalled'] = 'Module Wiki Uninstalled.';
 $lang['installed'] = 'Module Wiki version %s installed.';
 $lang['reseted'] = 'Module Wiki version %s reseted with success ';
 $lang['moddescription'] = 'This module is a simple implementation of a WIKI into CmsMadeSimple';
-$lang['changelog'] = 'see changelog : <a href="https://github.com/besstiolle/wiki-ms" target="_blank">https://github.com/besstiolle/wiki-ms</a>';
+$lang['changelog'] = 'see changelog : <a href="https://github.com/besstiolle/wiki" target="_blank">https://github.com/besstiolle/wiki</a>';
 
 $lang['lang_id_mandatory'] = 'the lang_id parameter is missing';
 $lang['lang_mandatory'] = 'The lang is missing or unknown';
